@@ -1,0 +1,40 @@
+script:
+  - cd angular && npm install && npm run setup_test
+  - cd ../node && npm install && npm run setup_test
+
+cache:
+  directories:
+    - "node_modules"
+    - "public"
+
+# specify language
+language:
+    - node_js
+
+node_js:
+    - "8.12.0"
+
+env:
+  global:
+      - PGPORT=5432
+
+addons:
+  postgresql: "9.4"
+  apt:
+    sources:
+      - google-chrome
+    packages:
+      - google-chrome-stable
+ 
+
+branches:
+  # whitelist
+  only:
+    - master
+
+deploy:
+  provider: heroku
+  skip_cleanup: true
+  api_key: df03ab6c-6466-428d-83c7-97b1b1290925
+  app:
+    master: angular-continuous-deployment

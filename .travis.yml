@@ -31,10 +31,11 @@ branches:
   # whitelist
   only:
     - master
+    - production
 
 deploy:
   provider: heroku
   skip_cleanup: true
   api_key: df03ab6c-6466-428d-83c7-97b1b1290925
   app:
-    master: angular-continuous-deployment
+    production: angular-continuous-deployment

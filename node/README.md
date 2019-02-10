@@ -1,36 +1,13 @@
-# Project Collab
+## Starting development server
 
-This project was generated with [npm install](https://docs.npmjs.com/cli/install).
-
-## Development server
-
-Run `npm run start:dev` for a dev server. Navigate to `http://127.0.0.1:8000/`. 
-The app will automatically reload if you change any of the source files.
+Run `npm run start` for a dev server. Navigate to `http://127.0.0.1:8000/`. 
 
 ## DB setup
-
-The project is currently setup to work with a [PostgresSQL](https://www.postgresql.org/) database but this can be
-changed in .\project-team-20\node\server\config\config.json  file to match the DB config that you would like.
-i.e.
-
-"development": {
-    "username": "project-collab-admin",
-    "password": "XXXXXXXXXX",
-    "database": "project-collab-db",
-    "host": "127.0.0.1",
-    "port": 5432,
-    "dialect": "postgres"
-}
-
-## DB and Models scaffolding
-
-A list of vaiable commands for the [Sequelize CLI](https://github.com/sequelize/cli/blob/master/README.md)
-
-To run the project as is with sample date install [PostgresSQL](https://www.postgresql.org/) and run `psql -U postgres < node/db/setup.sql` from the project root folder.
-
-Next `cd .\project-team-20\node` and run `sequelize db:migrate`
-
-Next `cd .\project-team-20\node\db` and run `psql -U project-collab-admin -d project-collab-db -f sample_data.sql`
+Database and sample data setup
+1. install [PostgresSQL](https://www.postgresql.org/) 
+2. run `psql -U postgres < node/db/setup.sql` from the project root folder. (ensure `psql` is added into your path variables)
+3. Next `cd .\project-team-20\node` and run `sequelize db:migrate`, this will setup the database tables
+4. Next `cd .\project-team-20\node\db` and run `psql -U project-collab-admin -d project-collab-db -f sample_data.sql`. Use the password `collab-project`, this will populate your database with some sample data, you should be able to use postman and test out some of the existing API routes
 
 ## Further help
 

@@ -13,13 +13,16 @@ import { HttpClientModule } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
+import { ProjectFormComponent } from './project-form/project-form.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     ExampleComponent,
     LoginComponent,
-    MainNavComponent
+    MainNavComponent,
+    ProjectFormComponent
   ],
   imports: [
     BrowserAnimationsModule,

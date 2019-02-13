@@ -1,21 +1,27 @@
-<div class="container">
-		<mat-card>
-			<div class="card-body">
-				<form (ngSubmit)="f.form.valid && getToken()" #f="ngForm">
-					<p class="alert alert-warning text-center" *ngIf="error"> <strong>Login was unsuccessful</strong> </p>
+<form [formGroup]="loginForm" novalidate (ngSubmit)="onSubmit()">
+  <mat-card class="shipping-card">
+    <mat-card-header>
+      <mat-card-title>Login</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Username" formControlName="username">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Password" formControlName="password">
+          </mat-form-field>
+        </div>
+      </div>
 
-					<div class="form-group">
-						<label class="font-weight-bold" for="username"> Username </label>
-						<input type="text" class="form-control" name="username" placeholder="Username" [(ngModel)]="model.username" #username="ngModel">
-					</div>
-					<div class="form-group">
-						<label class="font-weight-bold"> Password </label>
-						<input type="password" class="form-control" name="password" placeholder="Password" [(ngModel)]="model.password" #password="ngModel">
-					</div>
-					<div class="text-center">
-						<button type="submit" class="btn btn-primary shadow">LOGIN</button>
-					</div>
-				</form>
-			</div>
-		</mat-card>
-</div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit">Submit</button>
+    </mat-card-actions>
+  </mat-card>
+</form>

@@ -1,5 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Project } from '../project';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { ProjectFormService } from './project-form.service';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-project-form',
@@ -9,14 +11,21 @@ import { Project } from '../project';
 
 export class ProjectFormComponent implements OnInit {
 
-  project = new Project(1, 'Kelly', 'Basic', 'kelly@utoronto.ca', 'github.com', 'kelly')
-  submitted = false;
+  projectForm = this.fb.group({
+    name: [null, Validators.required],
+    description: [null, Validators.required],
+    email: [null, Validators.required],
+    url: [null, Validators.required],
+    github: [null, Validators.required]
+  });
 
-  onSubmit() { this.submitted = true; }
+  onSubmit() { console.log(this.projectForm.value); }
 
-  constructor() {
-    console.log(this.project);
-  }
+  constructor(
+    private fb: FormBuilder,
+    private projectFormService: ProjectFormService,
+    public router: Router
+  ) { }
 
   ngOnInit() {
   }

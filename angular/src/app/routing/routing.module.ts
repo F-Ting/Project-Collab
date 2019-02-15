@@ -8,7 +8,7 @@ import { ProjectFormComponent } from '../project-form/project-form.component';
 const routes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'project-form', component: ProjectFormComponent}
+  { path: 'create', component: ProjectFormComponent}
 ];
 
 @NgModule({

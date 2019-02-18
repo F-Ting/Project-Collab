@@ -14,7 +14,7 @@ class GenExamples:
     user_type = ["Team Member", "Team Admin", "Site Admin"]
     photo_url = ["hello", "world", "face", "shoes", "flowers"]
     project_name = ["Google", "Project-Collab", "Snapchat", "Facebook", "DCS", "ta_feedback", "PCRS"]
-
+    databases= ["project-collab-db","project-collab-test-db"]
     def __init__(self):
         # set the seed so we always get the same sequence of randoms
         random.seed(1234)
@@ -46,54 +46,56 @@ class GenExamples:
 if __name__ == "__main__":
     import json
     gen = GenExamples()
-    #to keep track of all the data generated so far
-    current_data_set = {}
     out = []
-    # NOTE:
-    # Order to add insert statements
-    # users
-    # project
-    # user_associations
 
-    out.append('\c project-collab-db;')
-    current_data_set['users'] = {}
-    current_data_set['projects'] = {}
-    # users add admins (1,0,0), instructors (0,1,0), and tas (0,0,1) as well
-    # as some mixed
-    # example insert statment:
-    # INSERT INTO users VALUES ('prof0',0,1,0,'prof0',NULL);
-    gen_user_id = 1
-    for _ in range(10):
-        names = [gen.name() for _ in range(10)]
-        user_names = [gen.user_id(name) for name in names]
-        password = gen.password()
-        bio = gen.sentence()
-        for name, user_name in zip(names, user_names):
-            q = "INSERT INTO users (username, name, bio, password, type) VALUES ('{}','{}','{}','{}', 'student');".format(user_name, name, bio, password)
-            current_data_set['users'][user_name] = {'name': name , 'id': gen_user_id }
-            gen_user_id+=1
+
+    for db in gen.databases:
+        #to keep track of all the data generated so far
+        current_data_set = {}
+        # NOTE:
+        # Order to add insert statements
+        # users
+        # project
+        # user_associations
+        out.append("\c " + db)
+        current_data_set['users'] = {}
+        current_data_set['projects'] = {}
+        # users add admins (1,0,0), instructors (0,1,0), and tas (0,0,1) as well
+        # as some mixed
+        # example insert statment:
+        # INSERT INTO users VALUES ('prof0',0,1,0,'prof0',NULL);
+        gen_user_id = 1
+        for _ in range(10):
+            names = [gen.name() for _ in range(10)]
+            user_names = [gen.user_id(name) for name in names]
+            password = gen.password()
+            bio = gen.sentence()
+            for name, user_name in zip(names, user_names):
+                q = "INSERT INTO users (username, name, bio, password, type) VALUES ('{}','{}','{}','{}', 'student');".format(user_name, name, bio, password)
+                current_data_set['users'][user_name] = {'name': name , 'id': gen_user_id }
+                gen_user_id+=1
+                out.append(q)
+        out.append("")
+        id = 1
+        for name in gen.project_name:
+            description = gen.paragraph()
+            date = gen.get_start_date()
+            status = 'approved' if random.randint(0,10) < 3 else 'unapproved'
+            q = "INSERT INTO projects (name, description, project_start_date, status) VALUES ('{}','{}','{}', '{}');".format(name, description, date, status)
+            current_data_set['projects'][name] = {'name': name, 'id': id}
+            id += 1
             out.append(q)
-    out.append("")
-    id = 1
-    for name in gen.project_name:
-        description = gen.paragraph()
-        date = gen.get_start_date()
-        status = 'approved' if random.randint(0,10) < 3 else 'unapproved'
-        q = "INSERT INTO projects (name, description, project_start_date, status) VALUES ('{}','{}','{}', '{}');".format(name, description, date, status)
-        current_data_set['projects'][name] = {'name': name, 'id': id}
-        id += 1
-        out.append(q)
-    out.append("")
+        out.append("")
 
-    for user in current_data_set['users'].keys():
-        project_name = random.choice(current_data_set['projects'].keys())
-        project_id = current_data_set['projects'][project_name]['id']
-        user_id = current_data_set['users'][user]['id']
-        admin_status = True if random.randint(0,10) < 3 else False
-        project_status = 'unapproved'
-        if admin_status:
-            project_status = 'approved'
-        q = "INSERT INTO user_associations (user_id, project_id, is_admin, status) VALUES ({},{},{},'{}');".format(user_id, project_id, admin_status, project_status)
-        out.append(q)
+        for user in current_data_set['users'].keys():
+            project_name = random.choice(list(current_data_set['projects'].keys()))
+            project_id = current_data_set['projects'][project_name]['id']
+            user_id = current_data_set['users'][user]['id']
+            admin_status = True if random.randint(0,10) < 3 else False
+            project_status = 'unapproved'
+            if admin_status:
+                project_status = 'approved'
+            q = "INSERT INTO user_associations (user_id, project_id, is_admin, status) VALUES ({},{},{},'{}');".format(user_id, project_id, admin_status, project_status)
+            out.append(q)
 
     print("\n".join(out))

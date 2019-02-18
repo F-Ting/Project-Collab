@@ -1,5 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { environment } from '../../environments/environment';
 import { ExampleComponent } from './example.component';
 
 describe('ExampleComponent', () => {
@@ -21,5 +22,8 @@ describe('ExampleComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+  it('should contain a p tag', () => {
+    expect(document.getElementsByTagName("p")[0]).toBeTruthy();
   });
 });

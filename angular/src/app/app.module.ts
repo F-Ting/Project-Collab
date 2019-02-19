@@ -42,11 +42,12 @@ import { DiscoverComponent } from './discover/discover.component';
     MatToolbarModule,
     MatSidenavModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    HttpClientModule
   ],
   exports: [MainNavComponent],
   providers: [],
   bootstrap: [AppComponent]
- 
+
 })
 export class AppModule { }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from './login.service';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -13,23 +13,31 @@ import { FormBuilder, Validators } from '@angular/forms';
 // componenet that handels user login
 export class LoginComponent implements OnInit {
 
-    loginForm = this.fb.group({
-      username: [null, Validators.required],
-      password: [null, Validators.required]
-    });
+  loginForm = this.fb.group({
+    username: [null, Validators.required],
+    password: [null, Validators.required]
+  });
 
-    hasUnitNumber = false;
+  hasUnitNumber = false;
+  error = false;
 
-    ngOnInit() {
-    }
+  ngOnInit() {
+  }
 
   constructor(private fb: FormBuilder, private loginService: LoginService, public router: Router) { }
 
 
 
   onSubmit() {
-    console.log(this.loginForm);
-    alert('Thanks!');
+    this.loginService.login(this.loginForm.value).subscribe((data: Array<object>) => {
+      this.error = false;
+      console.log(data);
+    },
+      error => {
+        // ann error on the API call
+        this.error = true;
+      });
+
   }
 
 

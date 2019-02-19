@@ -27,14 +27,14 @@ export class HttpService {
   get(url) {
 	  let header = new HttpHeaders();
 	  header = this.addAuthToken(header);
-	  return this.http.get(`${this.API_URL}/${url}`, {headers: header});
+	  return this.http.get(`${this.API_URL}/${url}`, {headers: header, withCredentials: true });
   }
 
   // performs a post request after calling the addAuthToken function
   post(url, data) {
 	  let header = new HttpHeaders();
 	  header = this.addAuthToken(header);
-	  return this.http.post(`${this.API_URL}/${url}`, data, {headers: header});
+	  return this.http.post(`${this.API_URL}/${url}`, data, {headers: header, withCredentials: true });
   }
 
 }

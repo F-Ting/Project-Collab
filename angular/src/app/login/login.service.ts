@@ -10,6 +10,6 @@ export class LoginService {
 
     login(data) {
       // login
-      return this.httpClient.post(`/api/user/login/`, data);
+      return this.httpClient.post(`api/user/login/`, data);
     }
 }

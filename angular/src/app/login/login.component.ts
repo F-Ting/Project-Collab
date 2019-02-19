@@ -1,4 +1,4 @@
- import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from './login.service';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -13,6 +13,8 @@ import { FormBuilder, Validators } from '@angular/forms';
 // componenet that handels user login
 export class LoginComponent implements OnInit {
 
+  constructor(private fb: FormBuilder, private loginService: LoginService, private router: Router) { }
+
   loginForm = this.fb.group({
     username: [null, Validators.required],
     password: [null, Validators.required]
@@ -21,27 +23,20 @@ export class LoginComponent implements OnInit {
   hasUnitNumber = false;
   error = false;
 
+
   ngOnInit() {
   }
 
-  constructor(private fb: FormBuilder, private loginService: LoginService, private router: Router) { }
-
-
-
   onSubmit() {
-    this.loginService.login(this.loginForm.value).subscribe((data: Array<object>) => {
-      this.error = false;
-      console.log(data);
+    this.loginService.login(this.loginForm.value).subscribe((response)=>{
+        this.error = false;
+        console.log(response);
     },
-      error => {
-        // ann error on the API call
-        this.error = true;
-      });
+    error => {
+      console.log(this.loginForm.value);
+      this.error = true;
+    });
 
   }
-
-
-
-
 
 }

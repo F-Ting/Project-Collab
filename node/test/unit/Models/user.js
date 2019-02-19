@@ -1,3 +1,4 @@
+//borrowed from https://github.com/jordanell/testing-with-sequelize/tree/master/src
 import { assert } from 'chai';
 
 import models from '../../../server/models';

@@ -1,3 +1,4 @@
+//borrowed from https://github.com/jordanell/testing-with-sequelize/tree/master/src
 // test/factories/user.js
 import faker from 'faker';
 import models from '../../server/models';

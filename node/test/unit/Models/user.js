@@ -4,6 +4,9 @@ import models from '../../../server/models';
 
 import factories from '../../factories';
 import truncate from '../../truncate';
+const chai = require('chai')
+  , chaiHttp = require('chai-http');
+chai.use(chaiHttp);
 
 describe('User model', () => {
   let user;

@@ -5,6 +5,7 @@ import { LoginComponent } from './login.component';
 import {MatCardModule,MatFormFieldModule,MatInputModule} from '@angular/material';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 
 describe('LoginComponent', () => {
@@ -22,7 +23,8 @@ describe('LoginComponent', () => {
         MatFormFieldModule,
         MatInputModule,
         RouterTestingModule,
-        NoopAnimationsModule
+        NoopAnimationsModule,
+        HttpClientTestingModule
       ]
     })
     .compileComponents();

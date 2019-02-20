@@ -8,12 +8,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RoutingModule } from './routing/routing.module';
 import { ExampleComponent } from './example/example.component';
 import { LoginComponent } from './login/login.component';
-import { MatGridListModule, MatCardModule, MatMenuModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatSelectModule, MatRadioModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule} from '@angular/material';
+import { MatGridListModule, MatCardModule, MatMenuModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatSelectModule, MatRadioModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule, MatExpansionModule, MatChipsModule} from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { DiscoverComponent } from './discover/discover.component';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { DiscoverComponent } from './discover/discover.component';
     ExampleComponent,
     LoginComponent,
     MainNavComponent,
-    DiscoverComponent
+    DiscoverComponent,
+    SearchComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -31,6 +33,7 @@ import { DiscoverComponent } from './discover/discover.component';
     RoutingModule,
     MatGridListModule,
     MatCardModule,
+    MatChipsModule,
     MatMenuModule,
     MatInputModule,
     MatButtonModule,
@@ -42,11 +45,12 @@ import { DiscoverComponent } from './discover/discover.component';
     MatToolbarModule,
     MatSidenavModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    MatExpansionModule,
   ],
   exports: [MainNavComponent],
   providers: [],
   bootstrap: [AppComponent]
- 
+
 })
 export class AppModule { }

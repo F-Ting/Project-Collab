@@ -164,7 +164,7 @@ module.exports = {
           });
         }
         if(users.type != 'instructor'){
-          return res.status(400).send("you don't have permissions for this command");
+          return res.status(400).send({message: "you don't have permissions for this command"});
         }
         return Associations
         .findOne({

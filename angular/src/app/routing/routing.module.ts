@@ -2,13 +2,16 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from '../login/login.component';
-import { ProjectFormComponent } from '../project-form/project-form.component';
-
+import { RegistrationComponent } from '../registration/registration.component';
+import { DiscoverComponent } from '../discover/discover.component';
+mport { ProjectFormComponent } from '../project-form/project-form.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent},
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'create', component: ProjectFormComponent}
+  { path: 'registration', component: RegistrationComponent},
+  { path: 'discover', component: DiscoverComponent},
+  { path: 'create', component: ProjectFormComponent},
+  { path: '', redirectTo: '/login', pathMatch: 'full' }
 ];
 
 @NgModule({

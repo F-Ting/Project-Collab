@@ -27,6 +27,7 @@ const adminAuthenticate = (req, res, next) => {
 
 module.exports = (app) => {
   app.use((req, res, next)=>{
+	res.header("Access-Control-Allow-Origin", "http://localhost:4200");
     res.header("Access-Control-Allow-Headers","Origin,X-Requested-With,Content-Type,Accept");
     res.header('Access-Control-Allow-Credentials',' true');
     next();
@@ -45,7 +46,7 @@ module.exports = (app) => {
   // get all users
   app.get('/api/users', usersController.list);
   // get a single user info TODO
-  app.get('/api/users/:username', authenticate, usersController.getUser);
+  app.get('/api/users/:username', usersController.getUser);
   // remove a single user TODO
   app.post('/api/user/remove', usersController.removeUser);
   // * sign-up routes *

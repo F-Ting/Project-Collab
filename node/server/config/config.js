@@ -8,9 +8,9 @@
       dialect: "postgres"
     },
     test: {
-      username: "project-collab-admin",
-      password: "collab-project",
-      database: "project-collab-db",
+      username: "root",
+      password: "",
+      database: "project-collab-test-db",
       host: "127.0.0.1",
       port: 5432,
       dialect: "postgres"

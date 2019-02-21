@@ -19,7 +19,14 @@ export class ProjectFormComponent implements OnInit {
     github: [null, Validators.required]
   });
 
-  onSubmit() { console.log(this.projectForm.value); }
+  onSubmit() {
+    this.projectFormService.create(this.projectForm.value).subscribe((response)=>{
+      console.log(response);
+    },
+    error => {
+      console.log(this.projectForm.value);
+    });
+  }
 
   constructor(
     private fb: FormBuilder,

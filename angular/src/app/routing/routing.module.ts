@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from '../login/login.component';
 import { RegistrationComponent } from '../registration/registration.component';
 import { DiscoverComponent } from '../discover/discover.component';
-mport { ProjectFormComponent } from '../project-form/project-form.component';
+import { ProjectFormComponent } from '../project-form/project-form.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent},

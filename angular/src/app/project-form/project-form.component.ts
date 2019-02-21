@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Optional } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProjectFormService } from './project-form.service';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Project } from '../models/project'
 
 @Component({
   selector: 'app-project-form',
@@ -12,15 +13,34 @@ import { FormBuilder, Validators } from '@angular/forms';
 export class ProjectFormComponent implements OnInit {
 
   projectForm = this.fb.group({
-    name: [null, Validators.required],
-    description: [null, Validators.required],
-    email: [null, Validators.required],
-    url: [null, Validators.required],
-    github: [null, Validators.required]
+    user_id: 1,
+    name: [this.project && this.project.title || null, Validators.required],
+    description: [this.project && this.project.description || null, Validators.required],
+    email: [this.project && this.project.email || null, Validators.required],
+    url: [this.project && this.project.url || null, Validators.required],
+    github: [this.project && this.project.github || null, Validators.required]
   });
 
   onSubmit() {
-    this.projectFormService.create(this.projectForm.value).subscribe((response)=>{
+    if (!this.project) {
+      this.projectFormService.create(this.projectForm.value).subscribe((response)=>{
+        console.log(response);
+      },
+      error => {
+        console.log(this.projectForm.value);
+      });
+    } else {
+      this.projectFormService.edit(this.projectForm.value, this.project._id).subscribe((response)=>{
+        console.log(response);
+      },
+      error => {
+        console.log(this.projectForm.value);
+      });
+    }
+  }
+
+  onDelete() {
+    this.projectFormService.delete({"id":this.project._id}).subscribe((response)=>{
       console.log(response);
     },
     error => {
@@ -31,8 +51,10 @@ export class ProjectFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private projectFormService: ProjectFormService,
-    public router: Router
-  ) { }
+    public router: Router,
+    @Optional() private project: Project
+  ) {
+  }
 
   ngOnInit() {
   }

@@ -4,9 +4,9 @@ export class Project {
       public title: string,
       public description: string,
       public owner: string,
-      public img: string,
       public email: string,
       public url: string,
-      public github: string
+      public github: string,
+      public img?: string,
     ) {}
   }

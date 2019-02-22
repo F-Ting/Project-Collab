@@ -33,7 +33,6 @@ export class LoginComponent implements OnInit {
         console.log(response);
     },
     error => {
-      console.log(this.loginForm.value);
       this.error = true;
     });
 

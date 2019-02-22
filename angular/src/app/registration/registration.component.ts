@@ -17,8 +17,12 @@ export class RegistrationComponent implements OnInit {
 
   registrationForm = this.fb.group({
     username: [null, Validators.required],
-    password: [null, Validators.required],
-    email: [null, Validators.required]
+    password: [null, [Validators.required, Validators.minLength(8)]],
+    passwordConfirm: [null, [Validators.required, Validators.minLength(8)]],
+    email: [null, [Validators.required, Validators.email]],
+    firstName: [null, Validators.required],
+    lastName: [null, Validators.required],
+
   });
 
   hasUnitNumber = false;
@@ -29,15 +33,20 @@ export class RegistrationComponent implements OnInit {
   }
 
   onSubmit() {
-    this.registrationService.registration(this.registrationForm.value, "student").subscribe((response)=>{
-        this.error = false;
-        console.log(response);
-    },
-    error => {
-      console.log(this.registrationForm.value);
-      this.error = true;
-      console.log(error)
-    });
+
+    if(this.registrationForm.value.password == this.registrationForm.value.passwordConfirm){
+        this.registrationForm.value.firstName = `${this.registrationForm.value.firstName} ${this.registrationForm.value.lastName}`;
+        this.registrationService.registration(this.registrationForm.value, "student").subscribe((response)=>{
+            this.error = false;
+            console.log(response);
+        },
+        error => {
+          this.error = true;
+        });
+    } else{
+        this.error = true;
+    }
+
 
   }
 

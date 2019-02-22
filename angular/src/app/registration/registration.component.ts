@@ -33,13 +33,20 @@ export class RegistrationComponent implements OnInit {
   }
 
   onSubmit() {
-    this.registrationService.registration(this.registrationForm.value, "student").subscribe((response)=>{
-        this.error = false;
-        console.log(response);
-    },
-    error => {
-      this.error = true;
-    });
+
+    if(this.registrationForm.value.password == this.registrationForm.value.passwordConfirm){
+        this.registrationForm.value.firstName = `${this.registrationForm.value.firstName} ${this.registrationForm.value.lastName}`;
+        this.registrationService.registration(this.registrationForm.value, "student").subscribe((response)=>{
+            this.error = false;
+            console.log(response);
+        },
+        error => {
+          this.error = true;
+        });
+    } else{
+        this.error = true;
+    }
+
 
   }
 

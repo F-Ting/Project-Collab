@@ -5,7 +5,7 @@ module.exports = {
   create(req, res) {
     return Users
       .create({
-        name: req.body.username,
+        name: req.body.firstName,
         username: req.body.username,
         password: req.body.password,
         email: req.body.email,

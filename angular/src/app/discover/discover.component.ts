@@ -14,7 +14,7 @@ export class DiscoverComponent implements OnInit {
 
     /** TODO: Service to load and initialize projects from the DB */
     ngOnInit() {
-      this.projects = [
+      this.projects;/** = [
         {
           _id: 1,
           title: "WoofWoof",
@@ -29,7 +29,7 @@ export class DiscoverComponent implements OnInit {
           owner: "Sohail Hameed",
           img: "https://i.imgur.com/kWrq84r.jpg"
         }
-      ];
+      ];**/
     }
 
 }

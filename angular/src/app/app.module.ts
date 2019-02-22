@@ -15,6 +15,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { DiscoverComponent } from './discover/discover.component';
+import { ProjectFormComponent } from './project-form/project-form.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { DiscoverComponent } from './discover/discover.component';
     LoginComponent,
     RegistrationComponent,
     MainNavComponent,
-    DiscoverComponent
+    DiscoverComponent,
+    ProjectFormComponent
   ],
   imports: [
     BrowserAnimationsModule,

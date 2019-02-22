@@ -52,7 +52,7 @@ export class ProjectFormComponent implements OnInit {
     private fb: FormBuilder,
     private projectFormService: ProjectFormService,
     public router: Router,
-    @Optional() private project: Project
+    @Optional() public project: Project
   ) {
   }
 

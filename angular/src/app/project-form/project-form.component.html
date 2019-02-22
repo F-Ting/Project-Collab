@@ -7,44 +7,44 @@
       <div class="row">
         <div class="col">
           <mat-form-field>
-            <input matInput placeholder="Project Name" formControlName="name">
+            <input id='project-form-name' matInput placeholder="Project Name" formControlName="name">
           </mat-form-field>
         </div>
       </div>
       <div class="row">
         <div class="col">
           <mat-form-field>
-            <input matInput placeholder="Project Description" formControlName="description">
+            <input id='project-form-description' matInput placeholder="Project Description" formControlName="description">
           </mat-form-field>
         </div>
       </div>
       <div class="row">
         <div class="col">
           <mat-form-field>
-            <input matInput placeholder="Email" formControlName="email">
+            <input id='project-form-email' matInput placeholder="Email" formControlName="email">
           </mat-form-field>
         </div>
       </div>
       <div class="row">
         <div class="col">
           <mat-form-field>
-            <input matInput placeholder="URL" formControlName="url">
+            <input id='project-form-url' matInput placeholder="URL" formControlName="url">
           </mat-form-field>
         </div>
       </div>
       <div class="row">
         <div class="col">
           <mat-form-field>
-            <input matInput placeholder="Github" formControlName="github">
+            <input id='project-form-github' matInput placeholder="Github" formControlName="github">
           </mat-form-field>
         </div>
       </div>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button color="primary" (click)="onDelete()" *ngIf="project" type="delete">Delete</button>
+      <button id='project-form-delete' mat-raised-button color="primary" (click)="onDelete()" *ngIf="project" type="delete">Delete</button>
     </mat-card-actions>
     <mat-card-actions>
-      <button mat-raised-button color="primary" type="submit">Submit</button>
+      <button id='project-form-submit' mat-raised-button color="primary" type="submit">Submit</button>
     </mat-card-actions>
   </mat-card>
 </form>

@@ -17,8 +17,12 @@ export class RegistrationComponent implements OnInit {
 
   registrationForm = this.fb.group({
     username: [null, Validators.required],
-    password: [null, Validators.required],
-    email: [null, Validators.required]
+    password: [null, [Validators.required, Validators.minLength(8)]],
+    passwordConfirm: [null, [Validators.required, Validators.minLength(8)]],
+    email: [null, [Validators.required, Validators.email]],
+    firstName: [null, Validators.required],
+    lastName: [null, Validators.required],
+
   });
 
   hasUnitNumber = false;

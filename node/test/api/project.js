@@ -38,7 +38,6 @@ describe('Project model', () => {
 
         const response = await chai.request(app).post('/api/project').send(new_project);
 
-        console.warn(response);
         expect(response).to.have.status(200);
         assert.equal(new_project.name, response.body.name);
         assert.equal(new_project.description, response.body.description);

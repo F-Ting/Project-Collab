@@ -16,7 +16,7 @@ import { Project } from '../models/project';
 describe('ProjectFormComponent', () => {
   let component: ProjectFormComponent;
   let fixture: ComponentFixture<ProjectFormComponent>;
-  const dummyProject = new Project(1, "test_name", "test_description", "test_owner", "test_img", "test_email", "test_url", "test_github");
+  const dummyProject = new Project(1, 'test_name', 'test_description', 'test_owner', 'test_email', 'test_url', 'test_github');
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -83,6 +83,6 @@ describe('ProjectFormComponent', () => {
   // TODO: FIX ME!
   // it('should populate fields when there is a project', () => {
   //   component.project = dummyProject;
-  //   expect(document.getElementsByTagName('input')[0].value).toEqual("test_name");
+  //   expect(document.getElementsByTagName('input')[0].value).toEqual('test_name');
   // });
 });

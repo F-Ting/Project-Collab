@@ -4,12 +4,12 @@ import { HttpService} from '../http.service';
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
+export class RegistrationService {
 
     constructor(private httpClient: HttpService) { }
 
-    login(data) {
-      // login
-      return this.httpClient.post(`api/user/login/`, data);
+    registration(data, type) {
+      // registration
+      return this.httpClient.post(`api/users/${type}`, data);
     }
 }

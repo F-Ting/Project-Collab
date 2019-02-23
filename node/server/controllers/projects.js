@@ -71,7 +71,7 @@ module.exports = {
       )
       .then(project => {
         return project.destroy()
-          .then(() => res.status(200).send("project deleted"))
+          .then(() => res.status(200).send({message: "project deleted"}))
           .catch((error) => res.status(400).send(error));
         })
       .catch(error => res.status(400).send(error));

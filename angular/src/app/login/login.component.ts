@@ -13,27 +13,29 @@ import { FormBuilder, Validators } from '@angular/forms';
 // componenet that handels user login
 export class LoginComponent implements OnInit {
 
-    loginForm = this.fb.group({
-      username: [null, Validators.required],
-      password: [null, Validators.required]
-    });
-
-    hasUnitNumber = false;
-
-    ngOnInit() {
-    }
-
   constructor(private fb: FormBuilder, private loginService: LoginService, private router: Router) { }
 
+  loginForm = this.fb.group({
+    username: [null, Validators.required],
+    password: [null, Validators.required]
+  });
+
+  hasUnitNumber = false;
+  error = false;
 
 
-  onSubmit() {
-    console.log(this.loginForm);
-    alert('Thanks!');
+  ngOnInit() {
   }
 
+  onSubmit() {
+    this.loginService.login(this.loginForm.value).subscribe((response)=>{
+        this.error = false;
+        console.log(response);
+    },
+    error => {
+      this.error = true;
+    });
 
-
-
+  }
 
 }

@@ -9,21 +9,25 @@ import { RoutingModule } from './routing/routing.module';
 import { ExampleComponent } from './example/example.component';
 import { LoginComponent } from './login/login.component';
 import { MatGridListModule, MatCardModule, MatMenuModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatSelectModule, MatRadioModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule, MatExpansionModule, MatChipsModule, MatAutocompleteModule} from '@angular/material';
+import { RegistrationComponent } from './registration/registration.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { DiscoverComponent } from './discover/discover.component';
 import { SearchComponent } from './search/search.component';
+import { ProjectFormComponent } from './project-form/project-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ExampleComponent,
     LoginComponent,
+    RegistrationComponent,
     MainNavComponent,
     DiscoverComponent,
-    SearchComponent
+    SearchComponent,
+    ProjectFormComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -47,7 +51,8 @@ import { SearchComponent } from './search/search.component';
     MatIconModule,
     MatListModule,
     MatExpansionModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    HttpClientModule
   ],
   exports: [MainNavComponent],
   providers: [],

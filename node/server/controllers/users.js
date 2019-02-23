@@ -5,13 +5,13 @@ module.exports = {
   create(req, res) {
     return Users
       .create({
-        name: req.body.username,
+        name: req.body.firstName,
         username: req.body.username,
         password: req.body.password,
         email: req.body.email,
         type: req.params.type
       })
-      .then(users =>  res.status(200).send("okay"))
+      .then(users =>  res.status(200).send({message: "okay"}))
       .catch(error => res.status(400).send(error));
   },
 
@@ -33,7 +33,7 @@ module.exports = {
         attributes: ['id', 'name', 'username', 'email', 'bio']
       })
       .then(users => {
-        res.status(200).send("okay")
+        res.status(200).send({message: "okay"})
       })
       .catch(error => res.status(400).send(error));
   },
@@ -156,7 +156,7 @@ module.exports = {
       )
       .then(user => {
         return user.destroy()
-          .then(() => res.status(200).send("user deleted"))
+          .then(() => res.status(200).send({message:"user deleted"}))
           .catch((error) => res.status(400).send(error));
         })
       .catch(error => res.status(400).send(error));

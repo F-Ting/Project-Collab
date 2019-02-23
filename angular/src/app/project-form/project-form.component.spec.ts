@@ -16,7 +16,7 @@ import { Project } from '../models/project';
 describe('ProjectFormComponent', () => {
   let component: ProjectFormComponent;
   let fixture: ComponentFixture<ProjectFormComponent>;
-  const dummyProject = new Project(1, 'test_name', 'test_description', 'test_owner', 'test_email', 'test_url', 'test_github');
+  const dummyProject = new Project(1, 'test_title', 'test_description', 'test_owner', 'test_url', 'test_github');
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -52,10 +52,6 @@ describe('ProjectFormComponent', () => {
 
   it('should contain a description input', () => {
     expect(document.getElementById('project-form-description')).toBeTruthy();
-  });
-
-  it('should contain an email input', () => {
-    expect(document.getElementById('project-form-email')).toBeTruthy();
   });
 
   it('should contain a url input', () => {

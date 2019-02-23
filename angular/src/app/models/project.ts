@@ -4,7 +4,6 @@ export class Project {
       public title: string,
       public description: string,
       public owner: string,
-      public email: string,
       public url: string,
       public github: string,
       public img?: string,

@@ -14,7 +14,7 @@ export class ProjectFormComponent implements OnInit {
 
   projectForm = this.fb.group({
     user_id: 1,
-    name: [this.project && this.project.title || null, Validators.required],
+    name: [this.project && this.project.name || null, Validators.required],
     description: [this.project && this.project.description || null, Validators.required],
     email: [this.project && this.project.email || null, Validators.required],
     url: [this.project && this.project.url || null, Validators.required],

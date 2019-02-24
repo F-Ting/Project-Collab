@@ -1,33 +1,38 @@
 <app-search></app-search>
 <div class="grid-container">
-    <mat-grid-list cols="4" rowHeight="400px">
-      <mat-grid-tile *ngFor="let project of projects" [colspan]="1" [rowspan]="1">
-        <mat-card class="dashboard-card">
-          <img
-            mat-card-image
-            src= {{project.img}}
-            style="height: 250px; object-fit: cover;"
-          />
-          <mat-card-title>
-            {{ project.title }}
-          </mat-card-title>
+  <mat-grid-list cols="4" rowHeight="400px">
+    <mat-grid-tile *ngFor="let project of projects" [colspan]="1" [rowspan]="1">
+      <mat-card class="dashboard-card">
+        <img
+          mat-card-image
+          src="https://i.imgur.com/VBjgoiU.png"
+          style="height: 250px; object-fit: cover;"
+        />
 
-          <mat-card-content class="dashboard-card-content">
-            <div>{{ project.description }}</div>
-          </mat-card-content>
-          <mat-card-footer>
-            <!-- <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
+        <mat-card-title>
+          {{ project.name }}
+        </mat-card-title>
+
+        <mat-card-content class="dashboard-card-content">
+          <div>{{ project.description }}</div>
+        </mat-card-content>
+
+        <!-- <mat-card-actions>
+          <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
               <mat-icon>more_vert</mat-icon>
             </button>
             <mat-menu #menu="matMenu" xPosition="before">
               <button mat-menu-item>Expand</button>
               <button mat-menu-item>Remove</button>
-            </mat-menu> -->
-            <div style="text-align: right; padding-right: 20px;">
-              {{ project.owner }}
-            </div>
-          </mat-card-footer>
-        </mat-card>
-      </mat-grid-tile>
-    </mat-grid-list>
+            </mat-menu>
+        </mat-card-actions> -->
+
+        <mat-card-footer>
+          <div style="text-align: right; padding-right: 20px;">
+            {{ project.status }}
+          </div>
+        </mat-card-footer>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
 </div>

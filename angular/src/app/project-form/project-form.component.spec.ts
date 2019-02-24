@@ -16,7 +16,7 @@ import { Project } from '../models/project';
 describe('ProjectFormComponent', () => {
   let component: ProjectFormComponent;
   let fixture: ComponentFixture<ProjectFormComponent>;
-  const dummyProject = new Project(1, "test_name", "test_description", "test_owner", "test_img", "test_email", "test_url", "test_github");
+  const dummyProject = new Project(1, "test_name", "test_description", "test_owner", "test_email", "test_github", "test_url", "test_startDate", "test_status", "test_img");
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({

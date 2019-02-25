@@ -4,7 +4,7 @@ import path from 'path';
 import { exec } from 'child-process-promise';
 import { parseURL } from 'whatwg-url';
 
-import 'server/initialize';
+import '../server/initialize';
 
 const spawnOptions = { cwd: path.join(__dirname, '../..'), stdio: 'inherit' };
 

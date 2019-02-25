@@ -1,9 +1,11 @@
 import { TestBed } from '@angular/core/testing';
 
 import { DiscoverService } from './discover.service';
-
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 describe('DiscoverService', () => {
-  beforeEach(() => TestBed.configureTestingModule({}));
+  beforeEach(() => TestBed.configureTestingModule({
+    imports: [HttpClientTestingModule]
+  }));
 
   it('should be created', () => {
     const service: DiscoverService = TestBed.get(DiscoverService);

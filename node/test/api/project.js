@@ -46,8 +46,33 @@ describe('Project model', () => {
         assert.equal(count + 1, await models.projects.count());
     });
 
+    it('can post to the project endpoint to edit a project', async () => {
+        project = await factories.project();
+        const count = await models.projects.count();
+        const new_project_data = {
+            name: "test_name",
+            description: "test_description",
+            github: "test_github",
+            url: "test_url"
+        }
 
-    // TODO: EDIT PROJECT
+        const response = await chai.request(app).post(`/api/project/${project.id}/update`).send(new_project_data);
 
-    // TODO: DELETE PROJECT
+        expect(response).to.have.status(200);
+        assert.equal(new_project_data.name, response.body.name);
+        assert.equal(new_project_data.description, response.body.description);
+        assert.equal(new_project_data.github, response.body.github);
+        assert.equal(new_project_data.url, response.body.url);
+        assert.equal(count, await models.projects.count());
+    });
+
+    it('can post to the project endpoint to delete a project', async () => {
+        project = await factories.project();
+        const count = await models.projects.count();
+
+        const response = await chai.request(app).post(`/api/project/remove`).send({"id": project.id});
+
+        expect(response).to.have.status(200);
+        assert.equal(count - 1, await models.projects.count());
+    });
 });

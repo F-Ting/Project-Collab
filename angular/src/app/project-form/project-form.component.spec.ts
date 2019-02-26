@@ -88,11 +88,15 @@ describe('ProjectFormComponent', () => {
   }));
 
   it('should set submitted to be true', () => {
-    component.projectForm.controls['name'].setValue("test");
-    component.projectForm.controls['description'].setValue("test");
-    component.projectForm.controls['url'].setValue("test");
-    component.projectForm.controls['github'].setValue("test");
     component.onSubmit();
+    fixture.detectChanges();
     expect(component.submitted).toBeTruthy();
+  });
+
+  it('should set deleted to be true', () => {
+    component.project = dummyProject;
+    component.onDelete();
+    fixture.detectChanges();
+    expect(component.deleted).toBeTruthy();
   });
 });

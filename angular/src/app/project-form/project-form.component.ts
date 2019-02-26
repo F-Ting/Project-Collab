@@ -20,20 +20,23 @@ export class ProjectFormComponent implements OnInit {
     github: [this.project && this.project.github || null, Validators.required]
   });
   submitted = false;
+  deleted = false;
+  response = null;
 
   onSubmit() {
+    this.submitted = true;
     if (!this.project) {
       this.projectFormService.create(this.projectForm.value).subscribe((response) => {
+        this.response = response;
         console.log(response);
-        this.submitted = true;
       },
       error => {
         console.log(this.projectForm.value);
       });
     } else {
       this.projectFormService.edit(this.projectForm.value, this.project._id).subscribe((response) => {
+        this.response = response;
         console.log(response);
-        this.submitted = true;
       },
       error => {
         console.log(this.projectForm.value);
@@ -42,6 +45,7 @@ export class ProjectFormComponent implements OnInit {
   }
 
   onDelete() {
+    this.deleted = true;
     this.projectFormService.delete({'id': this.project._id}).subscribe((response) => {
       console.log(response);
     },

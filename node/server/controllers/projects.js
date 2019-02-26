@@ -1,5 +1,6 @@
 const Projects = require('../models').projects;
 const Associations = require('../models').user_associations;
+const axios = require('axios');
 
 module.exports = {
   //create a new Porjects
@@ -32,12 +33,14 @@ module.exports = {
 
   // list all Porjects
   list(req, res) {
-    return Projects
-      .findAll({
-        attributes: {exclude: ['createdAt', 'updatedAt'] }
-      })
-      .then((projects) => res.status(200).send(projects))
-      .catch((error) => res.status(400).send(error));
+    return axios.get("http://localhost:8001/api/projects")
+    .then(response => {
+      res.status(200).send(response.data);
+    })
+    .catch(error => {
+      console.log(error)
+      res.status(400).send(error);
+    });
   },
 
   // list all Porjects that are approved or that are unapproved

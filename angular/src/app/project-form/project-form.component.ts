@@ -19,11 +19,13 @@ export class ProjectFormComponent implements OnInit {
     url: [this.project && this.project.url || null, Validators.required],
     github: [this.project && this.project.github || null, Validators.required]
   });
+  submitted = false;
 
   onSubmit() {
     if (!this.project) {
       this.projectFormService.create(this.projectForm.value).subscribe((response) => {
         console.log(response);
+        this.submitted = true;
       },
       error => {
         console.log(this.projectForm.value);
@@ -31,6 +33,7 @@ export class ProjectFormComponent implements OnInit {
     } else {
       this.projectFormService.edit(this.projectForm.value, this.project._id).subscribe((response) => {
         console.log(response);
+        this.submitted = true;
       },
       error => {
         console.log(this.projectForm.value);

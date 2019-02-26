@@ -23,7 +23,6 @@
   "dependencies": {
     "@babel/polyfill": "^7.2.5",
     "auto-parse": "1.5.1",
-    "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "child-process-promise": "2.2.1",
     "dotenv": "6.1.0",

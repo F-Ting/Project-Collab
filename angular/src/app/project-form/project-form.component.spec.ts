@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ProjectFormComponent } from './project-form.component';
-import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { By, BrowserModule } from '@angular/platform-browser';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
@@ -54,10 +54,6 @@ describe('ProjectFormComponent', () => {
     expect(document.getElementById('project-form-description')).toBeTruthy();
   });
 
-  it('should contain an email input', () => {
-    expect(document.getElementById('project-form-email')).toBeTruthy();
-  });
-
   it('should contain a url input', () => {
     expect(document.getElementById('project-form-url')).toBeTruthy();
   });
@@ -80,9 +76,27 @@ describe('ProjectFormComponent', () => {
     expect(document.getElementById('project-form-delete')).toBeTruthy();
   });
 
-  // TODO: FIX ME!
-  // it('should populate fields when there is a project', () => {
-  //   component.project = dummyProject;
-  //   expect(document.getElementsByTagName('input')[0].value).toEqual("test_name");
-  // });
+  it('should populate fields when there is a project', async(() => {
+    component.projectForm.controls['name'].setValue("test_title");
+    fixture.detectChanges();
+
+    fixture.whenStable().then(() => {
+      const input = fixture.debugElement.query(By.css('input'));
+      console.log(input.nativeElement.value);
+      expect(input.nativeElement.value).toEqual(dummyProject.title);
+    });
+  }));
+
+  it('should set submitted to be true', () => {
+    component.onSubmit();
+    fixture.detectChanges();
+    expect(component.submitted).toBeTruthy();
+  });
+
+  it('should set deleted to be true', () => {
+    component.project = dummyProject;
+    component.onDelete();
+    fixture.detectChanges();
+    expect(component.deleted).toBeTruthy();
+  });
 });

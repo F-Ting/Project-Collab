@@ -64,7 +64,7 @@ module.exports = (app) => {
   app.post('/api/project', projectsController.create);
   // update a project
   app.post('/api/project/:project/update', projectsController.update);
-  // remove a porject
+  // remove a project
   app.post('/api/project/remove', projectsController.removeProject);
   // gets all projects
   app.get('/api/projects', projectsController.list);
@@ -85,11 +85,11 @@ module.exports = (app) => {
   app.post('/api/user_associations/add', userAssociationsController.create);
   // get all users associations for a project (equal to getting all users for a project)
   app.get('/api/user_associations/project/:project', userAssociationsController.listUsers);
-  //get all users associations for a User (equal to getting all porjects for a User)
+  //get all users associations for a User (equal to getting all projects for a User)
   app.get('/api/user_associations/user', authenticate, userAssociationsController.listProjects);
   // get your status on a project
   app.get('/api/user_associations/user/project/:project', authenticate, userAssociationsController.yourProjectStatus);
-  // get all users associations a user is not aprt (equal to getting all porjects a user is not apart of)
+  // get all users associations a user is not aprt (equal to getting all projects a user is not apart of)
   app.get('/api/user_associations/user/not', authenticate, userAssociationsController.listNotInProjects);
 
   // remove a users association user TODO

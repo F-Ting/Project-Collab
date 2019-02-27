@@ -31,7 +31,7 @@ module.exports = {
       .catch(error => res.status(400).send(error));
   },
 
-  // list all Porjects
+  // list all projects
   list(req, res) {
     return axios.get("http://localhost:8001/api/projects")
     .then(response => {
@@ -43,7 +43,7 @@ module.exports = {
     });
   },
 
-  // list all Porjects that are approved or that are unapproved
+  // list all projects that are approved or that are unapproved
   listApprovedOrUnapproved(req, res) {
     return Projects
       .findAll({
@@ -56,7 +56,7 @@ module.exports = {
       .catch((error) => res.status(400).send(error));
   },
 
-  // get a single porject
+  // get a single project
   getProject(req, res) {
     return Projects
       .findById( req.params.project, {

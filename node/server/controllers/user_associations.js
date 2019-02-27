@@ -107,7 +107,7 @@ module.exports = {
             status: 'approved'
           }
         })
-        .then((porject) => res.status(200).send(porject))
+        .then((project) => res.status(200).send(project))
         .catch((error) => res.status(400).send(error));
       })
       .catch((error) => res.status(400).send(error));

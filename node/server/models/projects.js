@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
     github: DataTypes.STRING,
     url: DataTypes.STRING,
     project_start_date: DataTypes.DATE,
+    image: DataTypes.STRING,
     status: {
       type: DataTypes.ENUM,
       values: ['approved', 'unapproved', 'rejected']

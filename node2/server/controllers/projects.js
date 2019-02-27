@@ -4,7 +4,7 @@ const Associations = require('../models').user_associations;
 
 module.exports = {
 
-  // list all Porjects
+  // list all projects
   list(req, res) {
     Projects
       .findAll({
@@ -23,6 +23,7 @@ module.exports = {
         }]
       })
       .then((projects) => {
+
         const resObj = projects.map(project => {
           return Object.assign({},
             {
@@ -32,6 +33,7 @@ module.exports = {
                 "github": project.github,
                 "url": project.url,
                 "project_start_date": project.project_start_date,
+                "image": project.image,
                 "status": project.status,
                 "createdAt": project.createdAt,
                 "updatedAt": project.updatedAt,
@@ -47,7 +49,7 @@ module.exports = {
       .catch((error) => res.status(400).send(error));
   },
 
-  // list all Porjects that are approved or that are unapproved
+  // list all projects that are approved or that are unapproved
   listApprovedOrUnapproved(req, res) {
     return Projects
       .findAll({

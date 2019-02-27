@@ -1,11 +1,11 @@
 <app-search></app-search>
 <div class="grid-container">
-  <mat-grid-list cols="4" rowHeight="400px">
+  <mat-grid-list cols="4" rowHeight="410px">
     <mat-grid-tile *ngFor="let project of projects" [colspan]="1" [rowspan]="1">
       <mat-card class="dashboard-card">
         <img
           mat-card-image
-          src="https://i.imgur.com/VBjgoiU.png"
+          src="{{ project.image }}"
           style="height: 250px; object-fit: cover;"
         />
 
@@ -16,10 +16,18 @@
         <mat-card-content class="dashboard-card-content">
           <div>{{ project.description }}</div>
         </mat-card-content>
-        
+
         <mat-card-footer>
-          <div style="text-align: right; padding-right: 20px;">
-            {{ project.status }}
+          <div style="margin:15px">
+            <span style="float: left">
+              <a href="{{ project.github }}" style="text-decoration: none"
+                >Project Link</a
+              >
+            </span>
+
+            <span style="float: right">
+              {{ project.owner.username }}
+            </span>
           </div>
         </mat-card-footer>
       </mat-card>

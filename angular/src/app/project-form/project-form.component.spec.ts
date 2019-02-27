@@ -16,7 +16,7 @@ import { Project } from '../models/project';
 describe('ProjectFormComponent', () => {
   let component: ProjectFormComponent;
   let fixture: ComponentFixture<ProjectFormComponent>;
-  const dummyProject = new Project(1, "test_name", "test_description", "test_owner", "test_email", "test_github", "test_url", "test_startDate", "test_status", "test_img");
+  const dummyProject = new Project(1, "test_title", "test_description", "test_owner", "test_email", "test_github", "test_url", "test_startDate", "test_status", "test_img");
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -83,7 +83,7 @@ describe('ProjectFormComponent', () => {
     fixture.whenStable().then(() => {
       const input = fixture.debugElement.query(By.css('input'));
       console.log(input.nativeElement.value);
-      expect(input.nativeElement.value).toEqual(dummyProject.title);
+      expect(input.nativeElement.value).toEqual(dummyProject.name);
     });
   }));
 

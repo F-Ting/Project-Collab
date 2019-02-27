@@ -60,6 +60,7 @@ export class RegistrationComponent implements OnInit {
           this.error = true;
         });
     } else{
+      console.log("password not matching")
         this.error = true;
     }
 

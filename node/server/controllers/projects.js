@@ -3,7 +3,7 @@ const Associations = require('../models').user_associations;
 const axios = require('axios');
 
 module.exports = {
-  //create a new Porjects
+  // Create a new Project
   create(req, res) {
     return Projects
       .create({
@@ -16,7 +16,7 @@ module.exports = {
       .then(project => {
         if (!project) {
           return res.status(500).send({
-            message: 'Eerror Creating Project ',
+            message: 'Error Creating Project ',
           });
         }
         return Associations.create({

@@ -1,23 +1,19 @@
-<<<<<<< HEAD
-\c project-collab-db;
-=======
->>>>>>> master
-INSERT INTO users (username, name, bio, password, type) VALUES ('student1','Marie Bailey','Sadipscing legere ea elaboraret eu usu ea diam .','student', 'student');
-INSERT INTO users (username, name, bio, password, type) VALUES ('student2','James Freeman','Sadipscing legere ea elaboraret eu usu ea diam .','student', 'student');
-INSERT INTO users (username, name, bio, password, type) VALUES ('student3','Peter Barnes','Sadipscing legere ea elaboraret eu usu ea diam .','student', 'student');
-INSERT INTO users (username, name, bio, password, type) VALUES ('company1','Peter Barnes','Sadipscing legere ea elaboraret eu usu ea diam .','student', 'company');
-INSERT INTO users (username, name, bio, password, type) VALUES ('admin1','Peter Barnes','Sadipscing legere ea elaboraret eu usu ea diam .','student', 'instructor');
+INSERT INTO users (username, name, bio, password, type) VALUES ('SergeyBrin','Sergey Brin','CEO at Google.','password', 'admin');
+INSERT INTO users (username, name, bio, password, type) VALUES ('matthew-jay-wong','Matthew Wong','3rd Year CS Specialist.','password', 'student');
+INSERT INTO users (username, name, bio, password, type) VALUES ('3370sohail','Sohail Hameed','3rd Year CS Specialist.','password', 'student');
+INSERT INTO users (username, name, bio, password, type) VALUES ('TensorFlow','TensorFlow','Open source software library.','password', 'company');
+INSERT INTO users (username, name, bio, password, type) VALUES ('Clarifai','Clarifai','Image processing library.','password', 'company');
 
-INSERT INTO projects (name, description, project_start_date, status) VALUES ('Google','Iudico ad periculis lorem ipsum . Ipsum vel ullamcorper brute cu sea qui everti enim ex . Periculis autem lorem cum utamur usu ut . Tamquam utamur velit cu offendit ius ius nemore cum amet .','2018-11-25', 'approved');
-INSERT INTO projects (name, description, project_start_date, status) VALUES ('Project-Collab','Sea nemore autem ut utamur in enim sadipscing amet . Nemore ut usu reprehendunt autem in diam autem velit elaboraret . Nemore periculis cu ex ullamcorper sit offendit enim . Lorem ipsum cu amet utamur tamquam sadipscing sea . Modus vel modus diam elaboraret ipsum .','2018-11-25', 'approved');
-INSERT INTO projects (name, description, project_start_date, status) VALUES ('Snapchat','Periculis sit eu elaboraret eu lorem sit soluta . Nemore eos modus cu lorem enim brute nemore . Eu eos ipsum sea cum vel amet .','2018-11-25', 'approved');
-INSERT INTO projects (name, description, project_start_date, status) VALUES ('Facebook','Sea iudico sit eu vel utamur soluta ius . Legere cu sea tamquam sadipscing ius .','2018-11-25', 'unapproved');
-INSERT INTO projects (name, description, project_start_date, status) VALUES ('DCS','Erant sea diam ex ea sea ei utamur . Ex diam cum ea velit usu enim ex cum dolor .','2018-11-25', 'unapproved');
-INSERT INTO projects (name, description, project_start_date, status) VALUES ('ta_feedback','Lorem ipsum cu reprehendunt modus usu utamur eos ad . Offendit offendit in elaboraret enim autem . Velit nemore reprehendunt elaboraret diam in cum ius eu elaboraret . Ex elaboraret cu enim cum iudico elaboraret sadipscing eu . Offendit modus eu sea eu offendit in .','2018-11-25', 'unapproved');
-INSERT INTO projects (name, description, project_start_date, status) VALUES ('PCRS','Enim diam utamur cu ad tamquam . Sadipscing enim vel enim sadipscing enim iudico utamur . Dolor cum brute sea elaboraret sea reprehendunt ei ullamcorper eu .','2018-11-25', 'unapproved');
 
-INSERT INTO user_associations (user_id, project_id, is_admin, status) VALUES (1,1,False,'unapproved');
-INSERT INTO user_associations (user_id, project_id, is_admin, status) VALUES (2,2,False,'unapproved');
-INSERT INTO user_associations (user_id, project_id, is_admin, status) VALUES (3,3,False,'unapproved');
+INSERT INTO projects (name, description, github, url, project_start_date, image, status) VALUES ('Google', 'Google LLC is an American multinational technology company that specializes in Internet-related services and products, which include online advertising technologies, search engine, cloud computing, software, and hardware.', 'https://github.com/google', 'https://google.com', '1998-11-25T05:00:00.000Z', 'https://i.imgur.com/Hjpgzeq.jpg', 'approved');
+INSERT INTO projects (name, description, github, url, project_start_date, image, status) VALUES ('Rate My Courses', 'Finding the right class for YOU.', 'https://github.com/matthew-jay-wong/rate-my-courses', 'https://matthew-jay-wong.github.io', '1998-11-25T05:00:00.000Z', 'https://i.imgur.com/RWfjloZ.jpg', 'approved');
+INSERT INTO projects (name, description, github, url, project_start_date, image, status) VALUES ('ShowTime', 'Community Driven TV Guide.', 'https://github.com/george-ma/ShowTime', 'https://3370sohail.github.io', '1998-11-25T05:00:00.000Z', 'https://i.imgur.com/dN7IETs.png', 'approved');
+INSERT INTO projects (name, description, github, url, project_start_date, image, status) VALUES ('TensorFlow', 'TensorFlow is an open source software library for numerical computation using data flow graphs. The graph nodes represent mathematical operations, while the graph edges represent the multidimensional data arrays (tensors) that flow between them. This flexible architecture enables you to deploy computation to one or more CPUs or GPUs in a desktop, server, or mobile device without rewriting code. TensorFlow also includes TensorBoard, a data visualization toolkit.', 'https://github.com/tensorflow/tensorflow', 'https://www.tensorflow.org/', '1998-11-25T05:00:00.000Z', 'https://i.imgur.com/Jsd4Ukc.jpg', 'approved');
+INSERT INTO projects (name, description, github, url, project_start_date, image, status) VALUES ('Clarifai API', 'The Clarifai API offers image and video recognition as a service. Whether you have one image or billions, you are only steps away from using artificial intelligence to recognize your visual content.', 'https://github.com/Clarifai', 'https://clarifai.com/', '1998-11-25T05:00:00.000Z', 'https://i.imgur.com/torxQvw.png', 'approved');
+
+
+INSERT INTO user_associations (user_id, project_id, is_admin, status) VALUES (1,1,True,'approved');
+INSERT INTO user_associations (user_id, project_id, is_admin, status) VALUES (2,2,True,'approved');
+INSERT INTO user_associations (user_id, project_id, is_admin, status) VALUES (3,3,True,'approved');
 INSERT INTO user_associations (user_id, project_id, is_admin, status) VALUES (4,4,True,'approved');
--- INSERT INTO user_associations (user_id, project_id, is_admin, status) VALUES (2,5,True,'unapproved');
+INSERT INTO user_associations (user_id, project_id, is_admin, status) VALUES (5,5,True,'approved');

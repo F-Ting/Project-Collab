@@ -17,7 +17,8 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { DiscoverComponent } from './discover/discover.component';
 import { SearchComponent } from './search/search.component';
 import { ProjectFormComponent } from './project-form/project-form.component';
-import {MatStepperModule} from '@angular/material/stepper';
+import { MatStepperModule } from '@angular/material/stepper';
+import { ProfileComponent } from "./profile/profile.component";
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import {MatStepperModule} from '@angular/material/stepper';
     MainNavComponent,
     DiscoverComponent,
     SearchComponent,
+    ProfileComponent,
     ProjectFormComponent
   ],
   imports: [

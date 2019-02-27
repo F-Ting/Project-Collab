@@ -1,4 +1,4 @@
-## Setup for Client Testing (Anisha)
+## Setup for Client Testing
 
 ### Testing Framework Used
 
@@ -12,7 +12,7 @@ Functions created in order to communicate with the back-end are service files, a
 
 Component Testing is a fair bit more involved as it involves testing the validity of the front-end itself. Mostly this involves checking HTML tags and accessing for specific tags as we expect them to arrive. An example of this is during the creation of a form, the delete button should only appear when the project is an existing one. Thus, we would attempt to access the HTML tag for the delete button, expecting it to only exist when a project exists. Furthermore, component class variables can be used to determine the current stage of the component function that is being tested. For example, if a function is expecting a response from the database, that response can be stored within a variable in the component function and the value of that variable can be tested.
 
-## Setup for API Testing (Daniel) 
+## Setup for API Testing
 
 ### Testing Framework Used
 We are using Mocha and chai to be testing framework we use. In addition, the Faker library is used to help us create fake data to be inserted into our database. We choose Mocha and Chai due to a very comprehensive tutorial we found that uses them with node, express and sequelize library.

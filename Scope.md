@@ -1,18 +1,15 @@
-## Project Overview 
-- Purpose/Vision
-- Target Users
-
-## Project Breakdown
-- Project Capability
-- Use Cases
-
-## Project Timeline (Within the course)
-- 3 Sprints
-- Each sprint consists:
+## Project Overview
+Given that we are not working on the default project, we have created a project proposal document which covers everythign about the project.
+The proposal could be found via the following link: https://docs.google.com/document/d/1U6OhjnrtKAbctL48Yah2XUSOw6cMEyru6UtWubOEdL8/edit#
 
 ## Team learning goals
 For example: Back-end focused, purely on Practicing Continuous deployment by setting up project with Travis, Docker, kubernetes.
 
-Consensus Goals:
+Goals:
+- Full stack web development using Javascript
+- Learn Angular 7 
+- Building RESTful APIs with Node.js and Express.js
+- OAuth and good encription practices
+- Better teamwork and communication skills
+- TDD
 
-Non-Consensus(individual/pair) Goals:

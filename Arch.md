@@ -1,12 +1,10 @@
-A  system like the above can be “sliced” into webapps and services in many different ways. (Until recently, before the rise of web services, many systems were one monolithic webapp.) 
-
-In this course we are insisting you break the system up into at least two webapps and services: a instructor client webapp that creates, views, adds intervals and another webapp that student facing client code uses to edit meetings.  
-## Web services (Confirm in OH tomorrow on 2+ web services)
-- Furthermore, to follow the Bezos doctrine,  we insist that the webapps call into at least two web services
-- What webservice have been created?
+## Web services
+Currently we have 2 services:
+1. Service to handle all project based queries (Can be resource intensive due to large amount of table join and searching through large amounts of data. Potentially in the future, when the tag system is implemented, we will use a simple heuristic search to offer recommendations, requiring even more resources to compute)
+2. Service to handle simple user base interactions (Time complexity is not costly, which will not clog up the server)
 
 ## Technologies (Tech Stack)
 You have to decide which technology you will use to implement each webapp and endpoint. 
 - Techologies used and why
-
-(Link to API documentation)
+Front-end: Angular 7 (Easy to pick up, simpler templating compared to the old react front-end that we replaced)
+Back-end: Node.js, Express.js, Sequelize.js, PostgresDB (Full on javascript stack makes learning curve low for members to pickup, also Sequelize (ORM library) makes it easy to avoid programming in SQL and better conversion from database models to JSON objects and vice versa.) 

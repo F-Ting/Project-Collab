@@ -2,7 +2,7 @@
 
 ## Messaging
 
-- We are using slack as our message board to organise meetings, quickly share and pin resources, and check in on one another. 
+- We are using slack as our message board to organize meetings, quickly share and pin resources, and check in on one another. 
 - In addition, the slack is also used for organising meeting times and share google hangouts links. 
 
 ## Progress
@@ -13,8 +13,8 @@ We are using GitHub issues to organise our story points, assign tasks and track 
 
 ## Time/Location
 
-- The large weekly meetings have no set time and location, but will usually take place on campus with the majority of the team  attending in person. 
-- The time and location are decided near the beginning of the week by discussing on the group clack when everyone is free.
+- The large weekly meetings are generally scheduled to be Fridays during tutorial time, however schedule may change due to midterm conflicts, but will usually take place on campus with the majority of the team attending in person. 
+- The time and location are decided near the beginning of the week by discussing on the group slack when everyone is free.
 - Those who absolutely cannot make it in person will call in through a google hangouts link shared in the group slack.
 
 ## Shared documents
@@ -40,17 +40,18 @@ For each person/pair, two things are discussed:
 
    - Do you have the capacity to take on new tasks for this week?
 
-   - Do you have the capacity to help others with their tasks on top of staying on track with your own task?
+   - Do you have the capacity to help others with their tasks?
 
 ### Product Owner
 
-- How will you do regular standup meetings with your various conflicting schedules? Can online meetings help somehow?
+- Weekly standup meeting are usually schedule to fit the majority of the group (more than 4 out of 7 members). The rest of the members will be provided meeting notes to support their understanding of the meeting. Furthermore, each memeber who aren't able to make it to the meeting will be scheduled a followup 1 on 1 meeting to further explain their task in detail. 
+- In the case of weeks that meeting schedules are difficult to scheudle, the product owner will list out tasks neccessary to be done in the week, then contact each individual/pair to discuss and assign tasks. Given that we are doing pair programming as a team, it will be relatively easy to catch everyone up on the work needed to be done.
 
 # Workflow Processes
 
 ## Pair Programming
 
-Given that not everyone in the team is familiar with the tech stack being used, the team decided that it would be most efficient if instead of assigning tasks to individual group members, we would use a system of pair programming. 
+Given that not everyone in the team is familiar with the tech stack being used, the team decided that it would be most efficient to do pair programming.  
 
 ## Tasks
 
@@ -61,13 +62,13 @@ Given that not everyone in the team is familiar with the tech stack being used, 
 ## Sprints
 
 - We will be using two week sprints. This works out quite nicely with the timeline we need to meet with the phase1 and phase2 deadlines. 
-- For each sprint, each pair will try to complete the tasks created for the story they have been assigned to. 
+- For each sprint, each pair will try to complete the tasks created for the task they have been assigned to. 
 - In between sprints, the scrum master will decide how to best reassign tasks to keep up with completing the sprint. 
 
 ## Scrum Master
 
 - The scrum master is **Daniel**. 
-- He will be responsible for organising meetings and decide how to best reassign tasks after reassessing the project mid sprint and at the end of a sprint. 
+- He will be responsible for organizing meetings and decide how to best reassign tasks after reassessing the project mid sprint and at the end of a sprint. 
 
 ## TDD Person
 

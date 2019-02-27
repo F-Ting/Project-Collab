@@ -14,7 +14,7 @@ class GenExamples:
     user_type = ["Team Member", "Team Admin", "Site Admin"]
     photo_url = ["hello", "world", "face", "shoes", "flowers"]
     project_name = ["Google", "Project-Collab", "Snapchat", "Facebook", "DCS", "ta_feedback", "PCRS"]
-    databases= ["project-collab-db","project-collab-test-db"]
+    databases= ["project-collab-db"]
     def __init__(self):
         # set the seed so we always get the same sequence of randoms
         random.seed(1234)

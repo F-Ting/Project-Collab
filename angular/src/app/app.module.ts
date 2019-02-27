@@ -8,13 +8,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RoutingModule } from './routing/routing.module';
 import { ExampleComponent } from './example/example.component';
 import { LoginComponent } from './login/login.component';
+import { MatGridListModule, MatCardModule, MatMenuModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatSelectModule, MatRadioModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule, MatExpansionModule, MatChipsModule, MatAutocompleteModule} from '@angular/material';
 import { RegistrationComponent } from './registration/registration.component';
-import { MatGridListModule, MatCardModule, MatMenuModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatSelectModule, MatRadioModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule} from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { DiscoverComponent } from './discover/discover.component';
+import { SearchComponent } from './search/search.component';
 import { ProjectFormComponent } from './project-form/project-form.component';
 
 @NgModule({
@@ -25,6 +26,7 @@ import { ProjectFormComponent } from './project-form/project-form.component';
     RegistrationComponent,
     MainNavComponent,
     DiscoverComponent,
+    SearchComponent,
     ProjectFormComponent
   ],
   imports: [
@@ -35,6 +37,7 @@ import { ProjectFormComponent } from './project-form/project-form.component';
     RoutingModule,
     MatGridListModule,
     MatCardModule,
+    MatChipsModule,
     MatMenuModule,
     MatInputModule,
     MatButtonModule,
@@ -47,6 +50,8 @@ import { ProjectFormComponent } from './project-form/project-form.component';
     MatSidenavModule,
     MatIconModule,
     MatListModule,
+    MatExpansionModule,
+    MatAutocompleteModule,
     HttpClientModule
   ],
   exports: [MainNavComponent],

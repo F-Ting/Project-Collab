@@ -1,6 +1,6 @@
 import { assert } from 'chai';
 
-import app from '../../app'
+import app from '../../app' // express
 import models, { sequelize } from '../../server/models';
 
 import factories from '../factories';

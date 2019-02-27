@@ -5,12 +5,14 @@ import { LoginComponent } from '../login/login.component';
 import { RegistrationComponent } from '../registration/registration.component';
 import { DiscoverComponent } from '../discover/discover.component';
 import { ProjectFormComponent } from '../project-form/project-form.component';
+import { ProfileComponent} from "../profile/profile.component";
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: 'registration', component: RegistrationComponent},
   { path: 'discover', component: DiscoverComponent},
   { path: 'create', component: ProjectFormComponent},
+  { path: 'profile', component: ProfileComponent},
   { path: '', redirectTo: '/login', pathMatch: 'full' }
 ];
 

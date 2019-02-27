@@ -17,6 +17,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { DiscoverComponent } from './discover/discover.component';
 import { SearchComponent } from './search/search.component';
 import { ProjectFormComponent } from './project-form/project-form.component';
+import {MatStepperModule} from '@angular/material/stepper';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { ProjectFormComponent } from './project-form/project-form.component';
     MatInputModule,
     MatButtonModule,
     MatSelectModule,
+    MatStepperModule,
     MatFormFieldModule,
     MatRadioModule,
     ReactiveFormsModule,

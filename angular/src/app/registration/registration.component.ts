@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { RegistrationService } from './registration.service';
-import { FormBuilder, Validators } from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+
 
 @Component({
   selector: 'app-registration',
@@ -12,31 +13,46 @@ import { FormBuilder, Validators } from '@angular/forms';
 
 // component that handles user registration
 export class RegistrationComponent implements OnInit {
-
-  constructor(private fb: FormBuilder, private registrationService: RegistrationService, private router: Router) { }
-
-  registrationForm = this.fb.group({
-    username: [null, Validators.required],
-    password: [null, [Validators.required, Validators.minLength(8)]],
-    passwordConfirm: [null, [Validators.required, Validators.minLength(8)]],
-    email: [null, [Validators.required, Validators.email]],
-    firstName: [null, Validators.required],
-    lastName: [null, Validators.required],
-
-  });
-
+  isLinear = true;
   hasUnitNumber = false;
   error = false;
+  firstGroup: FormGroup;
+  secondGroup: FormGroup;
+  thirdGroup: FormGroup;
 
-
+  constructor(private _formBuilder: FormBuilder, private registrationService: RegistrationService, private router: Router) {}
   ngOnInit() {
+    this.firstGroup = this._formBuilder.group({
+      username: [null, Validators.required],
+      password: [null, [Validators.required, Validators.minLength(8)]],
+      passwordConfirm: [null, [Validators.required, Validators.minLength(8)]]
+    });
+    this.secondGroup = this._formBuilder.group({
+      email: [null, [Validators.required, Validators.email]]
+    });
+    this.thirdGroup = this._formBuilder.group({
+      firstName: [null, Validators.required],
+      lastName: [null, Validators.required]
+    });
   }
+  // constructor(private fb: MatStepperModule, private registrationService: RegistrationService, private router: Router) { }
+  //
+  // registrationForm = this.fb.group({
+  //   username: [null, Validators.required],
+  //   password: [null, [Validators.required, Validators.minLength(8)]],
+  //   passwordConfirm: [null, [Validators.required, Validators.minLength(8)]],
+  //   email: [null, [Validators.required, Validators.email]],
+  //   firstName: [null, Validators.required],
+  //   lastName: [null, Validators.required],
+  // });
+  // ngOnInit() {
+  // }
 
   onSubmit() {
 
-    if(this.registrationForm.value.password == this.registrationForm.value.passwordConfirm){
-        this.registrationForm.value.firstName = `${this.registrationForm.value.firstName} ${this.registrationForm.value.lastName}`;
-        this.registrationService.registration(this.registrationForm.value, "student").subscribe((response)=>{
+    if(this.firstGroup.value.password == this.firstGroup.value.passwordConfirm){
+        this.thirdGroup.value.firstName = `${this.thirdGroup.value.firstName} ${this.thirdGroup.value.lastName}`;
+        this.registrationService.registration((this.firstGroup.value, this.secondGroup.value, this.thirdGroup.value) , "student").subscribe((response)=>{
             this.error = false;
             console.log(response);
         },
@@ -46,6 +62,7 @@ export class RegistrationComponent implements OnInit {
     } else{
         this.error = true;
     }
+
 
 
   }

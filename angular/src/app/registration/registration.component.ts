@@ -35,18 +35,6 @@ export class RegistrationComponent implements OnInit {
       lastName: [null, Validators.required]
     });
   }
-  // constructor(private fb: MatStepperModule, private registrationService: RegistrationService, private router: Router) { }
-  //
-  // registrationForm = this.fb.group({
-  //   username: [null, Validators.required],
-  //   password: [null, [Validators.required, Validators.minLength(8)]],
-  //   passwordConfirm: [null, [Validators.required, Validators.minLength(8)]],
-  //   email: [null, [Validators.required, Validators.email]],
-  //   firstName: [null, Validators.required],
-  //   lastName: [null, Validators.required],
-  // });
-  // ngOnInit() {
-  // }
 
   onSubmit() {
 
@@ -63,8 +51,6 @@ export class RegistrationComponent implements OnInit {
       console.log("password not matching")
         this.error = true;
     }
-
-
 
   }
 

@@ -1,7 +1,6 @@
 script:
   - cd angular && npm install && npm run setup_test
-  - cd ../node && npm install && npm run setup_test
-
+  - cd ../node && npm install && npm run test
 cache:
   directories:
     - "node_modules"

@@ -9,19 +9,19 @@ import { ProfileService } from "./profile.service";
 export class ProfileComponent implements OnInit {
   error: boolean = false;
   user;
+  filtersLoaded: Promise<boolean>;
 
   constructor(private discoverService: ProfileService) {}
 
   ngOnInit() {
-  this.getUsers();
-  console.log(this.user)
+   this.getUsers();
   }
 
   getUsers() {
     this.discoverService.getUsers().subscribe(
       (response: Array<any>) => {
         this.user = response;
-        console.log(this.user)
+        this.filtersLoaded = Promise.resolve(true);
       },
       error => {
         this.error = true;

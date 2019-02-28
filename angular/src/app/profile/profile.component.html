@@ -5,19 +5,20 @@
         src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/ESC2016_-_Russia_Meet_%26_Greet_08_%28crop%29.jpg/220px-ESC2016_-_Russia_Meet_%26_Greet_08_%28crop%29.jpg"
         style="height: 250px; object-fit: cover;"
       />
+      <div *ngIf="userLoaded | async">
+        <mat-card-title>
+          {{user.name}}
+        </mat-card-title>
 
-      <mat-card-title>
-        {{ user.name}}
-      </mat-card-title>
+        <mat-card-content class="dashboard-card-content">
+          <div>{{ user.email }}</div>
+        </mat-card-content>
 
-      <mat-card-content class="dashboard-card-content">
-        <div>{{ user.email }}</div>
-      </mat-card-content>
-
-      <mat-card-footer>
-        <div style="text-align: right; padding-right: 20px;">
-          {{ user.bio }}
-        </div>
-      </mat-card-footer>
+        <mat-card-footer>
+          <div style="text-align: right; padding-right: 20px;">
+            {{ user.bio }}
+          </div>
+        </mat-card-footer>
+      </div>
     </mat-card>
 </div>

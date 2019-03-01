@@ -19,7 +19,8 @@
     "pretest": "set NODE_ENV=test && npm run db:migrate",
     "test": "set NODE_ENV=test && mocha",
     "test:coverage": "NODE_ENV=test nyc mocha",
-    "test:report": "nyc report --reporter=text-summary"
+    "test:report": "nyc report --reporter=text-summary",
+    "setup_test": "psql -U postgres < db/setup.sql"
   },
   "keywords": [],
   "author": "",

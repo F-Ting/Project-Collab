@@ -23,6 +23,7 @@ app.use(session({
 	secret: 'oursecret',
 	resave: false,
 	saveUninitialized: false,
+	store: new RedisStore(),
 	cookie: {
 		expires: 1800000, // 30 mins
 		httpOnly: true

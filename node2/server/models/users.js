@@ -30,6 +30,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'user_id',
         as: 'user_associations',
     });
+    users.hasMany(models.tag_to_user, {
+        foreignKey: 'user_id',
+        as: 'tag_to_user',
+    });
   };
   return users;
 };

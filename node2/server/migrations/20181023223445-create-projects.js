@@ -24,6 +24,9 @@ module.exports = {
       project_start_date: {
         type: Sequelize.DATE
       },
+      image: {
+          type: Sequelize.STRING
+      },
       status: {
         type: Sequelize.ENUM,
         values: ['approved', 'unapproved', 'rejected']

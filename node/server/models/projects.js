@@ -20,6 +20,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'project_id',
         as: 'user_associations',
     });
+    projects.hasMany(models.tag_to_project, {
+        foreignKey: 'project_id',
+        as: 'tag_to_project',
+    });
   };
   return projects;
 };

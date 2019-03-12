@@ -11,21 +11,23 @@ export class DiscoverComponent implements OnInit {
     error: boolean = false;
     //   projects: Array<Project> = [];
     projects: Array<any> = [];
+    user_id = localStorage.getItem("user_id");
 
     constructor(private discoverService: DiscoverService) {}
 
     ngOnInit() {
-    this.getProjects();
+      this.getProjects();
     }
 
     getProjects() {
-    this.discoverService.getProjects().subscribe(
-        (response: Array<any>) => {
-        this.projects = response;
-        },
-        error => {
-        this.error = true;
-        }
-    );
+      console.log(this.user_id);
+      this.discoverService.getProjects().subscribe(
+          (response: Array<any>) => {
+          this.projects = response;
+          },
+          error => {
+          this.error = true;
+          }
+      );
     }
 }

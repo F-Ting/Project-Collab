@@ -13,7 +13,7 @@ import { Project } from '../models/project'
 export class ProjectFormComponent implements OnInit {
 
   projectForm = this.fb.group({
-    user_id: 1,
+    user_id: localStorage.getItem("user_id"),
     name: [this.project && this.project.name || null, Validators.required],
     description: [this.project && this.project.description || null, Validators.required],
     url: [this.project && this.project.url || null, Validators.required],
@@ -29,6 +29,7 @@ export class ProjectFormComponent implements OnInit {
       this.projectFormService.create(this.projectForm.value).subscribe((response) => {
         this.response = response;
         console.log(response);
+        this.router.navigate(['/discover']);
       },
       error => {
         console.log(this.projectForm.value);
@@ -37,6 +38,7 @@ export class ProjectFormComponent implements OnInit {
       this.projectFormService.edit(this.projectForm.value, this.project._id).subscribe((response) => {
         this.response = response;
         console.log(response);
+        this.router.navigate(['/discover']);
       },
       error => {
         console.log(this.projectForm.value);

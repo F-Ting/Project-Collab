@@ -19,8 +19,10 @@ export class RegistrationComponent implements OnInit {
   firstGroup: FormGroup;
   secondGroup: FormGroup;
   thirdGroup: FormGroup;
+  data;
 
   constructor(private _formBuilder: FormBuilder, private registrationService: RegistrationService, private router: Router) {}
+
   ngOnInit() {
     this.firstGroup = this._formBuilder.group({
       username: [null, Validators.required],
@@ -37,21 +39,32 @@ export class RegistrationComponent implements OnInit {
   }
 
   onSubmit() {
+    this.data = {"name": `${this.thirdGroup.value.firstName} ${this.thirdGroup.value.lastName}`,
+      "username": this.firstGroup.value.username,
+      "bio": "",
+      "password": this.firstGroup.value.password,
+      "email": this.secondGroup.value.email,
+      "photo": "",
+      "linked_in": "",
+      "github": ""};
 
-    if(this.firstGroup.value.password == this.firstGroup.value.passwordConfirm){
-        this.thirdGroup.value.firstName = `${this.thirdGroup.value.firstName} ${this.thirdGroup.value.lastName}`;
-        this.registrationService.registration((this.firstGroup.value, this.secondGroup.value, this.thirdGroup.value) , "student").subscribe((response)=>{
+    if (this.firstGroup.value.password == this.firstGroup.value.passwordConfirm) {
+        this.registrationService.registration(this.data, "student").subscribe((response)=>{
             this.error = false;
+            // set up local storage with necessary information
+            localStorage.setItem("username", response["username"]);
+            localStorage.setItem("user_id", response["id"]);
+            
             console.log(response);
         },
         error => {
           this.error = true;
+          console.log(error);
         });
-    } else{
+    } else {
       console.log("password not matching")
-        this.error = true;
+      this.error = true;
     }
-
   }
 
 }

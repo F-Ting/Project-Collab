@@ -35,7 +35,7 @@
     </form>
   </mat-step>
   <mat-step [stepControl]="thirdGroup">
-    <form [formGroup]="thirdGroup">
+    <form [formGroup]="thirdGroup" (ngSubmit)="onSubmit()">
       <ng-template matStepLabel>Personal Info</ng-template>
       <div>
         <mat-form-field>

@@ -13,7 +13,7 @@ import { Project } from '../models/project'
 export class ProjectFormComponent implements OnInit {
 
   projectForm = this.fb.group({
-    user_id: 1,
+    user_id: localStorage.getItem("user_id"),
     name: [this.project && this.project.name || null, Validators.required],
     description: [this.project && this.project.description || null, Validators.required],
     url: [this.project && this.project.url || null, Validators.required],

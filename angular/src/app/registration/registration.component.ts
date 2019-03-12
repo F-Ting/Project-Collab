@@ -51,6 +51,10 @@ export class RegistrationComponent implements OnInit {
     if (this.firstGroup.value.password == this.firstGroup.value.passwordConfirm) {
         this.registrationService.registration(this.data, "student").subscribe((response)=>{
             this.error = false;
+            // set up local storage with necessary information
+            localStorage.setItem("username", response["username"]);
+            localStorage.setItem("user_id", response["id"]);
+            
             console.log(response);
         },
         error => {

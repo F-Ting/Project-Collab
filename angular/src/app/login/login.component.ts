@@ -24,7 +24,6 @@ export class LoginComponent implements OnInit {
   hasUnitNumber = false;
   error = false;
 
-
   ngOnInit() {
   }
 
@@ -32,6 +31,8 @@ export class LoginComponent implements OnInit {
     this.loginService.login(this.loginForm.value).subscribe((response)=>{
         this.error = false;
         console.log(response);
+        localStorage.setItem("username", response["username"]);
+        localStorage.setItem("user_id", response["id"]);
         this.router.navigate(['/discover']);
     },
     error => {

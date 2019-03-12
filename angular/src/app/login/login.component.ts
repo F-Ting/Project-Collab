@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from './login.service';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +24,6 @@ export class LoginComponent implements OnInit {
   hasUnitNumber = false;
   error = false;
 
-
   ngOnInit() {
   }
 
@@ -31,6 +31,9 @@ export class LoginComponent implements OnInit {
     this.loginService.login(this.loginForm.value).subscribe((response)=>{
         this.error = false;
         console.log(response);
+        localStorage.setItem("username", response["username"]);
+        localStorage.setItem("user_id", response["id"]);
+        this.router.navigate(['/discover']);
     },
     error => {
       this.error = true;

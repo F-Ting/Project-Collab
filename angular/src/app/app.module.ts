@@ -19,6 +19,7 @@ import { SearchComponent } from './search/search.component';
 import { ProjectFormComponent } from './project-form/project-form.component';
 import { MatStepperModule } from '@angular/material/stepper';
 import { ProfileComponent } from "./profile/profile.component";
+import { LogoutComponent } from './logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { ProfileComponent } from "./profile/profile.component";
     DiscoverComponent,
     SearchComponent,
     ProfileComponent,
-    ProjectFormComponent
+    ProjectFormComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserAnimationsModule,

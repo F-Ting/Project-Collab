@@ -82,7 +82,6 @@ describe('ProjectFormComponent', () => {
 
     fixture.whenStable().then(() => {
       const input = fixture.debugElement.query(By.css('input'));
-      console.log(input.nativeElement.value);
       expect(input.nativeElement.value).toEqual(dummyProject.name);
     });
   }));

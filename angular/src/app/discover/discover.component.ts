@@ -10,7 +10,6 @@ import { Router } from '@angular/router';
 })
 export class DiscoverComponent implements OnInit {
     error: boolean = false;
-    //   projects: Array<Project> = [];
     projects: Array<any> = [];
     user_id = localStorage.getItem("user_id");
     username = localStorage.getItem("username");
@@ -34,7 +33,6 @@ export class DiscoverComponent implements OnInit {
     }
 
     onEdit(project) {
-      console.log(project);
       localStorage.setItem("project", JSON.stringify(project));
       this.router.navigate(['/create']);
     }

@@ -23,7 +23,6 @@ export class ProjectFormComponent implements OnInit {
     if (!this.project) {
       this.projectFormService.create(this.projectForm.value).subscribe((response) => {
         this.response = response;
-        console.log(response);
         this.router.navigate(['/discover']);
       },
       error => {
@@ -32,7 +31,6 @@ export class ProjectFormComponent implements OnInit {
     } else {
       this.projectFormService.edit(this.projectForm.value, this.project.id).subscribe((response) => {
         this.response = response;
-        console.log(response);
         this.router.navigate(['/discover']);
       },
       error => {
@@ -44,7 +42,6 @@ export class ProjectFormComponent implements OnInit {
   onDelete() {
     this.deleted = true;
     this.projectFormService.delete({'id': this.project.id}).subscribe((response) => {
-      console.log(response);
       this.router.navigate(['/discover']);
     },
     error => {

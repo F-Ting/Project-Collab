@@ -12,13 +12,8 @@ import { Project } from '../models/project'
 
 export class ProjectFormComponent implements OnInit {
 
-  projectForm = this.fb.group({
-    user_id: localStorage.getItem("user_id"),
-    name: [this.project && this.project.name || null, Validators.required],
-    description: [this.project && this.project.description || null, Validators.required],
-    url: [this.project && this.project.url || null, Validators.required],
-    github: [this.project && this.project.github || null, Validators.required]
-  });
+  project;
+  projectForm;
   submitted = false;
   deleted = false;
   response = null;
@@ -35,7 +30,7 @@ export class ProjectFormComponent implements OnInit {
         console.log(this.projectForm.value);
       });
     } else {
-      this.projectFormService.edit(this.projectForm.value, this.project._id).subscribe((response) => {
+      this.projectFormService.edit(this.projectForm.value, this.project.id).subscribe((response) => {
         this.response = response;
         console.log(response);
         this.router.navigate(['/discover']);
@@ -48,8 +43,9 @@ export class ProjectFormComponent implements OnInit {
 
   onDelete() {
     this.deleted = true;
-    this.projectFormService.delete({'id': this.project._id}).subscribe((response) => {
+    this.projectFormService.delete({'id': this.project.id}).subscribe((response) => {
       console.log(response);
+      this.router.navigate(['/discover']);
     },
     error => {
       console.log(this.projectForm.value);
@@ -59,12 +55,20 @@ export class ProjectFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private projectFormService: ProjectFormService,
-    public router: Router,
-    @Optional() public project: Project
+    public router: Router
   ) {
   }
 
   ngOnInit() {
+    this.project = JSON.parse(localStorage.getItem('project'));
+    localStorage.removeItem("project");
+    this.projectForm = this.fb.group({
+      user_id: localStorage.getItem("user_id"),
+      name: [this.project && this.project["name"] || null, Validators.required],
+      description: [this.project && this.project.description || null, Validators.required],
+      url: [this.project && this.project.url || null, Validators.required],
+      github: [this.project && this.project.github || null, Validators.required]
+    });
   }
 
 }

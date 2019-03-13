@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Project } from "../models/project";
 import { DiscoverService } from "./discover.service";
+import { Router } from '@angular/router';
 
 @Component({
   selector: "app-discover",
@@ -12,8 +13,9 @@ export class DiscoverComponent implements OnInit {
     //   projects: Array<Project> = [];
     projects: Array<any> = [];
     user_id = localStorage.getItem("user_id");
+    username = localStorage.getItem("username");
 
-    constructor(private discoverService: DiscoverService) {}
+    constructor(private discoverService: DiscoverService, private router: Router) {}
 
     ngOnInit() {
       this.getProjects();
@@ -29,5 +31,11 @@ export class DiscoverComponent implements OnInit {
           this.error = true;
           }
       );
+    }
+
+    onEdit(project) {
+      console.log(project);
+      localStorage.setItem("project", JSON.stringify(project));
+      this.router.navigate(['/create']);
     }
 }

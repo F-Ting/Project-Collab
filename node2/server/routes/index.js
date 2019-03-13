@@ -42,9 +42,10 @@ module.exports = (app) => {
 
   // gets all projects
   app.get('/api/projects', projectsController.list);
-  // get all projects
+  // get all projects by status
   app.get('/api/projects/:status', projectsController.listApprovedOrUnapproved)
-
+  // get all projects by search
+  app.post('/api/projects/search', projectsController.listSearch);
 
   // * user_associations routes *
   // add a new user to a project
@@ -53,6 +54,8 @@ module.exports = (app) => {
   app.get('/api/user_associations/project/:project', userAssociationsController.listUsers);
   //get all users associations for a User (equal to getting all projects for a User)
   app.get('/api/user_associations/user', authenticate, userAssociationsController.listProjects);
+  //get all users associations for list of Users (equal to getting all projects for list of Users)
+  app.post('/api/user_associations/users', userAssociationsController.listProjectsFromUsers);
   // get your status on a project
   app.get('/api/user_associations/user/project/:project', authenticate, userAssociationsController.yourProjectStatus);
   // get all users associations a user is not aprt (equal to getting all projects a user is not apart of)

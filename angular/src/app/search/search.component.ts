@@ -1,5 +1,5 @@
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {MatChipInputEvent} from '@angular/material';
 import {Observable} from 'rxjs';
@@ -7,6 +7,8 @@ import {map, startWith} from 'rxjs/operators';
 import { SearchService } from './search.service';
 import { Project } from '../models/project';
 import { User } from '../models/user';
+
+const log = console.log;
 
 @Component({
   selector: 'app-search',
@@ -44,6 +46,9 @@ export class SearchComponent implements OnInit {
 
   searchProjects: string[];
   filteredSearchProjects: Observable<string[]>;
+
+  // Emitter to talk to discover page
+  @Output() searchEventEmitter = new EventEmitter<string[]>();
 
   constructor(private searchService: SearchService) {}
 
@@ -175,5 +180,7 @@ export class SearchComponent implements OnInit {
 
   search(): void {
     this.expand = false;
+    log(this.filterProjects);
+    this.searchEventEmitter.emit(this.filterProjects);
   }
 }

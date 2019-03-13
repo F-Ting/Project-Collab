@@ -12,6 +12,8 @@ import {
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { DiscoverComponent } from './discover.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+
 describe('DiscoverComponent', () => {
   let component: DiscoverComponent;
   let fixture: ComponentFixture<DiscoverComponent>;
@@ -27,7 +29,8 @@ describe('DiscoverComponent', () => {
         MatListModule,
         MatSidenavModule,
         MatToolbarModule,
-        HttpClientTestingModule
+        HttpClientTestingModule,
+        RouterTestingModule
       ],
       schemas: [NO_ERRORS_SCHEMA]
     })

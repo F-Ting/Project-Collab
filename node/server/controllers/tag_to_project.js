@@ -36,9 +36,6 @@ module.exports = {
             message: 'Error Creating Tag ',
           });
         }
-        // QUESTION: The DB does not enforce uniqueness of (tag_id, project_id) pairs in the tab_to_project
-        // table so in theory someone create a project multiple copies of the same tag. I'm assuming we don't
-        // want that so I'm attempting to enforce uniquness here. Should uniquness be added to the db though?
         return TagToProject
           .findOrCreate({
             where: {

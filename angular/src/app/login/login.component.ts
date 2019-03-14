@@ -30,7 +30,6 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     this.loginService.login(this.loginForm.value).subscribe((response)=>{
         this.error = false;
-        console.log(response);
         localStorage.setItem("username", response["username"]);
         localStorage.setItem("user_id", response["id"]);
         this.router.navigate(['/discover']);

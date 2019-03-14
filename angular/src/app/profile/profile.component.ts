@@ -9,7 +9,7 @@ import { ProfileService } from "./profile.service";
 export class ProfileComponent implements OnInit {
   error: boolean = false;
   user;
-  filtersLoaded: Promise<boolean>;
+  userLoaded: Promise<boolean>;
 
   constructor(private discoverService: ProfileService) {}
 
@@ -21,7 +21,7 @@ export class ProfileComponent implements OnInit {
     this.discoverService.getUsers().subscribe(
       (response: Array<any>) => {
         this.user = response;
-        this.filtersLoaded = Promise.resolve(true);
+        this.userLoaded = Promise.resolve(true);
       },
       error => {
         this.error = true;

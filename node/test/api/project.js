@@ -10,7 +10,7 @@ const chai = require('chai')
 let expect = chai.expect
 chai.use(chaiHttp);
 
-describe('Project model', () => {
+describe('Project API', () => {
 
     beforeEach(async () => {
         await truncate("projects");

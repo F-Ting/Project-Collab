@@ -10,7 +10,7 @@ const chai = require('chai')
 let expect = chai.expect
 chai.use(chaiHttp);
 
-describe('User model', () => {
+describe('User API', () => {
 
   beforeEach(async () => {
     //resets the users table, no params are provided, then resets all tables

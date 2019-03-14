@@ -41,12 +41,8 @@ export class ProjectFormComponent implements OnInit {
 
   onDelete() {
     this.deleted = true;
-<<<<<<< Updated upstream
     this.projectFormService.delete({'id': this.project.id}).subscribe((response) => {
       this.router.navigate(['/discover']);
-=======
-    this.projectFormService.delete({'id': this.project._id}).subscribe((response) => {
->>>>>>> Stashed changes
     },
     error => {
       console.log(this.projectForm.value);

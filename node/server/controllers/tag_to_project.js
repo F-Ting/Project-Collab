@@ -25,47 +25,56 @@ module.exports = {
 
   // Associate a tag with a projet, creating the tag if it doesn't already exist
   create(req, res) {
-    return Tags
-      .findOrCreate({
-        where: { tag: req.body.tag },
-        defaults: { tag: req.body.tag },
-      })
-      .then(([tag, created]) => {
-        if (!tag) {
-          return res.status(500).send({
-            message: 'Error Creating Tag ',
-          });
-        }
-        return TagToProject
+    const tags = req.body.tags;
+    return Promise.all(tags
+      // filter unique strings in the request to avoid duplicate db queries
+      .filter((e, i) => tags.indexOf(e) === i)
+      .map(tag => {
+        return Tags
           .findOrCreate({
-            where: {
-              tag_id: tag.id,
-              project_id: req.params.project_id
-            },
-            defaults: {
-              tag_id: tag.id,
-              project_id: req.params.project_id
-            }
+            where: { tag },
+            defaults: { tag },
           })
-          .then(([tag, created]) => res.status(200).send(tag))
+          .then(([tag, created]) => {
+            TagToProject
+              .findOrCreate({
+                where: {
+                  tag_id: tag.id,
+                  project_id: req.params.project_id
+                },
+                defaults: {
+                  tag_id: tag.id,
+                  project_id: req.params.project_id
+                }
+              })
+              .catch((error) => res.status(400).send(error));
+            return tag;
+          })
           .catch((error) => res.status(400).send(error));
+      }))
+      .then(tags => {
+        res.status(200).send(tags);
       })
       .catch((error) => res.status(400).send(error));
   },
 
   // Delete a tag from a project
   delete(req, res) {
-    console.log("id", req.body.id)
-    return TagToProject
-      .find({
-        where: { "tag_id": req.body.id }
+    return Tags
+      .findAll({
+        where: { tag: { [Op.in]: req.body.tags } }
       })
-      .then(tag => {
-        console.log(tag)
-        return tag.destroy()
+      .then(tags => {
+        return TagToProject
+          .destroy({
+            where: {
+              project_id: req.params.project_id,
+              tag_id: { [Op.in]: tags.map(tag => tag.id) }
+            }
+          })
           .then(() => res.status(200).send({ message: "tag deleted from project" }))
           .catch((error) => res.status(400).send(error));
       })
-      .catch(error => res.status(400).send(error));
+      .catch((error) => res.status(400).send(error));
   }
 };

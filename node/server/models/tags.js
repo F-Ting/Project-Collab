@@ -1,7 +1,11 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const tags = sequelize.define('tags', {
-    tag: DataTypes.STRING
+    tag: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+    }
   }, {});
   tags.associate = function(models) {
       tags.hasMany(models.tag_to_user, {

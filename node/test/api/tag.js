@@ -16,11 +16,4 @@ describe('Tag API', () => {
         await truncate("tags");
     });
 
-    it('should generate a tag from the factory', async () => {
-        //creates a project object with default props ad described in factory
-        //can pass props as project object to create specified project
-        tag = await factories.project();
-        assert.isOk(tag.tag);
-    });
-
 });

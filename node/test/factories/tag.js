@@ -12,7 +12,7 @@ import models from '../../server/models';
  */
 const data = async (props = {}) => {
     const defaultProps = {
-        name: faker.random.word()
+        tag: faker.random.word()
     };
     return Object.assign({}, defaultProps, props);
 };

@@ -79,7 +79,7 @@ module.exports = (app) => {
 
   //Return list of projects that contains the list of tags
   
-  app.get('/api/tags/projects/:list', projectsController.getProject);
+  app.get('/api/tags/projects', tagToProject.getProjectList);
 
 
 

@@ -10,23 +10,14 @@ const chai = require('chai')
 let expect = chai.expect
 chai.use(chaiHttp);
 
-describe('Project model', () => {
-    let project;
-    let user;
+describe('Project API', () => {
 
     beforeEach(async () => {
         await truncate("projects");
-        user = await factories.user();
-    });
-
-    it('should generate a project from the factory', async () => {
-        //creates a project object with default props ad described in factory
-        //can pass props as project object to create specified project
-        project = await factories.project();
-        assert.isOk(project.id);
     });
 
     it('can post to the project endpoint to create a new project', async () => {
+        let user = await factories.user();
         const count = await models.projects.count();
         const new_project = {
             user_id: user.id,

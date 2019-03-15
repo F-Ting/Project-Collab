@@ -77,7 +77,9 @@ module.exports = (app) => {
   app.post('/api/project/:project/:status', projectsController.updateStatus)
 
 
-
+  //Return list of projects that contains the list of tags
+  
+  app.get('/api/tags/projects', tagToProject.getProjectList);
 
 
 

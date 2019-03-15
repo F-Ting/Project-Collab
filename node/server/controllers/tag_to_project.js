@@ -61,17 +61,19 @@ module.exports = {
   // Associate a tag with a projet, creating the tag if it doesn't already exist
   create(req, res) {
     const tags = req.body.tags;
-    return Promise.all(tags
+    const result = [];
+    return Promise.all(
       // filter unique strings in the request to avoid duplicate db queries
-      .filter((e, i) => tags.indexOf(e) === i)
-      .map(tag => {
+      tags
+        .filter((e, i) => tags.indexOf(e) === i)
+        .map(tag => {
         return Tags
           .findOrCreate({
             where: { tag },
             defaults: { tag },
           })
           .then(([tag, created]) => {
-            TagToProject
+            return TagToProject
               .findOrCreate({
                 where: {
                   tag_id: tag.id,
@@ -82,15 +84,17 @@ module.exports = {
                   project_id: req.params.project_id
                 }
               })
-              .catch((error) => res.status(400).send(error));
-            return tag;
+              .then(() => result.push(tag))
           })
-          .catch((error) => res.status(400).send(error));
-      }))
-      .then(tags => {
-        res.status(200).send(tags);
-      })
-      .catch((error) => res.status(400).send(error));
+          .catch((error) => error(error));
+    }))
+    .then(() => {
+      res.status(200).send(result)
+      return Promise.resolve(result);
+    })
+    .catch(error =>
+      res.status(400).send(error)
+    )
   },
 
   // Delete a tag from a project
@@ -108,7 +112,7 @@ module.exports = {
             }
           })
           .then(() => res.status(200).send({ message: "tag deleted from project" }))
-          .catch((error) => res.status(400).send(error));
+          .catch((error) => error(error));
       })
       .catch((error) => res.status(400).send(error));
   }

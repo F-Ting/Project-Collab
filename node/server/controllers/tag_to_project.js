@@ -1,5 +1,6 @@
 const TagToProject = require('../models').tag_to_project;
 const Tags = require('../models').tags;
+const Projects = require('../models').projects;
 const Sequelize = require('sequelize');
 
 const Op = Sequelize.Op;
@@ -21,6 +22,40 @@ module.exports = {
         res.status(200).send(tag)
       })
       .catch((error) => res.status(400).send(error));
+  },
+
+  getProjectList(req,res){
+    let tagList = req.query.tags.split(',')
+    return Projects
+    .findAll({
+      include: [{
+        model: TagToProject,
+        as: 'tag_to_project',
+        include: [{
+          model: Tags,
+          where: {tag : { $in: tagList }}
+        }],
+        required: true
+      }],
+      attributes: { exclude: ['createdAt', 'updatedAt'] },
+    })
+    .then(projects => {
+        const resObj = projects.map(project => {
+          return Object.assign({},
+            {
+                "id": project.id,
+                "name": project.name,
+                "description": project.description,
+                "github": project.github,
+                "url": project.url,
+                "project_start_date": project.project_start_date,
+                "image": project.image
+            }
+          )
+        })
+        res.status(200).send(resObj)
+    })
+    .catch((error) => res.status(400).send(error));
   },
 
   // Associate a tag with a projet, creating the tag if it doesn't already exist

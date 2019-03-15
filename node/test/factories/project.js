@@ -15,7 +15,9 @@ const data = async (props = {}) => {
         name: faker.random.word(),
         description: faker.random.word(),
         github: faker.internet.userName(),
-        url: faker.internet.url()
+        url: faker.internet.url(),
+        project_start_date: faker.date.recent(),
+        image: faker.internet.url()
     };
     return Object.assign({}, defaultProps, props);
 };

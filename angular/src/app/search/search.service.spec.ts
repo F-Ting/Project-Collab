@@ -15,11 +15,6 @@ describe('SearchService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should have a getUsers function', () => {
-    const service: SearchService = TestBed.get(SearchService);
-    expect(service.getUsers).toBeDefined();
-  });
-
   it('should have a getProjects function', () => {
     const service: SearchService = TestBed.get(SearchService);
     expect(service.getProjects).toBeDefined();

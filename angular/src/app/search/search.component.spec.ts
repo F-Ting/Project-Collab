@@ -13,7 +13,6 @@ import {
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatChipsModule } from '@angular/material/chips';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { RouterTestingModule } from '@angular/router/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/compiler/src/core';
 
 describe('SearchComponent', () => {
@@ -34,8 +33,7 @@ describe('SearchComponent', () => {
         FormsModule,
         ReactiveFormsModule,
         MatAutocompleteModule,
-        NoopAnimationsModule,
-        RouterTestingModule
+        NoopAnimationsModule
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();

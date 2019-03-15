@@ -7,7 +7,7 @@ import truncate from '../truncate';
 const chai = require('chai');
 let expect = chai.expect;
 
-describe('Tag API', () => {
+describe('Tag Model', () => {
 
     beforeEach(async () => {
         await truncate("tags");

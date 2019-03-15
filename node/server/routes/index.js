@@ -1,6 +1,7 @@
 const usersController = require('../controllers').users;
 const projectsController = require('../controllers').projects;
 const userAssociationsController = require('../controllers').user_associations;
+const tagToProject = require('../controllers').tag_to_project;
 const upload = require('../controllers').upload;
 const Users = require('../models').users;
 
@@ -78,7 +79,9 @@ module.exports = (app) => {
   app.post('/api/project/:project/:status', projectsController.updateStatus)
 
 
-
+  //Return list of projects that contains the list of tags
+  
+  app.get('/api/tags/projects', tagToProject.getProjectList);
 
 
 
@@ -110,5 +113,13 @@ module.exports = (app) => {
   app.post('/upload', upload.handleFileUpload);
 
   app.post('/api/resume', upload.handleFileRequest);
+
+  // * tag_to_project routes *
+  // get all tags associated with a project
+  app.get('/api/tags/project/:project_id', tagToProject.list);
+  // create a tag and associate it with a project
+  app.post('/api/tags/project/:project_id', tagToProject.create);
+  // delete a tag from a project
+  app.post('/api/tags/project/:project_id/remove', tagToProject.delete);
 
 };

@@ -17,3 +17,39 @@ INSERT INTO user_associations (user_id, project_id, is_admin, status) VALUES (2,
 INSERT INTO user_associations (user_id, project_id, is_admin, status) VALUES (3,3,True,'approved');
 INSERT INTO user_associations (user_id, project_id, is_admin, status) VALUES (4,4,True,'approved');
 INSERT INTO user_associations (user_id, project_id, is_admin, status) VALUES (5,5,True,'approved');
+
+INSERT INTO tags (tag) VALUES ('Javascript'); 
+INSERT INTO tags (tag) VALUES ('Java'); 
+INSERT INTO tags (tag) VALUES ('Python');
+INSERT INTO tags (tag) VALUES ('Artificial Intellgence');
+INSERT INTO tags (tag) VALUES ('Machine Learning');
+INSERT INTO tags (tag) VALUES ('Node.js');
+INSERT INTO tags (tag) VALUES ('Angular 7');
+INSERT INTO tags (tag) VALUES ('React.js');
+INSERT INTO tags (tag) VALUES ('C');
+INSERT INTO tags (tag) VALUES ('C++');
+INSERT INTO tags (tag) VALUES ('C#');
+INSERT INTO tags (tag) VALUES ('JQuery');
+INSERT INTO tags (tag) VALUES ('Popular');
+INSERT INTO tags (tag) VALUES ('New');
+
+INSERT INTO tag_to_projects (tag_id,project_id) VALUES (1,3);
+INSERT INTO tag_to_projects (tag_id,project_id) VALUES (6,3);
+INSERT INTO tag_to_projects (tag_id,project_id) VALUES (7,3);
+INSERT INTO tag_to_projects (tag_id,project_id) VALUES (1,1);
+INSERT INTO tag_to_projects (tag_id,project_id) VALUES (2,1);
+INSERT INTO tag_to_projects (tag_id,project_id) VALUES (3,1);
+INSERT INTO tag_to_projects (tag_id,project_id) VALUES (4,1);
+INSERT INTO tag_to_projects (tag_id,project_id) VALUES (5,1);
+
+INSERT INTO tag_to_users (tag_id,user_id) VALUES (1,1);
+INSERT INTO tag_to_users (tag_id,user_id) VALUES (2,2);
+INSERT INTO tag_to_users (tag_id,user_id) VALUES (3,3);
+INSERT INTO tag_to_users (tag_id,user_id) VALUES (4,4);
+INSERT INTO tag_to_users (tag_id,user_id) VALUES (5,5);
+
+INSERT INTO tag_to_users (tag_id,user_id) VALUES (6,1);
+INSERT INTO tag_to_users (tag_id,user_id) VALUES (7,2);
+INSERT INTO tag_to_users (tag_id,user_id) VALUES (8,3);
+INSERT INTO tag_to_users (tag_id,user_id) VALUES (9,4);
+INSERT INTO tag_to_users (tag_id,user_id) VALUES (10,5);

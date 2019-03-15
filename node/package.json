@@ -7,7 +7,7 @@
     "node": ">=10.13.0"
   },
   "scripts": {
-    "start": "node ./bin/www",
+    "start": "nodemon ./bin/www",
     "frontend": "npm start --prefix ../angular",
     "microservice": "npm start --prefix ../node2",
     "dev": "concurrently \"npm run start\" \"npm run frontend\" \"npm run microservice\"",
@@ -16,7 +16,7 @@
     "db:drop": "babel-node ./db/drop",
     "db:migrate": "babel-node ./db/migrate",
     "db:reset": "sequelize db:migrate:undo:all && sequelize db:migrate && psql -U project-collab-admin -d project-collab-db -f db/handcraft_data.sql ",
-    "pretest": "set NODE_ENV=test && npm run db:migrate",
+    "pretest": "set NODE_ENV=test && sequelize db:migrate",
     "test": "set NODE_ENV=test && mocha",
     "test:coverage": "NODE_ENV=test nyc mocha",
     "test:report": "nyc report --reporter=text-summary",

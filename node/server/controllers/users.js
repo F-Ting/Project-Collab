@@ -70,7 +70,6 @@ module.exports = {
       .then((users) => {
         req.session.user = users.dataValues.id
         req.session.type = users.dataValues.type
-        console.log(req.session.user, req.session.type)
         res.status(200).send(users);
       })
       .catch((error) => res.status(400).send(error));

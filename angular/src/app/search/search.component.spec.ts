@@ -24,7 +24,6 @@ describe('SearchComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ SearchComponent ],
       imports: [
-        HttpClientTestingModule,
         MatExpansionModule,
         MatIconModule,
         MatListModule,
@@ -32,10 +31,11 @@ describe('SearchComponent', () => {
         MatFormFieldModule,
         MatInputModule,
         FormsModule,
+        HttpClientTestingModule,
+        RouterTestingModule,
         ReactiveFormsModule,
         MatAutocompleteModule,
-        NoopAnimationsModule,
-        RouterTestingModule
+        NoopAnimationsModule
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();

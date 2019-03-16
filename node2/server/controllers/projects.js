@@ -1,7 +1,7 @@
-const Users = require("../models").users;
-const Projects = require("../models").projects;
-const Associations = require("../models").user_associations;
-const Op = require("../models").Sequelize.Op;
+const Users = require('../models').users;
+const Projects = require('../models').projects;
+const Associations = require('../models').user_associations;
+const Op = require('../models').Sequelize.Op;
 
 const log = console.log;
 const mapProjects = function(projects) {
@@ -29,24 +29,24 @@ const mapProjects = function(projects) {
 };
 
 module.exports = {
+
   // list all projects
   list(req, res) {
-    Projects.findAll({
-      order: [["createdAt", "DESC"]],
-      include: [
-        {
+    Projects
+      .findAll({
+        order: [
+          ['createdAt', 'DESC'],
+        ],
+        include: [{
           model: Associations,
-          as: "user_associations",
+          as: 'user_associations',
           where: {
             is_admin: true
           },
-          include: [
-            {
-              model: Users
-            }
-          ]
-        }
-      ]
+          include:[{
+            model: Users,
+          }]
+        }]
     })
       .then(projects => {
         // turn into own method
@@ -85,21 +85,19 @@ module.exports = {
         log(resObj);
         res.status(200).send(resObj);
       })
-      .catch(error => res.status(400).send(error));
+      .catch((error) => res.status(400).send(error));
   },
 
   // list all projects that are approved or that are unapproved
   listApprovedOrUnapproved(req, res) {
-    return Projects.findAll({
-      attributes: { exclude: ["createdAt", "updatedAt"] },
-      where: {
-        status: req.params.status
-      }
-    })
-      .then(projects => res.status(200).send(projects))
-      .catch(error => {
-        log(error);
-        res.status(400).send(error);
-      });
+    return Projects
+      .findAll({
+        attributes: {exclude: ['createdAt', 'updatedAt'] },
+        where: {
+          status: req.params.status
+        }
+      })
+      .then((projects) => res.status(200).send(projects))
+      .catch((error) => res.status(400).send(error));
   }
 };

@@ -1,9 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  HttpClient,
-  HttpHeaders,
-  HttpClientModule
-} from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpClientModule } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -13,41 +9,32 @@ import {
    saved in the browsers sessionStorage under the key 'token', to any supported
    http requests (GET, POST) */
 export class HttpService {
+
   API_URL = 'http://localhost:8000';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   // returns an HttpHeaders object with the current user's auth token
-  addAuthToken(header: HttpHeaders) {
-    // Checks to see if current user is logged in
-    if (sessionStorage.getItem('currentUser')) {
-      return header.append(
-        'Authorization',
-        'Token ' + JSON.parse(sessionStorage.getItem('currentUser'))['token']
-      );
-    }
-    return header;
+  addAuthToken(header: HttpHeaders){
+	  // Checks to see if current user is logged in
+	  if (sessionStorage.getItem('currentUser')) {
+		  return header.append('Authorization', 'Token ' + JSON.parse(sessionStorage.getItem('currentUser'))['token']);
+	  }
+	  return header;
   }
 
   // performs a get request after calling the addAuthToken function
   get(url) {
-    let header = new HttpHeaders();
-    header = this.addAuthToken(header);
-    return this.http.get(`${this.API_URL}/${url}`, {
-      headers: header,
-      withCredentials: true
-    });
+	  let header = new HttpHeaders();
+	  header = this.addAuthToken(header);
+	  return this.http.get(`${this.API_URL}/${url}`, {headers: header, withCredentials: true });
   }
 
   // performs a post request after calling the addAuthToken function
   post(url, data) {
-    let header = new HttpHeaders();
-    header = this.addAuthToken(header);
-    console.log(`${this.API_URL}/${url}`);
-    console.log(data);
-    return this.http.post(`${this.API_URL}/${url}`, data, {
-      headers: header,
-      withCredentials: true
-    });
+	  let header = new HttpHeaders();
+	  header = this.addAuthToken(header);
+	  return this.http.post(`${this.API_URL}/${url}`, data, {headers: header, withCredentials: true });
   }
+
 }

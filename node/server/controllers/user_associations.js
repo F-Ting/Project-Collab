@@ -61,39 +61,6 @@ module.exports = {
       .catch((error) => res.status(400).send(error));
   },
 
-  // list all projects the list of users are in
-  listProjectsFromUsers(req, res) {
-    Users.findAll({
-      attributes: ["user_id"],
-      where: {
-        username: {
-          [Op.or]: req.body.searchByUsers
-        }
-      }
-    }).then((user_ids) => {
-      console.log(user_ids);
-      return Associations
-        .findAll({
-          where: {
-            user_id: {
-              [Op.or]: user_ids
-            }
-          },
-          order: [
-            ['createdAt', 'DESC'],
-          ],
-          include: [{
-            model: Projects,
-            as: 'project',
-            attributes: {exclude: ['password', 'createdAt', 'updatedAt'] },
-          }],
-          attributes: {exclude: ['createdAt', 'updatedAt', 'user_id'] }
-        })
-    })
-    .then((associations) => res.status(200).send(associations))
-    .catch((error) => res.status(400).send(error));
-  },
-
   // get your status on a project
   yourProjectStatus(req, res) {
     return Associations

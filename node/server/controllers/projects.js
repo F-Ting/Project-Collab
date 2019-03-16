@@ -1,58 +1,59 @@
-const Projects = require("../models").projects;
-const Associations = require("../models").user_associations;
-const axios = require("axios");
+const Projects = require('../models').projects;
+const Associations = require('../models').user_associations;
+const axios = require('axios');
 
 module.exports = {
   // Create a new Project
   create(req, res) {
-    return Projects.create({
-      name: req.body.name,
-      description: req.body.description,
-      github: req.body.github,
-      url: req.body.url,
-      status: "unapproved"
-    })
+    return Projects
+      .create({
+        name: req.body.name,
+        description: req.body.description,
+        github: req.body.github,
+        url: req.body.url,
+        status: 'unapproved'
+      })
       .then(project => {
         if (!project) {
           return res.status(500).send({
-            message: "Error Creating Project "
+            message: 'Error Creating Project ',
           });
         }
         return Associations.create({
           user_id: req.body.user_id,
           project_id: project.id,
           is_admin: true,
-          status: "approved"
+          status: 'approved'
         })
-          .then(association => res.status(200).send(project))
-          .catch(error => res.status(400).send(error));
+        .then((association) => res.status(200).send(project))
+        .catch((error) => res.status(400).send(error));
       })
       .catch(error => res.status(400).send(error));
   },
 
   // list all projects
   list(req, res) {
-    return axios
-      .get("http://localhost:8001/api/projects")
-      .then(response => {
-        res.status(200).send(response.data);
-      })
-      .catch(error => {
-        console.log(error);
-        res.status(400).send(error);
-      });
+    return axios.get("http://localhost:8001/api/projects")
+    .then(response => {
+      res.status(200).send(response.data);
+    })
+    .catch(error => {
+      console.log(error)
+      res.status(400).send(error);
+    });
   },
 
   // list all projects that are approved or that are unapproved
   listApprovedOrUnapproved(req, res) {
-    return Projects.findAll({
-      attributes: { exclude: ["createdAt", "updatedAt"] },
-      where: {
-        status: req.params.status
-      }
-    })
-      .then(projects => res.status(200).send(projects))
-      .catch(error => res.status(400).send(error));
+    return Projects
+      .findAll({
+        attributes: {exclude: ['createdAt', 'updatedAt'] },
+        where: {
+          status: req.params.status
+        }
+      })
+      .then((projects) => res.status(200).send(projects))
+      .catch((error) => res.status(400).send(error));
   },
 
   // list all projects
@@ -72,34 +73,38 @@ module.exports = {
 
   // get a single project
   getProject(req, res) {
-    return Projects.findById(req.params.project, {
-      attributes: { exclude: ["createdAt", "updatedAt"] }
-    })
-      .then(projects => res.status(200).send(projects))
-      .catch(error => res.status(400).send(error));
+    return Projects
+      .findById( req.params.project, {
+        attributes: {exclude: ['createdAt', 'updatedAt'] }
+      })
+      .then((projects) => res.status(200).send(projects))
+      .catch((error) => res.status(400).send(error));
   },
 
   // remove a project
   removeProject(req, res) {
-    return Projects.findById(req.body.id)
+    return Projects
+      .findById(
+        req.body.id
+      )
       .then(project => {
-        return project
-          .destroy()
-          .then(() => res.status(200).send({ message: "project deleted" }))
-          .catch(error => res.status(400).send(error));
-      })
+        return project.destroy()
+          .then(() => res.status(200).send({message: "project deleted"}))
+          .catch((error) => res.status(400).send(error));
+        })
       .catch(error => res.status(400).send(error));
   },
 
   //update a project
   update(req, res) {
-    return Projects.findById(req.params.project, {
-      attributes: { exclude: ["createdAt", "updatedAt"] }
-    })
+    return Projects
+      .findById( req.params.project, {
+        attributes: {exclude: ['createdAt', 'updatedAt'] }
+      })
       .then(project => {
         if (!project) {
           return res.status(404).send({
-            message: "Project Not Found"
+            message: 'Project Not Found',
           });
         }
         return project
@@ -110,29 +115,32 @@ module.exports = {
             url: req.body.url,
             status: req.body.status
           })
-          .then(project => res.status(200).send(project))
-          .catch(error => res.status(400).send(error));
+          .then((project) => res.status(200).send(project))
+          .catch((error) => res.status(400).send(error));
       })
-      .catch(error => res.status(400).send(error));
+      .catch((error) => res.status(400).send(error));
   },
   // approve a project
   updateStatus(req, res) {
-    return Projects.findById(req.params.project, {
-      attributes: { exclude: ["createdAt", "updatedAt"] }
-    })
+    return Projects
+      .findById( req.params.project, {
+        attributes: {exclude: ['createdAt', 'updatedAt'] }
+      })
       .then(project => {
         if (!project) {
           return res.status(404).send({
-            message: "Project Not Found"
+            message: 'Project Not Found',
           });
         }
         return project
           .update({
-            status: req.params.status
+            status: req.params.status,
           })
-          .then(project => res.status(200).send(project))
-          .catch(error => res.status(400).send(error));
+          .then((project) => res.status(200).send(project))
+          .catch((error) => res.status(400).send(error));
       })
-      .catch(error => res.status(400).send(error));
-  }
+      .catch((error) => res.status(400).send(error));
+  },
+
+
 };

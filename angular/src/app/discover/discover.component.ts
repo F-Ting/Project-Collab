@@ -23,7 +23,6 @@ export class DiscoverComponent implements OnInit {
     }
 
   getProjects() {
-    console.log(this.user_id);
     this.discoverService.getProjects().subscribe(
       (response: Array<any>) => {
         this.projects = response;
@@ -40,10 +39,8 @@ export class DiscoverComponent implements OnInit {
   }
 
   onSearch(searchProjects: string[]) {
-    log(searchProjects);
     this.discoverService.getProjectsBySearch(searchProjects).subscribe(
       (response: any[]) => {
-        log(response);
         this.projects = response;
       },
       (err: any) => {

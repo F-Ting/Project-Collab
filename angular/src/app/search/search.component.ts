@@ -8,8 +8,6 @@ import { SearchService } from './search.service';
 import { Project } from '../models/project';
 import { User } from '../models/user';
 
-const log = console.log;
-
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
@@ -180,7 +178,6 @@ export class SearchComponent implements OnInit {
 
   search(): void {
     this.expand = false;
-    log(this.filterProjects);
     this.searchEventEmitter.emit(this.filterProjects);
   }
 }

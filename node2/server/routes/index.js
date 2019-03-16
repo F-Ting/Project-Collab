@@ -42,9 +42,10 @@ module.exports = (app) => {
 
   // gets all projects
   app.get('/api/projects', projectsController.list);
-  // get all projects
+  // get all projects by status
   app.get('/api/projects/:status', projectsController.listApprovedOrUnapproved)
-
+  // get all projects by search
+  app.post('/api/projects/search', projectsController.listSearch);
 
   // * user_associations routes *
   // add a new user to a project

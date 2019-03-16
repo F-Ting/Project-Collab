@@ -12,4 +12,9 @@ export class DiscoverService {
       return this.httpClient.get(`api/projects`)
   }
 
+  getProjectsBySearch(projects: string[]) {
+    return this.httpClient.post('api/projects/search', {
+      searchByProject: projects
+    });
+  }
 }

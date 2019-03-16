@@ -28,7 +28,8 @@
     </mat-panel-description>
   </mat-expansion-panel-header>
   <mat-list>
-    <mat-list-item>
+    <!-- Use when tags get implimented -->
+    <!-- <mat-list-item>
       Recomended Tags: &nbsp;
       <mat-chip-list #chipList>
         <mat-chip *ngFor="let tag of recomendedTags" [value]="tag" [selectable]="selectable" [removable]="removable"
@@ -37,9 +38,10 @@
           <mat-icon matChipRemove *ngIf="removable">add</mat-icon>
         </mat-chip>
       </mat-chip-list>
-    </mat-list-item>
+    </mat-list-item> -->
     <form [formGroup]="formGroup">
-    <mat-list-item>
+      <!-- Use when tags get implimented -->
+      <!-- <mat-list-item>
         <mat-form-field style="padding-bottom: 20px; width: 100%; text-align: right">
           <input matInput placeholder="Search All Tags" formControlName="searchTagsControl" [matChipInputFor]="chipList"
             [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
@@ -47,32 +49,30 @@
         </mat-form-field>
         <mat-autocomplete #tag="matAutocomplete">
           <mat-option *ngFor="let tag of filteredSearchTags | async" [value]="tag">
-            <!-- (click)="search(course)"> -->
             {{tag}}
           </mat-option>
         </mat-autocomplete>
-    </mat-list-item>
-    <mat-list-item>
+    </mat-list-item> -->
+      <!-- <mat-list-item>
         <mat-form-field style="padding-top: 20px; padding-bottom: 20px; width: 100%; text-align: right">
           <input matInput placeholder="Search All Users" formControlName="searchUsersControl" [matChipInputFor]="chipList"
             [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
-            (matChipInputTokenEnd)="addFilterUser($event)" [matAutocomplete]="user">
+            (matChipInputTokenEnd)="addFilterUserChipEvent($event)" [matAutocomplete]="user">
         </mat-form-field>
         <mat-autocomplete #user="matAutocomplete">
-          <mat-option *ngFor="let user of filteredSearchUsers | async" [value]="user">
-            <!-- (click)="search(course)"> -->
+          <mat-option *ngFor="let user of filteredSearchUsers | async" [value]="user" (click)="addFilterUser(user)">
             {{user}}
           </mat-option>
         </mat-autocomplete>
-    </mat-list-item>
-    <mat-list-item>
+      </mat-list-item> -->
+      <mat-list-item>
         <mat-form-field style="padding-top: 20px; width: 100%; text-align: right">
           <input matInput placeholder="Search All Projects" formControlName="searchProjectsControl" [matChipInputFor]="chipList"
             [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
-            (matChipInputTokenEnd)="addFilterProject($event)" [matAutocomplete]="project">
+            (matChipInputTokenEnd)="addFilterProjectChipEvent($event)" [matAutocomplete]="project">
         </mat-form-field>
         <mat-autocomplete #project="matAutocomplete">
-          <mat-option *ngFor="let project of filteredSearchProjects | async" [value]="project">
+          <mat-option *ngFor="let project of filteredSearchProjects | async" [value]="project" (click)="addFilterProject(project)">
             {{project}}
           </mat-option>
         </mat-autocomplete>

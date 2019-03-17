@@ -7,6 +7,7 @@ import { RegistrationComponent } from '../registration/registration.component';
 import { DiscoverComponent } from '../discover/discover.component';
 import { ProjectFormComponent } from '../project-form/project-form.component';
 import { ProfileComponent} from "../profile/profile.component";
+import { ProjectComponent } from '../project/project.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent},
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'discover', component: DiscoverComponent},
   { path: 'create', component: ProjectFormComponent},
   { path: 'profile', component: ProfileComponent},
+  { path: 'project/:id', component: ProjectComponent },
   { path: '', redirectTo: '/discover', pathMatch: 'full' }
 ];
 

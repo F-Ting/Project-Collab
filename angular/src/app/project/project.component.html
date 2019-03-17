@@ -1,0 +1,36 @@
+<mat-card *ngIf='project'>
+    <mat-grid-list cols="2">
+        <mat-grid-tile [style.border-right]="'1px dashed #ddd'">
+            <img src="{{ project.image }}" alt="Project Image" />
+        </mat-grid-tile>
+        <mat-grid-tile>
+            <section class="description">
+                <mat-card>
+                    <mat-card-title>{{ project.name }}</mat-card-title>
+                    <mat-card-subtitle>Project Owner</mat-card-subtitle>
+
+                    <mat-card-title>Description</mat-card-title>
+                    <p>{{ project.description }}</p>
+
+                    <mat-card-title>Links</mat-card-title>
+                    <mat-card-actions>
+                        <button mat-button>
+                            <a
+                                href="{{ project.github }}"
+                                style="text-decoration: none"
+                                >{{ project.github }}</a
+                            >
+                        </button>
+                        <button mat-button>
+                            <a
+                                href="{{ project.url }}"
+                                style="text-decoration: none"
+                                >{{ project.url }}</a
+                            >
+                        </button>
+                    </mat-card-actions>
+                </mat-card>
+            </section>
+        </mat-grid-tile>
+    </mat-grid-list>
+</mat-card>

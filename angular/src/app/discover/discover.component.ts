@@ -38,6 +38,10 @@ export class DiscoverComponent implements OnInit {
     this.router.navigate(['/create']);
   }
 
+  redirectProject(project){
+    this.router.navigate([`/project/${project.id}`]);
+    }
+
   onSearch(searchProjects: string[]) {
     this.discoverService.getProjectsBySearch(searchProjects).subscribe(
       (response: any[]) => {

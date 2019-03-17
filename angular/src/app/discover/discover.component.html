@@ -2,18 +2,18 @@
 <div class="grid-container">
   <mat-grid-list cols="4" rowHeight="410px">
     <mat-grid-tile *ngFor="let project of projects" [colspan]="1" [rowspan]="1">
-      <mat-card class="dashboard-card">
-        <img
+      <mat-card  class="dashboard-card">
+        <img (click)="redirectProject(project)"
           mat-card-image
           src="{{ project.image }}"
           style="height: 250px; object-fit: cover;"
         />
 
-        <mat-card-title>
+        <mat-card-title (click)="redirectProject(project)">
           {{ project.name }}
         </mat-card-title>
 
-        <mat-card-content class="dashboard-card-content">
+        <mat-card-content (click)="redirectProject(project)" class="dashboard-card-content">
           <div>{{ project.description }}</div>
         </mat-card-content>
 
@@ -38,6 +38,7 @@
 
           </div>
         </mat-card-footer>
+        
       </mat-card>
     </mat-grid-tile>
   </mat-grid-list>

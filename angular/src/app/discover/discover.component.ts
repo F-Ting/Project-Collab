@@ -1,5 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import { Project } from "../models/project";
 import { DiscoverService } from "./discover.service";
 import { Router } from '@angular/router';
 
@@ -37,10 +36,6 @@ export class DiscoverComponent implements OnInit {
     localStorage.setItem("project", JSON.stringify(project));
     this.router.navigate(['/create']);
   }
-
-  redirectProject(project){
-    this.router.navigate([`/project/${project.id}`]);
-    }
 
   onSearch(searchProjects: string[]) {
     this.discoverService.getProjectsBySearch(searchProjects).subscribe(

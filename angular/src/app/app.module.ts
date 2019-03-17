@@ -21,6 +21,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { ProfileComponent } from "./profile/profile.component";
 import { LogoutComponent } from './logout/logout.component';
 import { ProjectComponent } from './project/project.component';
+import { ProjectCardComponent } from './project-card/project-card.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { ProjectComponent } from './project/project.component';
     ProfileComponent,
     ProjectFormComponent,
     LogoutComponent,
-    ProjectComponent
+    ProjectComponent,
+    ProjectCardComponent
   ],
   imports: [
     BrowserAnimationsModule,

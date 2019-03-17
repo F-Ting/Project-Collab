@@ -2,44 +2,7 @@
 <div class="grid-container">
   <mat-grid-list cols="4" rowHeight="410px">
     <mat-grid-tile *ngFor="let project of projects" [colspan]="1" [rowspan]="1">
-      <mat-card  class="dashboard-card">
-        <img (click)="redirectProject(project)"
-          mat-card-image
-          src="{{ project.image }}"
-          style="height: 250px; object-fit: cover;"
-        />
-
-        <mat-card-title (click)="redirectProject(project)">
-          {{ project.name }}
-        </mat-card-title>
-
-        <mat-card-content (click)="redirectProject(project)" class="dashboard-card-content">
-          <div>{{ project.description }}</div>
-        </mat-card-content>
-
-        <mat-card-footer>
-          <div style="margin:15px">
-            <span style="float: left">
-              <a href="{{ project.github }}" style="text-decoration: none"
-                >Project Link</a
-              >
-            </span>
-
-            <span style="float: right">
-              <mat-card-actions>
-                <button id='discover-project' mat-raised-button color="primary"
-                  (click)="onEdit(project)" *ngIf="project.owner.username == username"
-                  type="button">Edit</button>
-                <span style="float: right" *ngIf="project.owner.username != username">
-                  {{ project.owner.username }}
-                </span>
-              </mat-card-actions>
-            </span>
-
-          </div>
-        </mat-card-footer>
-        
-      </mat-card>
+      <app-project-card [project]=project></app-project-card>
     </mat-grid-tile>
   </mat-grid-list>
 </div>

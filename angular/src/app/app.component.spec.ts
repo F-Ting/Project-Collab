@@ -3,12 +3,14 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
+        RouterTestingModule,
+        HttpClientTestingModule
       ],
       declarations: [
         AppComponent,

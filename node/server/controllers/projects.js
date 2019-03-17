@@ -66,19 +66,19 @@ module.exports = {
         res.status(200).send(response.data);
       })
       .catch(error => {
-        console.log(error);
         res.status(400).send(error);
       });
   },
 
   // get a single project
   getProject(req, res) {
-    return Projects
-      .findById( req.params.project, {
-        attributes: {exclude: ['createdAt', 'updatedAt'] }
-      })
-      .then((projects) => res.status(200).send(projects))
-      .catch((error) => res.status(400).send(error));
+    return axios.get("http://localhost:8001/api/project/"+req.params.project )
+    .then(response => {
+      res.status(200).send(response.data);
+    })
+    .catch(error => {
+      res.status(400).send(error);
+    });
   },
 
   // remove a project

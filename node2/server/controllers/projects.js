@@ -56,6 +56,47 @@ module.exports = {
       .catch(error => res.status(400).send(error));
   },
 
+  getProject(req,res){
+    Projects
+      .findById( req.params.project, {
+        order: [
+          ['createdAt', 'DESC'],
+        ],
+        include: [{
+          model: Associations,
+          as: 'user_associations',
+          where: {
+            is_admin: true
+          },
+          include:[{
+            model: Users,
+          }]
+        }]
+    })
+      .then(project => {
+        resObj = Object.assign(
+          {},
+          {
+            id: project.id,
+            name: project.name,
+            description: project.description,
+            github: project.github,
+            url: project.url,
+            project_start_date: project.project_start_date,
+            image: project.image,
+            status: project.status,
+            createdAt: project.createdAt,
+            updatedAt: project.updatedAt,
+            owner: {
+              name: project.user_associations[0].user.name,
+              username: project.user_associations[0].user.username
+            }
+          }
+        );
+        res.status(200).send(resObj);
+      })
+      .catch(error => res.status(400).send(error));
+  },
   // list all projects by searching project names
   listSearch(req, res) {
     return Projects.findAll({
@@ -82,7 +123,6 @@ module.exports = {
     })
       .then(projects => {
         resObj = mapProjects(projects);
-        log(resObj);
         res.status(200).send(resObj);
       })
       .catch((error) => res.status(400).send(error));

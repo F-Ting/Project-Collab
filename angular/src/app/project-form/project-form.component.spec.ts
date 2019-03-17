@@ -8,7 +8,8 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import {
   MatCardModule,
   MatFormFieldModule,
-  MatInputModule
+  MatInputModule,
+  MatSnackBarModule
 } from '@angular/material';
 import { Project } from '../models/project';
 
@@ -30,7 +31,8 @@ describe('ProjectFormComponent', () => {
         MatInputModule,
         RouterTestingModule,
         NoopAnimationsModule,
-        HttpClientTestingModule
+        HttpClientTestingModule,
+        MatSnackBarModule
       ]
     })
     .compileComponents();

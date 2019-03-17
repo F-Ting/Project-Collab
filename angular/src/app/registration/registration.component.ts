@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { RegistrationService } from './registration.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { MatSnackBar } from '@angular/material';
 
 
 @Component({
@@ -14,6 +15,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 // component that handles user registration
 export class RegistrationComponent implements OnInit {
   isLinear = true;
+  lastBack = false;
   hasUnitNumber = false;
   error = false;
   firstGroup: FormGroup;
@@ -21,7 +23,9 @@ export class RegistrationComponent implements OnInit {
   thirdGroup: FormGroup;
   data;
 
-  constructor(private _formBuilder: FormBuilder, private registrationService: RegistrationService, private router: Router) {}
+  constructor(private _formBuilder: FormBuilder,
+    private registrationService: RegistrationService, private router: Router,
+    private snackBar: MatSnackBar) {}
 
   ngOnInit() {
     this.firstGroup = this._formBuilder.group({
@@ -48,21 +52,26 @@ export class RegistrationComponent implements OnInit {
       "linked_in": "",
       "github": ""};
 
-    if (this.firstGroup.value.password == this.firstGroup.value.passwordConfirm) {
-        this.registrationService.registration(this.data, "student").subscribe((response)=>{
-            this.error = false;
-            // set up local storage with necessary information
-            localStorage.setItem("username", response["username"]);
-            localStorage.setItem("user_id", response["id"]);
-        },
-        error => {
-          this.error = true;
-          console.log(error);
-        });
+    if (this.firstGroup.value.password != this.firstGroup.value.passwordConfirm) {
+      this.snackBar.open("The passwords did not match.", "Dismiss");
     } else {
-      console.log("password not matching")
-      this.error = true;
+      this.registrationService.registration(this.data, "student").subscribe((response)=>{
+        this.snackBar.open("Your registration has succeeded. Welcome to Project Collab!", "Dismiss");
+        this.error = false;
+        // set up local storage with necessary information
+        localStorage.setItem("username", response["username"]);
+        localStorage.setItem("user_id", response["id"]);
+      },
+      error => {
+        this.snackBar.open("The username has already been taken.", "Dismiss");
+        this.error = true;
+        console.log(error);
+      });
     }
+  }
+
+  redirect() {
+    this.router.navigateByUrl('discover');
   }
 
 }

@@ -2,7 +2,8 @@ import { Component, OnInit, Input, Optional } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProjectFormService } from './project-form.service';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Project } from '../models/project'
+import { Project } from '../models/project';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-project-form',
@@ -26,7 +27,8 @@ export class ProjectFormComponent implements OnInit {
         this.router.navigate(['/discover']);
       },
       error => {
-        console.log(this.projectForm.value);
+        this.snackBar.open("One or more of the fields are filled in incorrectly.", "Dismiss");
+        console.log(error);
       });
     } else {
       this.projectFormService.edit(this.projectForm.value, this.project.id).subscribe((response) => {
@@ -34,7 +36,8 @@ export class ProjectFormComponent implements OnInit {
         this.router.navigate(['/discover']);
       },
       error => {
-        console.log(this.projectForm.value);
+        this.snackBar.open("One or more of the fields are filled in incorrectly.", "Dismiss");
+        console.log(error);
       });
     }
   }
@@ -45,14 +48,16 @@ export class ProjectFormComponent implements OnInit {
       this.router.navigate(['/discover']);
     },
     error => {
-      console.log(this.projectForm.value);
+      this.snackBar.open("The project was not deleted.", "Dismiss");
+      console.log(error);
     });
   }
 
   constructor(
     private fb: FormBuilder,
     private projectFormService: ProjectFormService,
-    public router: Router
+    public router: Router,
+    private snackBar: MatSnackBar
   ) {
   }
 

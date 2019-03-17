@@ -48,17 +48,16 @@
         </mat-form-field>
       </div>
       <div>
+        <button mat-button matStepperPrevious>Back</button>
         <button mat-button matStepperNext>Next</button>
       </div>
     </form>
   </mat-step>
   <mat-step>
     <ng-template matStepLabel>Complete!</ng-template>
-    You have finished registering, welcome to Project-Collab
     <div>
       <button mat-button matStepperPrevious>Back</button>
-      <button mat-raised-button color="primary" type="submit">Submit</button>
-
+      <button (click)="redirect()" mat-raised-button color="primary" type="submit">Continue</button>
     </div>
   </mat-step>
 </mat-horizontal-stepper>

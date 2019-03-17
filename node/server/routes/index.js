@@ -69,8 +69,10 @@ module.exports = (app) => {
   app.post('/api/project/remove', projectsController.removeProject);
   // gets all projects
   app.get('/api/projects', projectsController.list);
-  // get all projects
+  // get all projects by status
   app.get('/api/projects/:status', projectsController.listApprovedOrUnapproved)
+  // get all projects by search
+  app.post('/api/projects/search', projectsController.listSearch);
   // get a single project
   app.get('/api/project/:project', projectsController.getProject);
   // update the status of a project via instructor

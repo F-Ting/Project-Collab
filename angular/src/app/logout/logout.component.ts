@@ -11,8 +11,13 @@ export class LogoutComponent implements OnInit {
   constructor(private loginService: LoginService) { }
 
   ngOnInit() {
-    localStorage.clear();
-    this.loginService.setLoginStatus(false);
+    this.loginService.logout().subscribe((response)=>{
+      localStorage.clear();
+      this.loginService.setLoginStatus(false);
+    },
+    error => {
+      console.log(error)
+    });
   }
 
 }

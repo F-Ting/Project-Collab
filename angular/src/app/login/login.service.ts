@@ -13,6 +13,9 @@ export class LoginService {
       // login
       return this.httpClient.post(`api/user/login/`, data);
     }
+    logout(){
+      return this.httpClient.get(`api/user/logout`);
+    }
     setLoginStatus(status: boolean) {
       this.subject.next({ status });
     }

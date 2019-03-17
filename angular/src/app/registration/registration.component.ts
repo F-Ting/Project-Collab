@@ -61,8 +61,6 @@ export class RegistrationComponent implements OnInit {
         // set up local storage with necessary information
         localStorage.setItem("username", response["username"]);
         localStorage.setItem("user_id", response["id"]);
-
-        console.log(response);
       },
       error => {
         this.snackBar.open("The username has already been taken.", "Dismiss");

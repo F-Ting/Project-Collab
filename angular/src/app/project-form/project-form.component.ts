@@ -28,7 +28,7 @@ export class ProjectFormComponent implements OnInit {
       },
       error => {
         this.snackBar.open("One or more of the fields are filled in incorrectly.", "Dismiss");
-        console.log(this.projectForm.value);
+        console.log(error);
       });
     } else {
       this.projectFormService.edit(this.projectForm.value, this.project.id).subscribe((response) => {
@@ -37,7 +37,7 @@ export class ProjectFormComponent implements OnInit {
       },
       error => {
         this.snackBar.open("One or more of the fields are filled in incorrectly.", "Dismiss");
-        console.log(this.projectForm.value);
+        console.log(error);
       });
     }
   }
@@ -49,7 +49,7 @@ export class ProjectFormComponent implements OnInit {
     },
     error => {
       this.snackBar.open("The project was not deleted.", "Dismiss");
-      console.log(this.projectForm.value);
+      console.log(error);
     });
   }
 

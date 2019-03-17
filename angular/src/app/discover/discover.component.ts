@@ -3,6 +3,8 @@ import { Project } from "../models/project";
 import { DiscoverService } from "./discover.service";
 import { Router } from '@angular/router';
 
+const log = console.log;
+
 @Component({
   selector: "app-discover",
   templateUrl: "./discover.component.html",
@@ -20,20 +22,30 @@ export class DiscoverComponent implements OnInit {
       this.getProjects();
     }
 
-    getProjects() {
-      console.log(this.user_id);
-      this.discoverService.getProjects().subscribe(
-          (response: Array<any>) => {
-          this.projects = response;
-          },
-          error => {
-          this.error = true;
-          }
-      );
-    }
+  getProjects() {
+    this.discoverService.getProjects().subscribe(
+      (response: Array<any>) => {
+        this.projects = response;
+      },
+      error => {
+        this.error = true;
+      }
+    );
+  }
 
-    onEdit(project) {
-      localStorage.setItem("project", JSON.stringify(project));
-      this.router.navigate(['/create']);
-    }
+  onEdit(project) {
+    localStorage.setItem("project", JSON.stringify(project));
+    this.router.navigate(['/create']);
+  }
+
+  onSearch(searchProjects: string[]) {
+    this.discoverService.getProjectsBySearch(searchProjects).subscribe(
+      (response: any[]) => {
+        this.projects = response;
+      },
+      (err: any) => {
+        log('Error searching for projects: ', err);
+      }
+    );
+  }
 }

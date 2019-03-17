@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { SearchComponent } from './search.component';
-import { 
+import {
   MatExpansionModule,
   MatIconModule,
   MatListModule,
@@ -11,7 +11,11 @@ import {
   MatAutocompleteModule
 } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatChipsModule} from '@angular/material/chips';
+import { MatChipsModule } from '@angular/material/chips';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+
 describe('SearchComponent', () => {
   let component: SearchComponent;
   let fixture: ComponentFixture<SearchComponent>;
@@ -27,12 +31,14 @@ describe('SearchComponent', () => {
         MatFormFieldModule,
         MatInputModule,
         FormsModule,
+        HttpClientTestingModule,
+        RouterTestingModule,
         ReactiveFormsModule,
         MatAutocompleteModule,
         NoopAnimationsModule
-      ]
-    })
-    .compileComponents();
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

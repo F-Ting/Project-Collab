@@ -1,9 +1,12 @@
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {MatChipInputEvent} from '@angular/material';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
+import { SearchService } from './search.service';
+import { Project } from '../models/project';
+import { User } from '../models/user';
 
 @Component({
   selector: 'app-search',
@@ -31,27 +34,38 @@ export class SearchComponent implements OnInit {
     searchProjectsControl: new FormControl()
   });
 
-  recomendedTags: string[] = ['tag1', 'tag2', 'tag3', 'tag4'];
+  recomendedTags: string[];
 
-  searchTags: string[] = ['tag1', 'tag2', 'tag3', 'tag4'];
+  searchTags: string[];
   filteredSearchTags: Observable<string[]>;
 
-  searchUsers: string[] = ['user1', 'user2', 'user3', 'user3'];
+  searchUsers: string[];
   filteredSearchUsers: Observable<string[]>;
 
-  searchProjects: string[] = ['proj1', 'aproj2', 'bproj3'];
+  searchProjects: string[];
   filteredSearchProjects: Observable<string[]>;
 
-  constructor() {}
+  // Emitter to talk to discover page
+  @Output() searchEventEmitter = new EventEmitter<string[]>();
+
+  constructor(private searchService: SearchService) {}
 
   ngOnInit() {
     // Fill search tags users and projects from backend
     this.filteredSearchTags = this.formGroup.get('searchTagsControl').valueChanges.pipe(
         startWith(''), map(value => this._filterTags(value)));
-    this.filteredSearchUsers = this.formGroup.get('searchUsersControl').valueChanges.pipe(
-        startWith(''), map(value => this._filterUsers(value)));
-    this.filteredSearchProjects = this.formGroup.get('searchProjectsControl').valueChanges.pipe(
-        startWith(''), map(value => this._filterProjects(value)));
+
+    this.searchService.getUsers().subscribe((users) => {
+      this.searchUsers = users.map((user: User) => user.username);
+      this.filteredSearchUsers = this.formGroup.get('searchUsersControl').valueChanges.pipe(
+          startWith(''), map(value => this._filterUsers(value)));
+    });
+
+    this.searchService.getProjects().subscribe((projects) => {
+      this.searchProjects = projects.map((project: Project) => project.name);
+      this.filteredSearchProjects = this.formGroup.get('searchProjectsControl').valueChanges.pipe(
+          startWith(''), map(value => this._filterProjects(value)));
+    });
   }
 
   private _filterTags(value: string): string[] {
@@ -89,14 +103,18 @@ export class SearchComponent implements OnInit {
     }
   }
 
-  addFilterUser(event: MatChipInputEvent): void {
+  addFilterUser(user: string): void {
+    // Add our fruit
+    if ((user || '').trim() && !this.filterUsers.includes(user.trim())) {
+      this.filterUsers.push(user.trim());
+    }
+  }
+
+  addFilterUserChipEvent(event: MatChipInputEvent): void {
     const input = event.input;
     const value = event.value;
 
-    // Add our fruit
-    if ((value || '').trim()) {
-      this.filterUsers.push(value.trim());
-    }
+    this.addFilterUser(value);
 
     // Reset the input value
     if (input) {
@@ -105,14 +123,18 @@ export class SearchComponent implements OnInit {
     }
   }
 
-  addFilterProject(event: MatChipInputEvent): void {
+  addFilterProject(project: string): void {
+    // Add our fruit
+    if ((project || '').trim() && !this.filterProjects.includes(project.trim())) {
+      this.filterProjects.push(project.trim());
+    }
+  }
+
+  addFilterProjectChipEvent(event: MatChipInputEvent): void {
     const input = event.input;
     const value = event.value;
 
-    // Add our fruit
-    if ((value || '').trim()) {
-      this.filterProjects.push(value.trim());
-    }
+    this.addFilterProject(value);
 
     // Reset the input value
     if (input) {
@@ -156,5 +178,6 @@ export class SearchComponent implements OnInit {
 
   search(): void {
     this.expand = false;
+    this.searchEventEmitter.emit(this.filterProjects);
   }
 }

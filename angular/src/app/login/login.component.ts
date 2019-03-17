@@ -31,11 +31,12 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    this.loginService.login(this.loginForm.value).subscribe((response)=> {
-      this.error = false;
-      localStorage.setItem("username", response["username"]);
-      localStorage.setItem("user_id", response["id"]);
-      this.router.navigate(['/discover']);
+    this.loginService.login(this.loginForm.value).subscribe((response)=>{
+        this.error = false;
+        localStorage.setItem("username", response["username"]);
+        localStorage.setItem("user_id", response["id"]);
+        this.loginService.setLoginStatus(true);
+        this.router.navigate(['/discover']);
     },
     error => {
       this.snackBar.open("The username or password is incorrect.", "Dismiss");

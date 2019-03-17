@@ -8,7 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RoutingModule } from './routing/routing.module';
 import { ExampleComponent } from './example/example.component';
 import { LoginComponent } from './login/login.component';
-import { MatGridListModule, MatCardModule, MatMenuModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatSelectModule, MatRadioModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule, MatExpansionModule, MatChipsModule, MatAutocompleteModule} from '@angular/material';
+import { MatSnackBarModule, MatGridListModule, MatCardModule, MatMenuModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatSelectModule, MatRadioModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule, MatExpansionModule, MatChipsModule, MatAutocompleteModule} from '@angular/material';
 import { RegistrationComponent } from './registration/registration.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -48,6 +48,7 @@ import { LogoutComponent } from './logout/logout.component';
     MatButtonModule,
     MatSelectModule,
     MatStepperModule,
+    MatSnackBarModule,
     MatFormFieldModule,
     MatRadioModule,
     ReactiveFormsModule,

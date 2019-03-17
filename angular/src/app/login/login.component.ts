@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { LoginService } from './login.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
+import { MatSnackBar } from '@angular/material';
+
 
 @Component({
   selector: 'app-login',
@@ -14,7 +16,8 @@ import { Location } from '@angular/common';
 // componenet that handels user login
 export class LoginComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, private loginService: LoginService, private router: Router) { }
+  constructor(private fb: FormBuilder, private loginService: LoginService,
+    private router: Router, private snackBar: MatSnackBar) { }
 
   loginForm = this.fb.group({
     username: [null, Validators.required],
@@ -28,14 +31,15 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    this.loginService.login(this.loginForm.value).subscribe((response)=>{
-        this.error = false;
-        console.log(response);
-        localStorage.setItem("username", response["username"]);
-        localStorage.setItem("user_id", response["id"]);
-        this.router.navigate(['/discover']);
+    this.loginService.login(this.loginForm.value).subscribe((response)=> {
+      this.error = false;
+      localStorage.setItem("username", response["username"]);
+      localStorage.setItem("user_id", response["id"]);
+      this.router.navigate(['/discover']);
     },
     error => {
+      this.snackBar.open("The username or password is incorrect.", "Dismiss");
+      console.log(error);
       this.error = true;
     });
 

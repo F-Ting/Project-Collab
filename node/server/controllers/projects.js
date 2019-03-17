@@ -56,6 +56,21 @@ module.exports = {
       .catch((error) => res.status(400).send(error));
   },
 
+  // list all projects
+  listSearch(req, res) {
+    return axios
+      .post("http://localhost:8001/api/projects/search", {
+        searchByProject: req.body.searchByProject
+      })
+      .then(response => {
+        res.status(200).send(response.data);
+      })
+      .catch(error => {
+        console.log(error);
+        res.status(400).send(error);
+      });
+  },
+
   // get a single project
   getProject(req, res) {
     return Projects

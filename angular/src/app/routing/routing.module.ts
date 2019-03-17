@@ -15,7 +15,7 @@ const routes: Routes = [
   { path: 'discover', component: DiscoverComponent},
   { path: 'create', component: ProjectFormComponent},
   { path: 'profile', component: ProfileComponent},
-  { path: '', redirectTo: '/login', pathMatch: 'full' }
+  { path: '', redirectTo: '/discover', pathMatch: 'full' }
 ];
 
 @NgModule({

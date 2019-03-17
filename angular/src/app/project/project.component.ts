@@ -23,12 +23,6 @@ export class ProjectComponent implements OnInit {
 
         this.projectService.getProject(this.projectId).subscribe( (response) => {
             this.project = response;
-            console.log(this.project.owner.username)
-        });
-
-        
-
-
-
+        });   
     }
 }

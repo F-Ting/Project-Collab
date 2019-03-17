@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-project-card',
@@ -8,9 +9,12 @@ import { Component, OnInit, Input } from '@angular/core';
 export class ProjectCardComponent implements OnInit {
   @Input() project: Object = null;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
 
+  redirectProject(project){
+    this.router.navigate([`/project/${project.id}`]);
+  }
 }

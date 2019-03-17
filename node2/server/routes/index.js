@@ -46,6 +46,8 @@ module.exports = (app) => {
   app.get('/api/projects/:status', projectsController.listApprovedOrUnapproved)
   // get all projects by search
   app.post('/api/projects/search', projectsController.listSearch);
+  // get a single project
+  app.get('/api/project/:project', projectsController.getProject);
 
   // * user_associations routes *
   // add a new user to a project

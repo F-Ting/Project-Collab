@@ -1,0 +1,26 @@
+.mat-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-card {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+  cursor: pointer;
+}
+
+/** flex-shrink: 0 so the header should not be clipped or shrink if the parent card height changes **/
+.mat-card-header {
+    display: flex;
+    flex-direction: row;
+    flex-shrink: 0;
+}
+
+.mat-card-content{
+	flex-grow: 1;
+	overflow: auto; 
+  /* outline: 1px solid red; */
+}

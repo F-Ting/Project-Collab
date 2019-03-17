@@ -32,6 +32,7 @@ export class LoginComponent implements OnInit {
         this.error = false;
         localStorage.setItem("username", response["username"]);
         localStorage.setItem("user_id", response["id"]);
+        this.loginService.setLoginStatus(true);
         this.router.navigate(['/discover']);
     },
     error => {

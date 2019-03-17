@@ -35,4 +35,8 @@ export class DiscoverComponent implements OnInit {
       localStorage.setItem("project", JSON.stringify(project));
       this.router.navigate(['/create']);
     }
+
+    redirectProject(project){
+        this.router.navigate([`/project/${project.id}`]);
+    }
 }

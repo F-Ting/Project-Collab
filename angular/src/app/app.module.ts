@@ -20,6 +20,7 @@ import { ProjectFormComponent } from './project-form/project-form.component';
 import { MatStepperModule } from '@angular/material/stepper';
 import { ProfileComponent } from "./profile/profile.component";
 import { LogoutComponent } from './logout/logout.component';
+import { ProjectComponent } from './project/project.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { LogoutComponent } from './logout/logout.component';
     SearchComponent,
     ProfileComponent,
     ProjectFormComponent,
-    LogoutComponent
+    LogoutComponent,
+    ProjectComponent
   ],
   imports: [
     BrowserAnimationsModule,

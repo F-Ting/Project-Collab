@@ -13,6 +13,7 @@
   left: 15px;
   right: 15px;
   bottom: 15px;
+  cursor: pointer;
 }
 
 /** flex-shrink: 0 so the header should not be clipped or shrink if the parent card height changes **/

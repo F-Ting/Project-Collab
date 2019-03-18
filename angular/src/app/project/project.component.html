@@ -29,6 +29,8 @@
                             >
                         </button>
                     </mat-card-actions>
+                    <button id='discover-project' mat-raised-button color="primary" (click)="onEdit(project)"
+                      *ngIf="project.owner.username == username" type="button">Edit</button>
                 </mat-card>
             </section>
         </mat-grid-tile>

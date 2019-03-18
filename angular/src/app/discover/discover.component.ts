@@ -10,16 +10,16 @@ const log = console.log;
   styleUrls: ["./discover.component.css"]
 })
 export class DiscoverComponent implements OnInit {
-    error: boolean = false;
-    projects: Array<any> = [];
-    user_id = localStorage.getItem("user_id");
-    username = localStorage.getItem("username");
+  error: boolean = false;
+  projects: Array<any> = [];
+  user_id = localStorage.getItem("user_id");
+  username = localStorage.getItem("username");
 
-    constructor(private discoverService: DiscoverService, private router: Router) {}
+  constructor(private discoverService: DiscoverService, private router: Router) {}
 
-    ngOnInit() {
-      this.getProjects();
-    }
+  ngOnInit() {
+    this.getProjects();
+  }
 
   getProjects() {
     this.discoverService.getProjects().subscribe(
@@ -30,11 +30,6 @@ export class DiscoverComponent implements OnInit {
         this.error = true;
       }
     );
-  }
-
-  onEdit(project) {
-    localStorage.setItem("project", JSON.stringify(project));
-    this.router.navigate(['/create']);
   }
 
   onSearch(searchProjects: string[]) {

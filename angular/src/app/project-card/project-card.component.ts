@@ -8,10 +8,16 @@ import { Router } from '@angular/router';
 })
 export class ProjectCardComponent implements OnInit {
   @Input() project: Object = null;
+  username = localStorage.getItem("username");
 
   constructor(private router: Router) { }
 
   ngOnInit() {
+  }
+
+  onEdit(project) {
+    localStorage.setItem("project", JSON.stringify(project));
+    this.router.navigate(['/create']);
   }
 
   redirectProject(project){

@@ -9,6 +9,7 @@ import { ProjectService } from "./project.service";
 })
 export class ProjectComponent implements OnInit {
     projectId: string;
+    username: string;
 
     project: any;
 
@@ -18,11 +19,17 @@ export class ProjectComponent implements OnInit {
         private projectService: ProjectService
     ) {}
 
+    onEdit(project) {
+      localStorage.setItem("project", JSON.stringify(project));
+      this.router.navigate(['/create']);
+    }
+
     ngOnInit() {
         this.projectId = this.route.snapshot.paramMap.get("id");
+        this.username = localStorage.getItem("username");
 
         this.projectService.getProject(this.projectId).subscribe( (response) => {
             this.project = response;
-        });   
+        });
     }
 }

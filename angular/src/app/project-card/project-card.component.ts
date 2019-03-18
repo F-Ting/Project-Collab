@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 })
 export class ProjectCardComponent implements OnInit {
   @Input() project: Object = null;
-  username = localStorage.username;
+  username = localStorage.getItem("username");
 
   constructor(private router: Router) { }
 

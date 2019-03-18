@@ -32,6 +32,11 @@ export class DiscoverComponent implements OnInit {
     );
   }
 
+  onEdit(project) {
+    localStorage.setItem("project", JSON.stringify(project));
+    this.router.navigate(['/create']);
+  }
+
   onSearch(searchProjects: string[]) {
     this.discoverService.getProjectsBySearch(searchProjects).subscribe(
       (response: any[]) => {

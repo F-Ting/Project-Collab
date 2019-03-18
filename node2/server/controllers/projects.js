@@ -1,6 +1,9 @@
 const Users = require('../models').users;
 const Projects = require('../models').projects;
 const Associations = require('../models').user_associations;
+const TagToProject = require('../models').tag_to_project;
+const Tags = require('../models').tags;
+
 const Op = require('../models').Sequelize.Op;
 
 const log = console.log;
@@ -22,7 +25,8 @@ const mapProjects = function(projects) {
         owner: {
           name: project.user_associations[0].user.name,
           username: project.user_associations[0].user.username
-        }
+        },
+        tags: project.tag_to_project ? project.tag_to_project.map(el => el.tag.tag) : []
       }
     );
   });
@@ -32,28 +36,12 @@ module.exports = {
 
   // list all projects
   list(req, res) {
-    Projects
-      .findAll({
-        order: [
-          ['createdAt', 'DESC'],
-        ],
-        include: [{
-          model: Associations,
-          as: 'user_associations',
-          where: {
-            is_admin: true
-          },
-          include:[{
-            model: Users,
-          }]
-        }]
-    })
-      .then(projects => {
-        // turn into own method
-        resObj = mapProjects(projects);
-        res.status(200).send(resObj);
-      })
-      .catch(error => res.status(400).send(error));
+    if(req.query.withTags){
+      getProjectsWithTags(req,res)
+    } else {
+      getProjectsWithoutTags(req,res)
+    }
+ 
   },
 
   getProject(req,res){
@@ -74,7 +62,7 @@ module.exports = {
         }]
     })
       .then(project => {
-        resObj = Object.assign(
+        let resObj = Object.assign(
           {},
           {
             id: project.id,
@@ -122,7 +110,7 @@ module.exports = {
       }
     })
       .then(projects => {
-        resObj = mapProjects(projects);
+        let resObj = mapProjects(projects);
         res.status(200).send(resObj);
       })
       .catch((error) => res.status(400).send(error));
@@ -141,3 +129,60 @@ module.exports = {
       .catch((error) => res.status(400).send(error));
   }
 };
+
+function getProjectsWithTags(req,res){
+  Projects
+  .findAll({
+    order: [
+      ['createdAt', 'DESC'],
+    ],
+    include: [{
+      model: Associations,
+      as: 'user_associations',
+      where: {
+        is_admin: true
+      },
+      include:[{
+        model: Users,
+      }]
+    },
+    {
+      model: TagToProject,
+      as: 'tag_to_project',
+      include:[{
+        model: Tags
+      }]
+    }]
+})
+  .then(projects => {
+    // turn into own method
+    let resObj = mapProjects(projects);
+    res.status(200).send(resObj);
+  })
+  .catch(error => res.status(400).send(error));
+}
+
+function getProjectsWithoutTags(req,res){
+  Projects
+  .findAll({
+    order: [
+      ['createdAt', 'DESC'],
+    ],
+    include: [{
+      model: Associations,
+      as: 'user_associations',
+      where: {
+        is_admin: true
+      },
+      include:[{
+        model: Users,
+      }]
+    }]
+})
+  .then(projects => {
+    // turn into own method
+    let resObj = mapProjects(projects);
+    res.status(200).send(resObj);
+  })
+  .catch(error => res.status(400).send(error));
+}

@@ -33,7 +33,8 @@ module.exports = {
 
   // list all projects
   list(req, res) {
-    return axios.get("http://localhost:8001/api/projects")
+    console.log(req.originalUrl)
+    return axios.get(req.originalUrl)
     .then(response => {
       res.status(200).send(response.data);
     })

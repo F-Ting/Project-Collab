@@ -7,26 +7,11 @@ import { TagsService } from './tags.service';
   styleUrls: ['./tags.component.css']
 })
 export class TagsComponent implements OnInit {
-  @Input() projectId = null;
+  @Input() tags: Array<String> = [];
   error: boolean = false;
-  tags: Array<any> = [];
   colour: 'primary';
-
 
   constructor(private tagsService: TagsService) { }
 
-  ngOnInit() {
-    this.getTags();
-  }
-
-  getTags() {
-    this.tagsService.getForProject(this.projectId).subscribe(
-      (response: Array<any>) => {
-        this.tags = response.map(tag => ({ tag: tag.tag, colour: this.colour }));
-      },
-      error => {
-        this.error = true;
-      }
-    );
-  }
+  ngOnInit() { }
 }

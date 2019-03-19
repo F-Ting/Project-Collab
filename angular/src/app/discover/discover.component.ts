@@ -22,7 +22,7 @@ export class DiscoverComponent implements OnInit {
   }
 
   getProjects() {
-    this.discoverService.getProjects().subscribe(
+    this.discoverService.getProjectsWithTags().subscribe(
       (response: Array<any>) => {
         this.projects = response;
       },

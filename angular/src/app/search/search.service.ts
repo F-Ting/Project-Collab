@@ -6,7 +6,7 @@ import { Project } from '../models/project';
 import { User } from '../models/user';
 
 const GET_USERS_URL = 'api/users';
-const GET_PROJECTS_URL = 'api/projects';
+const GET_PROJECTS_URL = 'api/projects?withTags=True';
 
 @Injectable({providedIn: 'root'})
 export class SearchService {

@@ -17,4 +17,9 @@ describe('DiscoverService', () => {
     const service: DiscoverService = TestBed.get(DiscoverService);
     expect(service.getProjects).toBeDefined();
   });
+
+  it('should have a getProjectsWithTags function', () => {
+    const service: DiscoverService = TestBed.get(DiscoverService);
+    expect(service.getProjectsWithTags).toBeDefined();
+  });
 });

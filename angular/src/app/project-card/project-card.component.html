@@ -11,7 +11,7 @@
   </mat-card-content>
 
   <mat-card-footer class="profile-card-footer">
-    <app-tags class="profile-card-tags" projectId="{{ project.id }}"></app-tags>
+    <app-tags class="profile-card-tags" [tags]="project.tags"></app-tags>
     <span class="profile-card-github">
       <a href="{{ project.github }}" style="text-decoration: none">Project Link</a>
     </span>

@@ -8,7 +8,7 @@ import { By } from '@angular/platform-browser';
 describe('TagsComponent', () => {
   let component: TagsComponent;
   let fixture: ComponentFixture<TagsComponent>;
-  const dummyTags = [{ tag: 'test', colour: 'primary' }];
+  const dummyTags = ['test'];
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -41,7 +41,8 @@ describe('TagsComponent', () => {
 
     fixture.whenStable().then(() => {
       const chip = fixture.debugElement.query(By.css('.mat-chip'));
-      expect(chip.nativeElement.value).toEqual(dummyTags[0].tag);
+      console.log(chip.nativeElement)
+      expect(chip.nativeElement.innerText).toEqual(dummyTags[0]);
     });
   });
 

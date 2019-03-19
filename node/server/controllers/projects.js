@@ -1,4 +1,7 @@
 const Projects = require('../models').projects;
+const Users = require('../models').users;
+const TagToProject = require('../models').tag_to_project;
+const Tags = require('../models').tags;
 const Associations = require('../models').user_associations;
 const axios = require('axios');
 
@@ -72,13 +75,11 @@ module.exports = {
 
   // get a single project
   getProject(req, res) {
-    return axios.get("http://localhost:8001/api/project/"+req.params.project )
-    .then(response => {
-      res.status(200).send(response.data);
-    })
-    .catch(error => {
-      res.status(400).send(error);
-    });
+    if(req.query.withTags){
+      getProjectWithTags(req,res)
+    } else {
+      getProjectWithoutTags(req,res)
+    }
   },
 
   // remove a project
@@ -143,4 +144,82 @@ module.exports = {
   },
 
 
+};
+
+function getProjectWithTags(req,res){
+  Projects
+  .findById(req.params.project,{
+    order: [
+      ['createdAt', 'DESC'],
+    ],
+    include: [{
+      model: Associations,
+      as: 'user_associations',
+      where: {
+        is_admin: true
+      },
+      include:[{
+        model: Users,
+      }]
+    },
+    {
+      model: TagToProject,
+      as: 'tag_to_project',
+      include:[{
+        model: Tags
+      }]
+    }]
+})
+  .then(project => {
+    // turn into own method
+    let resObj = mapProjects(project);
+    res.status(200).send(resObj);
+  })
+  .catch(error => res.status(400).send(error));
+}
+function getProjectWithoutTags(req,res){
+  Projects
+  .findById( req.params.project, {
+    order: [
+      ['createdAt', 'DESC'],
+    ],
+    include: [{
+      model: Associations,
+      as: 'user_associations',
+      where: {
+        is_admin: true
+      },
+      include:[{
+        model: Users,
+      }]
+    }]
+})
+  .then(project => {
+    let resObj = mapProjects(project);
+    res.status(200).send(resObj);
+  })
+  .catch(error => res.status(400).send(error));
+}
+
+const mapProjects = function(project) {
+    return Object.assign(
+      {},
+      {
+        id: project.id,
+        name: project.name,
+        description: project.description,
+        github: project.github,
+        url: project.url,
+        project_start_date: project.project_start_date,
+        image: project.image,
+        status: project.status,
+        createdAt: project.createdAt,
+        updatedAt: project.updatedAt,
+        owner: {
+          name: project.user_associations[0].user.name,
+          username: project.user_associations[0].user.username
+        },
+        tags: project.tag_to_project ? project.tag_to_project.map(el => el.tag.tag) : []
+      }
+    );
 };

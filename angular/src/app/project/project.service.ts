@@ -8,6 +8,6 @@ export class ProjectService {
     constructor(private httpClient: HttpService) {}
 
       getProject(projectId) {
-          return this.httpClient.get(`api/project/${projectId}`)
+          return this.httpClient.get(`api/project/${projectId}?withTags=true`)
       }
 }

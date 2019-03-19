@@ -24,3 +24,26 @@
 	overflow: auto; 
   /* outline: 1px solid red; */
 }
+
+.profile-card-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px;
+}
+
+.profile-card-tags {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.profile-card-github {
+  width: 50%;
+  float: left;
+}
+
+.profile-card-user {
+  width: max-content;
+  float: right;
+}

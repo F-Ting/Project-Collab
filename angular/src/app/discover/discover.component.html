@@ -1,6 +1,6 @@
 <app-search (searchEventEmitter)="onSearch($event)"></app-search>
 <div class="grid-container">
-  <mat-grid-list cols="4" rowHeight="410px">
+  <mat-grid-list cols="4" rowHeight="510px">
     <mat-grid-tile *ngFor="let project of projects" [colspan]="1" [rowspan]="1">
       <app-project-card [project]=project></app-project-card>
     </mat-grid-tile>

@@ -168,4 +168,36 @@ describe('Tag API', () => {
         assert(response.body, "tag deleted from user");
     });
 
+    it('should return 5 tags', async () => {
+        // create 5 tags
+        for(let i = 0; i < 5; i++){
+            await factories.tag();
+        }
+        //make API call
+        const response = await chai.request(app).get('/api/tags/recommend')
+        expect(response.body).to.have.lengthOf(5)
+    });
+
+    it('should return no more than 5 tags', async () => {
+        // create 7 tags
+        for(let i = 0; i < 7; i++){
+            await factories.tag();
+        }
+        //make API call
+        const response = await chai.request(app).get('/api/tags/recommend')
+        expect(response.body).to.have.lengthOf(5)
+    });
+
+    it('should return only 3 tags if only 3 tags exist', async () => {
+        // create 3 tags
+        for(let i = 0; i < 3; i++){
+            await factories.tag();
+        }
+        //make API call
+        const response = await chai.request(app).get('/api/tags/recommend')
+        expect(response.body).to.have.lengthOf(3)
+    });
+
+
+
 });

@@ -87,6 +87,10 @@ module.exports = (app) => {
   //Return list of users that contains the list of tags
   app.get('/api/tags/users', tagToUser.getUserList);
 
+  //Return list of users that contains the list of tags
+  app.get('/api/tags/recommend', tagToProject.recommend);
+
+
 
 
   // * user_associations routes *

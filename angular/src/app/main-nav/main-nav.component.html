@@ -6,7 +6,7 @@
       [opened]="!(isHandset$ | async)">
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-        <a mat-list-item *ngFor="let link of navLinks" href="{{link.url}}">{{link.name}}</a>
+        <a mat-list-item *ngFor="let link of navLinks" routerLink="{{link.url}}">{{link.name}}</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content class="side-buttons">
@@ -20,11 +20,11 @@
         svgIcon="thumbs-up">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <a href="#">Project Collab</a>
+      <a routerLink="/">Project Collab</a>
       <span class="spacer"></span>
       <span *ngFor="let link of navLinks; index as i">
-        <a *ngIf="navLinks[i].name == 'Logout'" href="#" (click)="$event.preventDefault();properLogout()">Logout</a>
-        <a *ngIf="navLinks[i].name != 'Logout'" href="{{link.url}}">{{link.name}}</a>
+        <a *ngIf="navLinks[i].name == 'Logout'" routerLink="#" (click)="$event.preventDefault();properLogout()">Logout</a>
+        <a *ngIf="navLinks[i].name != 'Logout'" routerLink="{{link.url}}">{{link.name}}</a>
       </span>
     </mat-toolbar>
     <ng-content></ng-content>

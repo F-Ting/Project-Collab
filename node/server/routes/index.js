@@ -81,7 +81,7 @@ module.exports = (app) => {
 
 
   //Return list of projects that contains the list of tags
-  
+
   app.get('/api/tags/projects', tagToProject.getProjectList);
 
   //Return list of users that contains the list of tags
@@ -130,7 +130,7 @@ module.exports = (app) => {
 
   // * tag_to_user routes *
   // get all tags associated with a user
-  app.get('/api/tags/user/:user_id', tagToUser.list);
+  app.get('/api/tags/user/:user_id', tagToUser.rec);
   // create a tag and associate it with a user
   app.post('/api/tags/user/:user_id', tagToUser.create);
   // delete a tag from a user

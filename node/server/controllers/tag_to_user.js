@@ -1,9 +1,20 @@
-const TagTouser = require('../models').tag_to_user;
+const TagToUser = require('../models').tag_to_user;
+const TagToProject = require('../models').tag_to_project;
 const Tags = require('../models').tags;
 const users = require('../models').users;
 const Sequelize = require('sequelize');
 
 const Op = Sequelize.Op;
+
+function moreRec(result, res){
+    console.log("here")
+    TagToProject.sequelize.query('SELECT project_id, count(tag_id) as tag_count FROM tag_to_projects WHERE tag_id IN(:status) GROUP BY project_id ORDER BY tag_count DESC',
+      { replacements: { status: result }, type: TagToProject.sequelize.QueryTypes.SELECT }
+    ).then(final => {
+        console.log(final)
+        res.status(200).send(final);
+    }).catch((error) => res.status(400).send(error));
+}
 
 module.exports = {
     // List all tags for a user
@@ -12,7 +23,7 @@ module.exports = {
             .findAll({
                 where: { "$tag_to_user.user_id$": req.params.user_id },
                 include: [{
-                    model: TagTouser,
+                    model: TagToUser,
                     as: 'tag_to_user',
                     attributes: [],
                 }],
@@ -24,12 +35,33 @@ module.exports = {
             .catch((error) => res.status(400).send(error));
     },
 
+    //rec
+    rec(req, res) {
+        return TagToUser
+            .findAll({
+                where: { user_id: req.params.user_id },
+                attributes: { exclude: ['createdAt', 'updatedAt', 'user_id', 'id'] },
+                raw: true
+            })
+            .then(tag => {
+                var result = [];
+                console.log(tag)
+                for ( var tag_id in tag){
+                    result.push(tag[tag_id].tag_id)
+                }
+                moreRec(result, res);
+
+
+
+            }).catch((error) => res.status(400).send(error));
+    },
+
     getUserList(req,res){
         let tagList = req.query.tags.split(',')
         return users
             .findAll({
                 include: [{
-                    model: TagTouser,
+                    model: TagToUser,
                     as: 'tag_to_user',
                     include: [{
                         model: Tags,
@@ -71,7 +103,7 @@ module.exports = {
                             defaults: { tag },
                         })
                         .then(([tag, created]) => {
-                            return TagTouser
+                            return TagToUser
                                 .findOrCreate({
                                     where: {
                                         tag_id: tag.id,
@@ -102,7 +134,7 @@ module.exports = {
                 where: { tag: { [Op.in]: req.body.tags } }
             })
             .then(tags => {
-                return TagTouser
+                return TagToUser
                     .destroy({
                         where: {
                             user_id: req.params.user_id,

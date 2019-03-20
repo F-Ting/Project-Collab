@@ -12,6 +12,7 @@ import {
 
 import { MainNavComponent } from './main-nav.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('MainNavComponent', () => {
   let component: MainNavComponent;
@@ -29,7 +30,8 @@ describe('MainNavComponent', () => {
         MatSidenavModule,
         MatToolbarModule,
         MatSnackBarModule,
-        HttpClientTestingModule
+        HttpClientTestingModule,
+        RouterTestingModule
       ]
     }).compileComponents();
   }));

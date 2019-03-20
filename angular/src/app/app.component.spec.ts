@@ -4,17 +4,21 @@ import { AppComponent } from './app.component';
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import {
+  MatSnackBarModule
+} from '@angular/material';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
-        HttpClientTestingModule
+        HttpClientTestingModule,
+        MatSnackBarModule
       ],
       declarations: [
         AppComponent,
-        MainNavComponent
+        MainNavComponent,
       ],
       schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();

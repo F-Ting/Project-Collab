@@ -58,6 +58,17 @@ module.exports = {
     .catch((error) => res.status(400).send(error));
   },
 
+  recommend(req,res){
+    // limit the results of the query
+    Tags.findAll({ limit: 5 })
+    .then(tags => {
+      //list of tags
+      let resObj = tags.map(el => el.tag)
+      res.status(200).send(resObj)
+    })
+    .catch((error) => res.status(400).send(error));
+  },
+
   // Associate a tag with a projet, creating the tag if it doesn't already exist
   create(req, res) {
     const tags = req.body.tags;

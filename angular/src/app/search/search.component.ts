@@ -51,9 +51,11 @@ export class SearchComponent implements OnInit {
   constructor(private searchService: SearchService) {}
 
   ngOnInit() {
-    // Fill search tags users and projects from backend
-    this.filteredSearchTags = this.formGroup.get('searchTagsControl').valueChanges.pipe(
+    this.searchService.getRecommendedTags().subscribe((tags) => {
+      this.recomendedTags = tags;
+      this.filteredSearchTags = this.formGroup.get('searchTagsControl').valueChanges.pipe(
         startWith(''), map(value => this._filterTags(value)));
+    });
 
     this.searchService.getUsers().subscribe((users) => {
       this.searchUsers = users.map((user: User) => user.username);

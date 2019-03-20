@@ -5,6 +5,7 @@ const Sequelize = require('sequelize');
 
 const Op = Sequelize.Op;
 
+
 module.exports = {
   //create a new association aka add a person to a group
   create(req, res) {
@@ -42,22 +43,29 @@ module.exports = {
 
   // list all projects a user is in
   listProjects(req, res) {
-    return Associations
+    return Projects
       .findAll({
-        where: {
-          user_id: req.body.user,
-        },
         order: [
           ['createdAt', 'DESC'],
         ],
         include: [{
-          model: Projects,
-          as: 'project',
-          attributes: {exclude: ['password', 'createdAt', 'updatedAt'] },
+          model: Associations,
+          as: 'user_associations',
+          required: true,
+          include:[{
+            model: Users,
+            where: {
+              username: req.params.username
+            },
+            required: true,
+          }]
         }],
         attributes: {exclude: ['createdAt', 'updatedAt', 'user_id'] }
       })
-      .then((associations) => res.status(200).send(associations))
+      .then((projects) => {
+        let resObj = mapProjects(projects)
+        res.status(200).send(resObj)
+      })
       .catch((error) => res.status(400).send(error));
   },
 
@@ -208,4 +216,29 @@ module.exports = {
   },
 
 
+};
+
+const mapProjects = function(projects) {
+  return projects.map(project => {
+    return Object.assign(
+      {},
+      {
+        id: project.id,
+        name: project.name,
+        description: project.description,
+        github: project.github,
+        url: project.url,
+        project_start_date: project.project_start_date,
+        image: project.image,
+        status: project.status,
+        createdAt: project.createdAt,
+        updatedAt: project.updatedAt,
+        owner: {
+          name: project.user_associations[0].user.name,
+          username: project.user_associations[0].user.username
+        },
+        tags: project.tag_to_project ? project.tag_to_project.map(el => el.tag.tag) : []
+      }
+    );
+  });
 };

@@ -1,0 +1,32 @@
+.row {
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  flex-direction: row;
+}
+
+.profile {
+  width: 350px;
+}
+
+.projects {
+  width: 750px;
+}
+
+.dashboard-card {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  right: 15px;
+  bottom: 15px;
+}
+
+.more-button {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+}
+
+.dashboard-card-content {
+  /* font-size: 1px; */
+}

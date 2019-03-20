@@ -1,0 +1,97 @@
+<div class="row" *ngIf="user">
+    <div class="profile">
+        <mat-grid-list cols="1" rowHeight="730">
+            <mat-grid-tile colspan="1" rowspan="1">
+                <mat-card class="dashboard-card">
+                    <img
+                        mat-card-image
+                        src="{{ user.photo }}"
+                        style="object-fit: cover;"
+                    />
+                    <mat-card-header>
+                        <mat-card-title>
+                            {{ user.name }}
+                            <button
+                                mat-icon-button
+                                class="more-button"
+                                aria-label="Change Profile Picture"
+                            >
+                                <mat-icon>create</mat-icon>
+                            </button>
+                        </mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content class="dashboard-card-content">
+                        <mat-list>
+                            <mat-list-item>
+                                <fa-icon [icon]="faEnvelope"></fa-icon>
+                                <p mat-line>
+                                    <a href="mailto:{{ user.email }}">{{
+                                        user.email
+                                    }}</a>
+                                </p>
+                            </mat-list-item>
+                            <mat-list-item>
+                                <fa-icon [icon]="faLinkedin"></fa-icon>
+                                <p mat-line>
+                                    <a
+                                        href="https://linkedin.com/in/{{
+                                            user.linked_in
+                                        }}/"
+                                        >{{ user.linked_in }}</a
+                                    >
+                                </p>
+                            </mat-list-item>
+                            <mat-list-item>
+                                <fa-icon [icon]="faGithub"></fa-icon>
+                                <p mat-line>
+                                    <a
+                                        href="https://github.com/{{
+                                            user.github
+                                        }}"
+                                    >
+                                        {{ user.github }}
+                                    </a>
+                                </p>
+                            </mat-list-item>
+                            <mat-divider></mat-divider>
+                        </mat-list>
+                        <h2>Bio</h2>
+                        <p>{{ user.bio }}</p>
+                    </mat-card-content>
+                </mat-card>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </div>
+    <div class="projects">
+        <mat-grid-list cols="2" rowHeight="450px">
+            <mat-grid-tile
+                *ngFor="let project of projects"
+                [colspan]="1"
+                [rowspan]="1"
+            >
+                <app-project-card [project]="project"></app-project-card>
+            </mat-grid-tile>
+            <mat-grid-tile
+                *ngFor="let project of projects"
+                [colspan]="1"
+                [rowspan]="1"
+            >
+                <app-project-card [project]="project"></app-project-card>
+            </mat-grid-tile>
+            <mat-grid-tile
+                *ngFor="let project of projects"
+                [colspan]="1"
+                [rowspan]="1"
+            >
+                <app-project-card [project]="project"></app-project-card>
+            </mat-grid-tile>
+            <mat-grid-tile
+                *ngFor="let project of projects"
+                [colspan]="1"
+                [rowspan]="1"
+            >
+                <app-project-card [project]="project"></app-project-card>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </div>
+</div>

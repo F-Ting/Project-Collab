@@ -8,6 +8,7 @@ import { DiscoverComponent } from '../discover/discover.component';
 import { ProjectFormComponent } from '../project-form/project-form.component';
 import { ProfileComponent} from "../profile/profile.component";
 import { ProjectComponent } from '../project/project.component';
+import { UserProfileComponent } from '../user-profile/user-profile.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent},
@@ -15,7 +16,7 @@ const routes: Routes = [
   { path: 'registration', component: RegistrationComponent},
   { path: 'discover', component: DiscoverComponent},
   { path: 'create', component: ProjectFormComponent},
-  { path: 'profile', component: ProfileComponent},
+  { path: 'profile', component: UserProfileComponent},
   { path: 'project/:id', component: ProjectComponent },
   { path: '', redirectTo: '/discover', pathMatch: 'full' }
 ];

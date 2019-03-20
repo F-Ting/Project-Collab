@@ -22,6 +22,8 @@ import { ProfileComponent } from "./profile/profile.component";
 import { LogoutComponent } from './logout/logout.component';
 import { ProjectComponent } from './project/project.component';
 import { ProjectCardComponent } from './project-card/project-card.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,8 @@ import { ProjectCardComponent } from './project-card/project-card.component';
     ProjectFormComponent,
     LogoutComponent,
     ProjectComponent,
-    ProjectCardComponent
+    ProjectCardComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -63,11 +66,11 @@ import { ProjectCardComponent } from './project-card/project-card.component';
     MatListModule,
     MatExpansionModule,
     MatAutocompleteModule,
-    HttpClientModule
+    HttpClientModule,
+    FontAwesomeModule
   ],
   exports: [MainNavComponent],
   providers: [],
   bootstrap: [AppComponent]
-
 })
 export class AppModule { }

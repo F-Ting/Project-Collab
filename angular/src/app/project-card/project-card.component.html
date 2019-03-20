@@ -17,7 +17,7 @@
       </span>
 
       <span style="float: right">
-        <mat-card-actions>
+        <mat-card-actions *ngIf="project.owner">
           <button id='discover-project' mat-raised-button color="primary" (click)="onEdit(project)"
             *ngIf="project.owner.username == username" type="button">Edit</button>
           <span style="float: right" *ngIf="project.owner.username != username">

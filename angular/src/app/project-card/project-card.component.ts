@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./project-card.component.css']
 })
 export class ProjectCardComponent implements OnInit {
-  @Input() project: Object = null;
+  @Input() project: any = null;
   username = localStorage.getItem("username");
 
   constructor(private router: Router) { }

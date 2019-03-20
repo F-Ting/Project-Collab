@@ -57,7 +57,7 @@ import { TagsComponent } from './tags/tags.component';
     LogoutComponent,
     ProjectComponent,
     ProjectCardComponent,
-    UserProfileComponent
+    UserProfileComponent,
     TagsComponent,
   ],
   imports: [

@@ -31,6 +31,7 @@
                     </mat-card-actions>
                     <button id='discover-project' mat-raised-button color="primary" (click)="onEdit(project)"
                       *ngIf="project.owner.username == username" type="button">Edit</button>
+                    <app-tags class="profile-card-tags" [tags]="project.tags"></app-tags>
                 </mat-card>
             </section>
         </mat-grid-tile>

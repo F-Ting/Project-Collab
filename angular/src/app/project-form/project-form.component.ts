@@ -18,11 +18,14 @@ export class ProjectFormComponent implements OnInit {
   submitted = false;
   deleted = false;
   response = null;
+  imagePath;
+  imgURL: any;
+  message: string;
 
   onSubmit() {
     this.submitted = true;
     if (!this.project) {
-      this.projectFormService.create(this.projectForm.value).subscribe((response) => {
+      this.projectFormService.create({...this.projectForm.value, image: this.imgURL}).subscribe((response) => {
         this.response = response;
         this.router.navigate(['/discover']);
       },
@@ -71,6 +74,23 @@ export class ProjectFormComponent implements OnInit {
       url: [this.project && this.project.url || null, Validators.required],
       github: [this.project && this.project.github || null, Validators.required]
     });
+  }
+  preview(files) {
+    if (files.length === 0)
+      return;
+ 
+    let mimeType = files[0].type;
+    if (mimeType.match(/image\/*/) == null) {
+      this.message = "Only images are supported.";
+      return;
+    }
+ 
+    let reader = new FileReader();
+    this.imagePath = files;
+    reader.readAsDataURL(files[0]); 
+    reader.onload = (_event) => { 
+      this.imgURL = reader.result; 
+    }
   }
 
 }

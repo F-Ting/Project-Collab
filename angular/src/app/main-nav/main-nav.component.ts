@@ -51,8 +51,6 @@ export class MainNavComponent {
   ngOnInit() {
     let user = localStorage.getItem('username')
     this.navLinks = user == null ? this.commonLinks.concat(this.loggedOutLinks) : this.commonLinks.concat(this.loggedInLinks)
-    console.log(this.navLinks);
-    console.log(this.navLinks[2].name);
   }
 
   createNavLinkObject(name:String,url:String){

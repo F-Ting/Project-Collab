@@ -14,6 +14,7 @@ module.exports = {
         description: req.body.description,
         github: req.body.github,
         url: req.body.url,
+        image: req.body.image,
         status: 'unapproved'
       })
       .then(project => {

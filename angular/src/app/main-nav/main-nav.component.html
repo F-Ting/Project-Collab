@@ -22,7 +22,10 @@
       </button>
       <a routerLink="/">Project Collab</a>
       <span class="spacer"></span>
-      <a *ngFor="let link of navLinks" routerLink="{{link.url}}">{{link.name}}</a>
+      <span *ngFor="let link of navLinks; index as i">
+        <a *ngIf="navLinks[i].name == 'Logout'" routerLink="#" (click)="$event.preventDefault();properLogout()">Logout</a>
+        <a *ngIf="navLinks[i].name != 'Logout'" routerLink="{{link.url}}">{{link.name}}</a>
+      </span>
     </mat-toolbar>
     <ng-content></ng-content>
   </mat-sidenav-content>

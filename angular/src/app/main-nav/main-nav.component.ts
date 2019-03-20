@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Observable,Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
-import {MatIconRegistry} from '@angular/material';
-import {DomSanitizer} from '@angular/platform-browser';
+import { MatIconRegistry, MatSnackBar } from '@angular/material';
+import { DomSanitizer } from '@angular/platform-browser';
 import { LoginService } from '../login/login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'main-nav',
@@ -23,8 +24,8 @@ export class MainNavComponent {
   //default links when users are not logged in
   loggedOutLinks = [
     this.createNavLinkObject("Login","login"),
-    this.createNavLinkObject("Signup","signup")
-  ]     
+    this.createNavLinkObject("Signup","registration")
+  ]
   // default common links across states
   commonLinks = [
     this.createNavLinkObject("Discover","discover")
@@ -35,7 +36,7 @@ export class MainNavComponent {
       map(result => result.matches)
     );
 
-  constructor(private breakpointObserver: BreakpointObserver, iconRegistry: MatIconRegistry, sanitizer: DomSanitizer,private loginService: LoginService) {
+  constructor(private breakpointObserver: BreakpointObserver, iconRegistry: MatIconRegistry, sanitizer: DomSanitizer,private loginService: LoginService, private snackbar: MatSnackBar, private router: Router) {
     iconRegistry.addSvgIcon(
       'thumbs-up',
       sanitizer.bypassSecurityTrustResourceUrl('assets/img/examples/thumbup-icon.svg'));
@@ -50,8 +51,10 @@ export class MainNavComponent {
   ngOnInit() {
     let user = localStorage.getItem('username')
     this.navLinks = user == null ? this.commonLinks.concat(this.loggedOutLinks) : this.commonLinks.concat(this.loggedInLinks)
+    console.log(this.navLinks);
+    console.log(this.navLinks[2].name);
   }
-  
+
   createNavLinkObject(name:String,url:String){
     return Object.assign({},{
       name: name,
@@ -59,4 +62,10 @@ export class MainNavComponent {
     })
   }
 
+  properLogout() {
+    this.snackbar.open("You have successfully logged out. You will now be redirected to the home page.", "Dismiss");
+    setTimeout(() => {
+        this.router.navigate(['/logout']);
+    }, 3000);  // 3s
+  }
 }

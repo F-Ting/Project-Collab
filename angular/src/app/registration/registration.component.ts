@@ -58,9 +58,6 @@ export class RegistrationComponent implements OnInit {
       this.registrationService.registration(this.data, "student").subscribe((response)=>{
         this.snackBar.open("Your registration has succeeded. Welcome to Project Collab!", "Dismiss");
         this.error = false;
-        // set up local storage with necessary information
-        localStorage.setItem("username", response["username"]);
-        localStorage.setItem("user_id", response["id"]);
       },
       error => {
         this.snackBar.open("The username has already been taken.", "Dismiss");
@@ -71,7 +68,7 @@ export class RegistrationComponent implements OnInit {
   }
 
   redirect() {
-    this.router.navigateByUrl('discover');
+    this.router.navigateByUrl('login');
   }
 
 }

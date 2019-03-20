@@ -8,7 +8,24 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RoutingModule } from './routing/routing.module';
 import { ExampleComponent } from './example/example.component';
 import { LoginComponent } from './login/login.component';
-import { MatSnackBarModule, MatGridListModule, MatCardModule, MatMenuModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatSelectModule, MatRadioModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule, MatExpansionModule, MatChipsModule, MatAutocompleteModule} from '@angular/material';
+import {
+  MatAutocompleteModule,
+  MatButtonModule,
+  MatCardModule,
+  MatChipsModule,
+  MatExpansionModule,
+  MatFormFieldModule,
+  MatGridListModule,
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatMenuModule,
+  MatRadioModule,
+  MatSelectModule,
+  MatSidenavModule,
+  MatSnackBarModule,
+  MatToolbarModule,
+} from '@angular/material';
 import { RegistrationComponent } from './registration/registration.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -24,6 +41,7 @@ import { ProjectComponent } from './project/project.component';
 import { ProjectCardComponent } from './project-card/project-card.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { TagsComponent } from './tags/tags.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +58,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     ProjectComponent,
     ProjectCardComponent,
     UserProfileComponent
+    TagsComponent,
   ],
   imports: [
     BrowserAnimationsModule,

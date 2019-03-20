@@ -1,8 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProjectCardComponent } from './project-card.component';
-import { MatCardModule, MatButtonModule, MatIconModule } from '@angular/material';
+import { MatCardModule, MatChipsModule, MatButtonModule, MatIconModule } from '@angular/material';
 import { RouterTestingModule } from '@angular/router/testing';
+import { TagsComponent } from '../tags/tags.component';
 
 describe('ProjectCardComponent', () => {
   let component: ProjectCardComponent;
@@ -10,10 +11,11 @@ describe('ProjectCardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ProjectCardComponent],
+      declarations: [ProjectCardComponent, TagsComponent],
       imports: [
         MatCardModule,
         MatButtonModule,
+        MatChipsModule,
         MatIconModule,
         RouterTestingModule
       ]

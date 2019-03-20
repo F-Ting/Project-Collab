@@ -12,6 +12,10 @@
   cursor: pointer;
 }
 
+.dashboard-card:hover {
+  box-shadow: 0 0 20px rgba(33,33,33,.2);
+}
+
 /** flex-shrink: 0 so the header should not be clipped or shrink if the parent card height changes **/
 .mat-card-header {
     display: flex;
@@ -20,7 +24,31 @@
 }
 
 .mat-card-content{
-	flex-grow: 1;
-	overflow: auto; 
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
   /* outline: 1px solid red; */
+}
+
+.profile-card-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  margin: 1px;
+}
+
+.profile-card-tags {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.profile-card-github {
+  width: 50%;
+  float: left;
+}
+
+.profile-card-user {
+  width: max-content;
+  float: right;
 }

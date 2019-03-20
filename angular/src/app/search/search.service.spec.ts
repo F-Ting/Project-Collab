@@ -19,4 +19,9 @@ describe('SearchService', () => {
     const service: SearchService = TestBed.get(SearchService);
     expect(service.getProjects).toBeDefined();
   });
+
+  it('should have a getRecommendedTags function', () => {
+    const service: SearchService = TestBed.get(SearchService);
+    expect(service.getRecommendedTags).toBeDefined();
+  });
 });

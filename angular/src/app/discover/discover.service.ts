@@ -9,7 +9,11 @@ export class DiscoverService {
   constructor(private httpClient: HttpService) { }
 
   getProjects() {
-      return this.httpClient.get(`api/projects`)
+    return this.httpClient.get(`api/projects`);
+  }
+
+  getProjectsWithTags() {
+    return this.httpClient.get(`api/projects?withTags=True`);
   }
 
   getProjectsBySearch(projects: string[]) {

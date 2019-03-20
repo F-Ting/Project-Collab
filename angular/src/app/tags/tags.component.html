@@ -1,0 +1,5 @@
+<mat-chip-list *ngIf="tags">
+  <mat-chip *ngFor="let tag of tags" color="{{ colour }}" selected>
+    {{tag}}
+  </mat-chip>
+</mat-chip-list>

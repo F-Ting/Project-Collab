@@ -7,10 +7,12 @@ import {
     MatIconModule,
     MatListModule,
     MatSidenavModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatChipsModule
   } from '@angular/material';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { TagsComponent } from '../tags/tags.component';
 
 describe('ProjectComponent', () => {
   let component: ProjectComponent;
@@ -18,7 +20,7 @@ describe('ProjectComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProjectComponent ],
+      declarations: [ ProjectComponent,TagsComponent ],
       imports: [
         MatGridListModule,
         MatCardModule,
@@ -28,7 +30,8 @@ describe('ProjectComponent', () => {
         MatSidenavModule,
         MatToolbarModule,
         HttpClientTestingModule,
-        RouterTestingModule
+        RouterTestingModule,
+        MatChipsModule
       ],
     })
     .compileComponents();

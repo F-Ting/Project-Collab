@@ -179,7 +179,7 @@ describe('Tag API', () => {
     });
 
     it('should return no more than 5 tags', async () => {
-        // create 5 tags
+        // create 7 tags
         for(let i = 0; i < 7; i++){
             await factories.tag();
         }
@@ -189,7 +189,7 @@ describe('Tag API', () => {
     });
 
     it('should return only 3 tags if only 3 tags exist', async () => {
-        // create 5 tags
+        // create 3 tags
         for(let i = 0; i < 3; i++){
             await factories.tag();
         }

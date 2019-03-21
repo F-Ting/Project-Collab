@@ -3,6 +3,7 @@ const projectsController = require('../controllers').projects;
 const userAssociationsController = require('../controllers').user_associations;
 const tagToProject = require('../controllers').tag_to_project;
 const tagToUser = require('../controllers').tag_to_user;
+const Rec = require('../controllers').rec;
 const upload = require('../controllers').upload;
 const Users = require('../models').users;
 
@@ -130,7 +131,13 @@ module.exports = (app) => {
 
   // * tag_to_user routes *
   // get all tags associated with a user
-  app.get('/api/tags/user/:user_id', tagToUser.rec);
+  app.get('/api/tags/user/:user_id', tagToUser.list);
+  // simple project rec
+  app.get('/api/tags/rec/user/:user_id', Rec.rec_project_list);
+  // simple simlair users
+  app.get('/api/tags/sim/user/:user_id', Rec.simlair_users);
+  //
+  app.get('/api/tags/counts/user/:user_id', Rec.count_of_tags_pre_proejct);
   // create a tag and associate it with a user
   app.post('/api/tags/user/:user_id', tagToUser.create);
   // delete a tag from a user

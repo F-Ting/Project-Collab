@@ -6,53 +6,22 @@ const Sequelize = require('sequelize');
 
 const Op = Sequelize.Op;
 
-function moreRec(result, res){
-    console.log("here")
-    TagToProject.sequelize.query('SELECT project_id, count(tag_id) as tag_count FROM tag_to_projects WHERE tag_id IN(:status) GROUP BY project_id ORDER BY tag_count DESC',
-      { replacements: { status: result }, type: TagToProject.sequelize.QueryTypes.SELECT }
-    ).then(final => {
-        console.log(final)
-        res.status(200).send(final);
-    }).catch((error) => res.status(400).send(error));
-}
-
 module.exports = {
     // List all tags for a user
     list(req, res) {
-        return Tags
-            .findAll({
-                where: { "$tag_to_user.user_id$": req.params.user_id },
-                include: [{
-                    model: TagToUser,
-                    as: 'tag_to_user',
-                    attributes: [],
-                }],
-                attributes: { exclude: ['createdAt', 'updatedAt'] },
-            })
-            .then(tag => {
-                res.status(200).send(tag)
-            })
-            .catch((error) => res.status(400).send(error));
-    },
-
-    //rec
-    rec(req, res) {
         return TagToUser
             .findAll({
                 where: { user_id: req.params.user_id },
+                include: [{
+                    model: Tags,
+                    as: 'tag',
+                    attributes: [],
+                }],
                 attributes: { exclude: ['createdAt', 'updatedAt', 'user_id', 'id'] },
                 raw: true
             })
             .then(tag => {
-                var result = [];
-                console.log(tag)
-                for ( var tag_id in tag){
-                    result.push(tag[tag_id].tag_id)
-                }
-                moreRec(result, res);
-
-
-
+                res.status(200).send(tag);
             }).catch((error) => res.status(400).send(error));
     },
 

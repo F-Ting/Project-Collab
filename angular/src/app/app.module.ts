@@ -35,7 +35,6 @@ import { DiscoverComponent } from './discover/discover.component';
 import { SearchComponent } from './search/search.component';
 import { ProjectFormComponent } from './project-form/project-form.component';
 import { MatStepperModule } from '@angular/material/stepper';
-import { ProfileComponent } from "./profile/profile.component";
 import { LogoutComponent } from './logout/logout.component';
 import { ProjectComponent } from './project/project.component';
 import { ProjectCardComponent } from './project-card/project-card.component';
@@ -52,7 +51,6 @@ import { TagsComponent } from './tags/tags.component';
     MainNavComponent,
     DiscoverComponent,
     SearchComponent,
-    ProfileComponent,
     ProjectFormComponent,
     LogoutComponent,
     ProjectComponent,

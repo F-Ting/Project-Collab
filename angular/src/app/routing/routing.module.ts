@@ -6,7 +6,6 @@ import { LogoutComponent } from '../logout/logout.component';
 import { RegistrationComponent } from '../registration/registration.component';
 import { DiscoverComponent } from '../discover/discover.component';
 import { ProjectFormComponent } from '../project-form/project-form.component';
-import { ProfileComponent} from "../profile/profile.component";
 import { ProjectComponent } from '../project/project.component';
 import { UserProfileComponent } from '../user-profile/user-profile.component';
 

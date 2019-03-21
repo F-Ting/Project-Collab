@@ -9,7 +9,6 @@ export class ProjectFormService {
   constructor(private httpClient: HttpService) { }
 
   create(data) {
-    console.log(data)
     return this.httpClient.post('api/project', data);
   }
 

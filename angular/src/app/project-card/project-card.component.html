@@ -18,7 +18,7 @@
     <button class="profile-card-user" id='discover-project' mat-raised-button color="primary" (click)="onEdit(project)"
       *ngIf="project.owner.username == username" type="button">Edit</button>
     <span class="profile-card-user" *ngIf="project.owner.username != username">
-      {{ project.owner.username }}
+      <a routerLink="/user/{{project.owner.username}}">{{ project.owner.username }}</a>
     </span>
   </mat-card-footer>
 

@@ -24,7 +24,8 @@
       <span class="spacer"></span>
       <span *ngFor="let link of navLinks; index as i">
         <a *ngIf="navLinks[i].name == 'Logout'" routerLink="#" (click)="$event.preventDefault();properLogout()">Logout</a>
-        <a *ngIf="navLinks[i].name != 'Logout'" routerLink="{{link.url}}">{{link.name}}</a>
+        <a *ngIf="navLinks[i].name == 'Profile'" routerLink="{{link.url + currentUsername}}">{{link.name}}</a>
+        <a *ngIf="navLinks[i].name != 'Logout' && navLinks[i].name != 'Profile'" routerLink="{{link.url}}">{{link.name}}</a>
       </span>
     </mat-toolbar>
     <ng-content></ng-content>

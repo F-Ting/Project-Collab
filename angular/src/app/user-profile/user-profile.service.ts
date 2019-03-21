@@ -8,15 +8,15 @@ import { Observable } from 'rxjs';
 export class UserProfileService {
     constructor(private httpClient: HttpService) {}
 
-    getUser(): Observable<any> {
+    getUser(username): Observable<any> {
         return this.httpClient.get(
-            `api/users/${localStorage.getItem('username')}`
+            `api/users/${username}`
         );
     }
 
-    getProjects(): Observable<any> {
+    getProjects(username): Observable<any> {
         return this.httpClient.get(
-            `api/user_associations/user/${localStorage.getItem('username')}`
+            `api/user_associations/user/${username}`
         );
     }
 }

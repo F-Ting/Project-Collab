@@ -13,13 +13,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./main-nav.component.css']
 })
 export class MainNavComponent {
-
+  currentUser = localStorage.getItem("username")
   navLinks = [];
     //default links when users are logged in
   loggedInLinks = [
     this.createNavLinkObject("Create Project","create"),
     this.createNavLinkObject("Logout","logout"),
-    this.createNavLinkObject("Profile","profile"),
+    this.createNavLinkObject("Profile",`user/${this.currentUser}`),
   ]
   //default links when users are not logged in
   loggedOutLinks = [
@@ -49,8 +49,7 @@ export class MainNavComponent {
 
   //populate nav-bar based on login status
   ngOnInit() {
-    let user = localStorage.getItem('username')
-    this.navLinks = user == null ? this.commonLinks.concat(this.loggedOutLinks) : this.commonLinks.concat(this.loggedInLinks)
+    this.navLinks = this.currentUser == null ? this.commonLinks.concat(this.loggedOutLinks) : this.commonLinks.concat(this.loggedInLinks)
   }
 
   createNavLinkObject(name:String,url:String){

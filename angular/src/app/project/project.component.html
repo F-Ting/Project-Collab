@@ -7,7 +7,7 @@
             <section class="description">
                 <mat-card>
                     <mat-card-title>{{ project.name }}</mat-card-title>
-                    <mat-card-subtitle>{{project.owner.username}}</mat-card-subtitle>
+                    <a routerLink="/user/{{project.owner.username}}">{{ project.owner.username }}</a>
 
                     <mat-card-title>Description</mat-card-title>
                     <p>{{ project.description }}</p>

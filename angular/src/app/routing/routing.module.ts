@@ -15,7 +15,7 @@ const routes: Routes = [
   { path: 'registration', component: RegistrationComponent},
   { path: 'discover', component: DiscoverComponent},
   { path: 'create', component: ProjectFormComponent},
-  { path: 'profile', component: UserProfileComponent},
+  { path: 'user/:username', component: UserProfileComponent},
   { path: 'project/:id', component: ProjectComponent },
   { path: '', redirectTo: '/discover', pathMatch: 'full' }
 ];

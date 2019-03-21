@@ -10,6 +10,9 @@ import {
 } from '@angular/material';
 
 import { UserProfileComponent } from './user-profile.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
 describe('UserProfileComponent', () => {
   let component: UserProfileComponent;
@@ -26,7 +29,10 @@ describe('UserProfileComponent', () => {
         MatGridListModule,
         MatIconModule,
         MatMenuModule,
-      ]
+        HttpClientTestingModule,
+        RouterTestingModule,
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
     }).compileComponents();
   }));
 

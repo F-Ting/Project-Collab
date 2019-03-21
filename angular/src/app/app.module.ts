@@ -35,10 +35,11 @@ import { DiscoverComponent } from './discover/discover.component';
 import { SearchComponent } from './search/search.component';
 import { ProjectFormComponent } from './project-form/project-form.component';
 import { MatStepperModule } from '@angular/material/stepper';
-import { ProfileComponent } from "./profile/profile.component";
 import { LogoutComponent } from './logout/logout.component';
 import { ProjectComponent } from './project/project.component';
 import { ProjectCardComponent } from './project-card/project-card.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TagsComponent } from './tags/tags.component';
 
 @NgModule({
@@ -50,11 +51,11 @@ import { TagsComponent } from './tags/tags.component';
     MainNavComponent,
     DiscoverComponent,
     SearchComponent,
-    ProfileComponent,
     ProjectFormComponent,
     LogoutComponent,
     ProjectComponent,
     ProjectCardComponent,
+    UserProfileComponent,
     TagsComponent,
   ],
   imports: [
@@ -82,11 +83,11 @@ import { TagsComponent } from './tags/tags.component';
     MatListModule,
     MatExpansionModule,
     MatAutocompleteModule,
-    HttpClientModule
+    HttpClientModule,
+    FontAwesomeModule
   ],
   exports: [MainNavComponent],
   providers: [],
   bootstrap: [AppComponent]
-
 })
 export class AppModule { }

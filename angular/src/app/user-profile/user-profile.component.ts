@@ -19,12 +19,13 @@ export class UserProfileComponent implements OnInit {
     public faLinkedin: IconDefinition = faLinkedin;
     public faGithub: IconDefinition = faGithub;
     public faEnvelope: IconDefinition = faEnvelope;
-
+    private isOwner: boolean = false;
+    private currentUsername = localStorage.getItem("username")
     public user: any;
     public projects: any[] = [];
 
     constructor(private userProfileService: UserProfileService, private route: ActivatedRoute) {}
-
+    
     ngOnInit(): void {
         this.route.paramMap.subscribe(params => {
             this.getUser(params.get("username"));
@@ -35,7 +36,12 @@ export class UserProfileComponent implements OnInit {
     private getUser(username) {
         this.userProfileService
             .getUser(username)
-            .subscribe(user => (this.user = user), error => log(error));
+            .subscribe(user => {
+                this.user = user;
+                if(user.username == this.currentUsername){
+                    this.isOwner = true;
+                }
+            }, error => log(error));
     }
 
     private getProjects(username) {

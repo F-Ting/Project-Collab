@@ -12,6 +12,7 @@
                         <mat-card-title>
                             {{ user.name }}
                             <button
+                                *ngIf="isOwner"
                                 mat-icon-button
                                 class="more-button"
                                 aria-label="Change Profile Picture"

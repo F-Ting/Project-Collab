@@ -25,7 +25,6 @@ import {
   MatSidenavModule,
   MatSnackBarModule,
   MatToolbarModule,
-  MatDialogModule,
 } from '@angular/material';
 import { RegistrationComponent } from './registration/registration.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -42,7 +41,6 @@ import { ProjectCardComponent } from './project-card/project-card.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TagsComponent } from './tags/tags.component';
-import { EditUserProfileComponent } from './user-profile/edit-user-profile/edit-user-profile.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +57,6 @@ import { EditUserProfileComponent } from './user-profile/edit-user-profile/edit-
     ProjectCardComponent,
     UserProfileComponent,
     TagsComponent,
-    EditUserProfileComponent,
   ],
   imports: [
     BrowserAnimationsModule,
@@ -87,14 +84,10 @@ import { EditUserProfileComponent } from './user-profile/edit-user-profile/edit-
     MatExpansionModule,
     MatAutocompleteModule,
     HttpClientModule,
-    MatDialogModule,
     FontAwesomeModule
   ],
   exports: [MainNavComponent],
   providers: [],
-  bootstrap: [AppComponent],
-  entryComponents: [
-    EditUserProfileComponent
-  ]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }

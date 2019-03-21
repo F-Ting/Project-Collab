@@ -9,20 +9,25 @@ const fs = require("fs");
 module.exports = {
   // Create a new Project
   create(req, res) {
-    let base64Data = req.body.image.replace(/^data:image\/png;base64,/,"")
-    let binaryData = new Buffer(base64Data, 'base64').toString('binary');
-    let userID = req.session.user;
-    let imgPath = path.join(__dirname, `../../resource/${userID}/projectImg.png`) 
-    fs.writeFile(imgPath, binaryData, "binary", function(err) {
-      console.log(err); // writes out file without error, but it's not a valid image
-    });
+    let imgURL = null;
+    if(req.body.img && req.body.img != null){
+      let base64Data = req.body.image.replace(/^data:image\/png;base64,/,"")
+      let binaryData = new Buffer(base64Data, 'base64').toString('binary');
+      let userID = req.session.user;
+      let imgPath = path.join(__dirname, `../../resource/${userID}/projectImg.png`) 
+      //create image
+      fs.writeFile(imgPath, binaryData, "binary", function(err) {
+        console.log(err); // writes out file without error, but it's not a valid image
+      });
+      imgURL = `http://localhost:8000/resource/${userID}/projectImg.png`
+    }
     return Projects
       .create({
         name: req.body.name,
         description: req.body.description,
         github: req.body.github,
         url: req.body.url,
-        image: `http://localhost:8000/resource/${userID}/projectImg.png`,
+        image: imgURL,
         status: 'unapproved'
       })
       .then(project => {

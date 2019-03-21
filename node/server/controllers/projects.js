@@ -9,17 +9,9 @@ const fs = require("fs");
 module.exports = {
   // Create a new Project
   create(req, res) {
-    let imgURL = null;
-    if(req.body.img && req.body.img != null){
-      let base64Data = req.body.image.replace(/^data:image\/png;base64,/,"")
-      let binaryData = new Buffer(base64Data, 'base64').toString('binary');
-      let userID = req.session.user;
-      let imgPath = path.join(__dirname, `../../resource/${userID}/projectImg.png`) 
-      //create image
-      fs.writeFile(imgPath, binaryData, "binary", function(err) {
-        console.log(err); // writes out file without error, but it's not a valid image
-      });
-      imgURL = `http://localhost:8000/resource/${userID}/projectImg.png`
+    let imageURL = null;
+    if(req.body.image){
+      imageURL = saveImage(req)
     }
     return Projects
       .create({
@@ -27,7 +19,7 @@ module.exports = {
         description: req.body.description,
         github: req.body.github,
         url: req.body.url,
-        image: imgURL,
+        image: imageURL,
         status: 'unapproved'
       })
       .then(project => {
@@ -112,13 +104,10 @@ module.exports = {
 
   //update a project
   update(req, res) {
-    let base64Data = req.body.image.replace(/^data:image\/png;base64,/,"")
-    let binaryData = new Buffer(base64Data, 'base64').toString('binary');
-    let userID = req.session.user;
-    let path = '/public/' + userID + "/projectImg.png"
-    fs.writeFile('public/projectImg.png', binaryData, "binary", function(err) {
-      console.log(err); // writes out file without error, but it's not a valid image
-    });
+    let imageURL = null;
+    if(req.body.image){
+      imageURL = saveImage(req)
+    }
     return Projects
       .findById( req.params.project, {
         attributes: {exclude: ['createdAt', 'updatedAt'] }
@@ -135,7 +124,8 @@ module.exports = {
             description: req.body.description,
             github: req.body.github,
             url: req.body.url,
-            status: req.body.status
+            status: req.body.status,
+            image: imageURL
           })
           .then((project) => res.status(200).send(project))
           .catch((error) => res.status(400).send(error));
@@ -244,3 +234,26 @@ const mapProjects = function(project) {
       }
     );
 };
+
+function ensureDirectoryExistence(filePath) {
+  let dirname = path.dirname(filePath);
+  if (fs.existsSync(dirname)) {
+    return true;
+  }
+  ensureDirectoryExistence(dirname);
+  fs.mkdirSync(dirname);
+}
+
+function saveImage(req){
+  let base64Data = req.body.image.replace(/^data:image\/png;base64,/,"")
+  let binaryData = new Buffer(base64Data, 'base64').toString('binary');
+  let userID = req.session.user
+  let imgPath = path.join(__dirname, `/../../public/${userID}/${req.body.name}ProjectImg.png`) 
+  ensureDirectoryExistence(imgPath);
+  //create image
+  fs.writeFile(imgPath, binaryData, "binary", function(err) {
+    console.log(err); // writes out file without error, but it's not a valid image
+    return null;
+  });
+  return imgURL = `http://localhost:8000/resource/${userID}/${req.body.name}ProjectImg.png`
+}

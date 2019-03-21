@@ -34,7 +34,7 @@ export class ProjectFormComponent implements OnInit {
         console.log(error);
       });
     } else {
-      this.projectFormService.edit(this.projectForm.value, this.project.id).subscribe((response) => {
+      this.projectFormService.edit({...this.projectForm.value, image: this.imgURL},this.project.id).subscribe((response) => {
         this.response = response;
         this.router.navigate(['/discover']);
       },

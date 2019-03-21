@@ -1,3 +1,10 @@
+.row {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+
 .grid-container {
-  margin: 20px;
+    margin: 20px;
+    width: 1200px;
 }

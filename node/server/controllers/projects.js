@@ -4,17 +4,25 @@ const TagToProject = require('../models').tag_to_project;
 const Tags = require('../models').tags;
 const Associations = require('../models').user_associations;
 const axios = require('axios');
-
+const path = require('path');
+const fs = require("fs");
 module.exports = {
   // Create a new Project
   create(req, res) {
+    let base64Data = req.body.image.replace(/^data:image\/png;base64,/,"")
+    let binaryData = new Buffer(base64Data, 'base64').toString('binary');
+    let userID = req.session.user;
+    let imgPath = path.join(__dirname, `../../resource/${userID}/projectImg.png`) 
+    fs.writeFile(imgPath, binaryData, "binary", function(err) {
+      console.log(err); // writes out file without error, but it's not a valid image
+    });
     return Projects
       .create({
         name: req.body.name,
         description: req.body.description,
         github: req.body.github,
         url: req.body.url,
-        image: req.body.image,
+        image: `http://localhost:8000/resource/${userID}/projectImg.png`,
         status: 'unapproved'
       })
       .then(project => {
@@ -99,6 +107,13 @@ module.exports = {
 
   //update a project
   update(req, res) {
+    let base64Data = req.body.image.replace(/^data:image\/png;base64,/,"")
+    let binaryData = new Buffer(base64Data, 'base64').toString('binary');
+    let userID = req.session.user;
+    let path = '/public/' + userID + "/projectImg.png"
+    fs.writeFile('public/projectImg.png', binaryData, "binary", function(err) {
+      console.log(err); // writes out file without error, but it's not a valid image
+    });
     return Projects
       .findById( req.params.project, {
         attributes: {exclude: ['createdAt', 'updatedAt'] }

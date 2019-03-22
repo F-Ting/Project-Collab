@@ -26,7 +26,7 @@ const mapProjects = function(projects) {
           name: project.user_associations[0].user.name,
           username: project.user_associations[0].user.username
         },
-        tags: project.tag_to_project ? project.tag_to_project.map(el => el.tag.tag) : []
+        tags: []
       }
     );
   });

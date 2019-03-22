@@ -16,13 +16,6 @@
   box-shadow: 0 0 20px rgba(33,33,33,.2);
 }
 
-/** flex-shrink: 0 so the header should not be clipped or shrink if the parent card height changes **/
-.mat-card-header {
-    display: flex;
-    flex-direction: row;
-    flex-shrink: 0;
-}
-
 .mat-card-content{
   text-overflow: ellipsis;
   overflow: hidden;
@@ -44,11 +37,23 @@
 }
 
 .profile-card-github {
-  width: 50%;
+  width: fit-content;
   float: left;
+}
+
+.profile-card-github:hover {
+  text-decoration: underline;
 }
 
 .profile-card-user {
   width: max-content;
   float: right;
+}
+
+.profile-card-user:hover {
+  text-decoration: underline;
+}
+
+.no-decoration {
+  text-decoration: none;
 }

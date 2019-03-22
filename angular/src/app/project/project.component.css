@@ -1,3 +1,12 @@
 .mat-button {
   padding: 0 10px;
 }
+
+.mat-card-subtitle {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.mat-card-subtitle:hover {
+  text-decoration: underline;
+}

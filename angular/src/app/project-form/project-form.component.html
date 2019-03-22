@@ -34,6 +34,13 @@
             </mat-form-field>
           </div>
         </div>
+        <div class="row">
+          <div class="col">
+            <span style="color:red;" *ngIf="message">{{message}}</span>
+            <input #file type="file" accept='image/*' (change)="preview(file.files)" />
+            <img [src]="imgURL" height="200" *ngIf="imgURL">
+          </div>
+        </div>
       </mat-card-content>
       <mat-card-actions>
         <button id='project-form-delete' mat-raised-button color="primary" (click)="onDelete()" *ngIf="project" type="delete">Delete</button>

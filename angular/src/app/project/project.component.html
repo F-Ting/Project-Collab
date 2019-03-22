@@ -1,4 +1,4 @@
-<mat-card *ngIf='project'>
+<mat-card *ngIf="project">
     <mat-grid-list cols="2">
         <mat-grid-tile [style.border-right]="'1px dashed #ddd'">
             <img src="{{ project.image }}" alt="Project Image" />
@@ -7,7 +7,10 @@
             <section class="description">
                 <mat-card>
                     <mat-card-title>{{ project.name }}</mat-card-title>
-                    <a routerLink="/user/{{project.owner.username}}">{{ project.owner.username }}</a>
+                    <mat-card-subtitle
+                        routerLink="/user/{{ project.owner.username }}"
+                        >{{ project.owner.username }}</mat-card-subtitle
+                    >
 
                     <mat-card-title>Description</mat-card-title>
                     <p>{{ project.description }}</p>

@@ -15,7 +15,7 @@
     <span class="profile-card-github">
       <a class="no-decoration" href="{{ project.github }}">Project Link</a>
     </span>
-    <button class="profile-card-user" id='discover-project' (click)="onEdit(project)"
+    <button class="profile-card-user" id='discover-project' mat-raised-button color="primary" (click)="onEdit(project)"
       *ngIf="project.owner.username == username" type="button">Edit</button>
     <span class="profile-card-user" *ngIf="project.owner.username != username">
       <a class="no-decoration" routerLink="/user/{{project.owner.username}}">{{ project.owner.username }}</a>

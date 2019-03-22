@@ -26,7 +26,7 @@ const mapProjects = function(projects) {
           name: project.user_associations[0].user.name,
           username: project.user_associations[0].user.username
         },
-        tags: project.tag_to_project ? project.tag_to_project.map(el => el.tag.tag) : []
+        tags: []
       }
     );
   });
@@ -46,27 +46,43 @@ module.exports = {
 
   // list all projects by searching project names
   listSearch(req, res) {
+    let hasTagFilter = req.body.searchByTags.length > 0 
+    let hasProjectFilter = req.body.searchByProjects.length > 0 
+    let projectFilter = hasProjectFilter ? {
+      name: {
+        [Op.in]: req.body.searchByProjects
+      }
+    } : {}
+    let tagFilter = hasTagFilter ? {
+      tag : {
+        [Op.in]: req.body.searchByTags
+      }
+    }: {}
     return Projects.findAll({
       order: [["createdAt", "DESC"]],
       include: [
         {
           model: Associations,
           as: "user_associations",
-          where: {
-            is_admin: true
-          },
           include: [
             {
               model: Users
             }
           ]
+        },
+        {
+          model: TagToProject,
+          as: 'tag_to_project',
+          required: hasTagFilter ? true : false,
+          include:[
+            {
+              model: Tags,
+              where: tagFilter
+            },
+        ]
         }
       ],
-      where: {
-        name: {
-          [Op.or]: req.body.searchByProject
-        }
-      }
+      where: projectFilter
     })
       .then(projects => {
         let resObj = mapProjects(projects);

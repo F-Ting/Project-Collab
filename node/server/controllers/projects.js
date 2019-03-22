@@ -68,9 +68,7 @@ module.exports = {
   // list all projects
   listSearch(req, res) {
     return axios
-      .post("http://localhost:8001/api/projects/search", {
-        searchByProject: req.body.searchByProject
-      })
+      .post("http://localhost:8001/api/projects/search", req.body)
       .then(response => {
         res.status(200).send(response.data);
       })

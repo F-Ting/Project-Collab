@@ -16,9 +16,11 @@ export class DiscoverService {
     return this.httpClient.get(`api/projects?withTags=True`);
   }
 
-  getProjectsBySearch(projects: string[]) {
+  getProjectsBySearch(searchOptions) {
     return this.httpClient.post('api/projects/search', {
-      searchByProject: projects
+      searchByProjects: searchOptions.projects,
+      searchByTags: searchOptions.tags,
+      searchByUsers : searchOptions.users
     });
   }
 }

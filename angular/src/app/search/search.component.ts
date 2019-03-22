@@ -46,7 +46,7 @@ export class SearchComponent implements OnInit {
   filteredSearchProjects: Observable<string[]>;
 
   // Emitter to talk to discover page
-  @Output() searchEventEmitter = new EventEmitter<string[]>();
+  @Output() searchEventEmitter = new EventEmitter<Object>();
 
   constructor(private searchService: SearchService) {}
 
@@ -180,6 +180,11 @@ export class SearchComponent implements OnInit {
 
   search(): void {
     this.expand = false;
-    this.searchEventEmitter.emit(this.filterProjects);
+    let filterOptions = {
+      projects: this.filterProjects,
+      tags: this.filterTags,
+      users: this.filterUsers
+    }
+    this.searchEventEmitter.emit(filterOptions);
   }
 }

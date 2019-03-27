@@ -16,9 +16,8 @@
     "db:drop": "babel-node ./db/drop",
     "db:migrate": "babel-node ./db/migrate",
     "db:reset": "sequelize db:migrate:undo:all && sequelize db:migrate && psql -U postgres -d project-collab-db -f db/handcraft_data.sql ",
-    "pretest": "set NODE_ENV=test && sequelize db:migrate",
-    "test": "set NODE_ENV=test && mocha",
-    "test:coverage": "NODE_ENV=test nyc mocha",
+    "pretest": "set NODE_ENV=test&& sequelize db:migrate",
+    "test": "set NODE_ENV=test&& mocha",
     "test:report": "nyc report --reporter=text-summary",
     "setup_test": "psql -U postgres < db/setup.sql"
   },

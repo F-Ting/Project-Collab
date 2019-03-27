@@ -35,6 +35,7 @@
           </div>
         </div>
         <div class="row">
+          Upload an Image (Optional): 
           <div class="col">
             <span style="color:red;" *ngIf="message">{{message}}</span>
             <input #file type="file" accept='image/*' (change)="preview(file.files)" />

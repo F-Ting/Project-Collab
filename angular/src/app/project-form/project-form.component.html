@@ -1,4 +1,4 @@
-<div class="main-div">
+<div *ngIf='projectForm' class="main-div">
   <form class="project-form" [formGroup]="projectForm" novalidate (ngSubmit)="onSubmit()">
     <mat-card class="shipping-card">
       <mat-card-header>
@@ -32,6 +32,11 @@
             <mat-form-field appearance="fill" class="project-full-width">
               <input id='project-form-github' matInput placeholder="Github" formControlName="github">
             </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <app-tags-autocomplete [group]="projectForm" (tagsChanged)="tagsChangedHandler($event)" class="project-full-width"></app-tags-autocomplete>
           </div>
         </div>
         <div class="row">

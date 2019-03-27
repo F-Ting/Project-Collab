@@ -10,16 +10,19 @@ module.exports = {
     list(req, res) {
         return Tags
             .findAll({
-                where: { "$tag_to_user.user_id$": req.params.user_id },
                 include: [{
                     model: TagTouser,
                     as: 'tag_to_user',
-                    attributes: [],
+                    include: [{
+                        model: users,
+                        where: { username: req.params.username },
+                    }]
                 }],
                 attributes: { exclude: ['createdAt', 'updatedAt'] },
             })
             .then(tag => {
-                res.status(200).send(tag)
+                let resObj = tag.map(el => el.tag)
+                res.status(200).send(resObj)
             })
             .catch((error) => res.status(400).send(error));
     },

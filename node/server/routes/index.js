@@ -130,9 +130,9 @@ module.exports = (app) => {
 
   // * tag_to_user routes *
   // get all tags associated with a user
-  app.get('/api/tags/user/:user_id', tagToUser.list);
+  app.get('/api/tags/user/:username', tagToUser.list);
   // create a tag and associate it with a user
-  app.post('/api/tags/user/:user_id', tagToUser.create);
+  app.post('/api/tags/user/:username', tagToUser.create);
   // delete a tag from a user
   app.post('/api/tags/user/:user_id/remove', tagToUser.delete);
 

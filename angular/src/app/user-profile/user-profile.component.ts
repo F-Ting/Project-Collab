@@ -23,6 +23,7 @@ export class UserProfileComponent implements OnInit {
     private currentUsername = localStorage.getItem("username")
     public user: any;
     public projects: any[] = [];
+    public tags: any[] = [];
 
     constructor(private userProfileService: UserProfileService, private route: ActivatedRoute) {}
     
@@ -30,9 +31,16 @@ export class UserProfileComponent implements OnInit {
         this.route.paramMap.subscribe(params => {
             this.getUser(params.get("username"));
             this.getProjects(params.get("username"));
+            this.getTags(params.get("username"))
           })
     }
-
+    private getTags(username) {
+        this.userProfileService
+            .getTags(username)
+            .subscribe(tags => {
+                this.tags = tags;
+            }, error => log(error));
+    }
     private getUser(username) {
         this.userProfileService
             .getUser(username)

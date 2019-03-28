@@ -9,7 +9,16 @@ import {
   MatSelectModule,
 } from '@angular/material';
 
+import {
+  MAT_DIALOG_DATA,
+  MatDialogModule,
+  MatDialogRef
+} from '@angular/material/dialog';
+
 import { EditUserProfileComponent } from './edit-user-profile.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/compiler/src/core';
 
 describe('EditUserProfileComponent', () => {
   let component: EditUserProfileComponent;
@@ -25,7 +34,15 @@ describe('EditUserProfileComponent', () => {
         MatCardModule,
         MatInputModule,
         MatRadioModule,
+        HttpClientTestingModule,
+        RouterTestingModule,
         MatSelectModule,
+        MatDialogModule,
+      ],
+      schemas: [NO_ERRORS_SCHEMA],
+      providers: [
+        {provide: MatDialogRef, useValue: {}},
+        {provide: MAT_DIALOG_DATA, useValue: {}},
       ]
     }).compileComponents();
   }));

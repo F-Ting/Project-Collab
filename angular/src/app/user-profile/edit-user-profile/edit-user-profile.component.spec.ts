@@ -18,7 +18,7 @@ import {
 import { EditUserProfileComponent } from './edit-user-profile.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { NO_ERRORS_SCHEMA } from '@angular/compiler/src/core';
+import { NO_ERRORS_SCHEMA } from '@angular//core';
 
 describe('EditUserProfileComponent', () => {
   let component: EditUserProfileComponent;

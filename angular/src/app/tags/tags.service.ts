@@ -12,4 +12,12 @@ export class TagsService {
     return this.httpClient.get('api/tags/project/' + projectId);
   }
 
+  addToProject(projectId, data) {
+    return this.httpClient.post('api/tags/project/' + projectId, data);
+  }
+
+  removeFromProject(projectId, data) {
+    return this.httpClient.post('api/tags/project/' + projectId + '/remove', data);
+  }
+
 }

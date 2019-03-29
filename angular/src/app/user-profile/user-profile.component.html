@@ -13,6 +13,7 @@
                             {{ user.name }}
                             <button
                                 *ngIf="isOwner"
+                                (click)="editProfile()"
                                 mat-icon-button
                                 class="more-button"
                                 aria-label="Change Profile Picture"
@@ -34,12 +35,9 @@
                             <mat-list-item>
                                 <fa-icon [icon]="faLinkedin"></fa-icon>
                                 <p mat-line>
-                                    <a
-                                        href="https://linkedin.com/in/{{
-                                            user.linked_in
-                                        }}/"
-                                        >{{ user.linked_in }}</a
-                                    >
+                                    <a href="{{ user.linked_in }}">{{
+                                        user.linked_in
+                                    }}</a>
                                 </p>
                             </mat-list-item>
                             <mat-list-item>

@@ -4,6 +4,7 @@ import { ProjectFormService } from './project-form.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { TagsService } from '../tags/tags.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-project-form',
@@ -60,12 +61,17 @@ export class ProjectFormComponent implements OnInit {
     });
   }
 
+  onBack() {
+    this.location.back();
+  }
+
   constructor(
     private fb: FormBuilder,
     private projectFormService: ProjectFormService,
     public router: Router,
     private snackBar: MatSnackBar,
     private tagService: TagsService
+    private location: Location
   ) {
   }
 
@@ -109,12 +115,12 @@ export class ProjectFormComponent implements OnInit {
       this.message = "Only images are supported.";
       return;
     }
- 
+
     let reader = new FileReader();
     this.imagePath = files;
-    reader.readAsDataURL(files[0]); 
-    reader.onload = (_event) => { 
-      this.imgURL = reader.result; 
+    reader.readAsDataURL(files[0]);
+    reader.onload = (_event) => {
+      this.imgURL = reader.result;
     }
   }
 

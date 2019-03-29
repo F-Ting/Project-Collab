@@ -61,7 +61,9 @@ export class MainNavComponent {
   }
 
   properLogout() {
-    this.snackbar.open("You have successfully logged out. You will now be redirected to the home page.", "Dismiss");
+    this.snackbar.open("You have successfully logged out. You will now be redirected to the home page.", "Dismiss", {
+        duration: 2500
+    });
     setTimeout(() => {
         this.router.navigate(['/logout']);
     }, 3000);  // 3s

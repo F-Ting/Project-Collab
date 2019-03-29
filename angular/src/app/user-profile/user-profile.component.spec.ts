@@ -7,6 +7,7 @@ import {
   MatGridListModule,
   MatIconModule,
   MatMenuModule,
+  MatDialogModule,
 } from '@angular/material';
 
 import { UserProfileComponent } from './user-profile.component';
@@ -29,6 +30,7 @@ describe('UserProfileComponent', () => {
         MatGridListModule,
         MatIconModule,
         MatMenuModule,
+        MatDialogModule,
         HttpClientTestingModule,
         RouterTestingModule,
       ],

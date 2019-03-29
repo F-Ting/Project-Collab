@@ -7,6 +7,8 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { ActivatedRoute } from "@angular/router";
+import { MatDialog } from '@angular/material';
+import { EditUserProfileComponent } from './edit-user-profile/edit-user-profile.component';
 
 const log = console.log;
 
@@ -24,8 +26,12 @@ export class UserProfileComponent implements OnInit {
     public user: any;
     public projects: any[] = [];
 
-    constructor(private userProfileService: UserProfileService, private route: ActivatedRoute) {}
-    
+    constructor(
+        private userProfileService: UserProfileService,
+        private route: ActivatedRoute,
+        public dialog: MatDialog
+    ) {}
+
     ngOnInit(): void {
         this.route.paramMap.subscribe(params => {
             this.getUser(params.get("username"));
@@ -51,5 +57,13 @@ export class UserProfileComponent implements OnInit {
                 projects => (this.projects = projects),
                 error => log(error)
             );
+    }
+
+    editProfile() {
+        const dialogRef = this.dialog.open(EditUserProfileComponent, {
+            width: '500px',
+            data: this.user
+        });
+        dialogRef.afterClosed().subscribe(_ => this.ngOnInit());
     }
 }

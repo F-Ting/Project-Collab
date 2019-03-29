@@ -50,6 +50,7 @@ export class MainNavComponent {
 
   //populate nav-bar based on login status
   ngOnInit() {
+    this.currentUsername = localStorage.getItem("username")
     this.navLinks = this.currentUsername == null ? this.commonLinks.concat(this.loggedOutLinks) : this.commonLinks.concat(this.loggedInLinks)
   }
 

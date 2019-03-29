@@ -31,10 +31,8 @@ export class EditUserProfileComponent {
     }
 
     onSubmit() {
-        log(this.editUserForm.value);
         this.editUserProfileService.saveUser(this.editUserForm.value).subscribe(
             result => {
-                log(result);
                 this.dialogRef.close();
             },
             err => log(err)

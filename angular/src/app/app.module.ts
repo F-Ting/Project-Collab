@@ -41,6 +41,7 @@ import { ProjectCardComponent } from './project-card/project-card.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TagsComponent } from './tags/tags.component';
+import { TagsAutocompleteComponent } from './tags-autocomplete/tags-autocomplete.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { TagsComponent } from './tags/tags.component';
     ProjectCardComponent,
     UserProfileComponent,
     TagsComponent,
+    TagsAutocompleteComponent,
   ],
   imports: [
     BrowserAnimationsModule,

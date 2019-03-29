@@ -27,6 +27,7 @@ module.exports = {
             .catch((error) => res.status(400).send(error));
     },
 
+    // get list of users that contain any of the follow tags
     getUserList(req,res){
         let tagList = req.query.tags.split(',')
         return users
@@ -59,7 +60,7 @@ module.exports = {
             .catch((error) => res.status(400).send(error));
     },
 
-    // Associate a tag with a projet, creating the tag if it doesn't already exist
+    // Associate a tag with a user, creating the tag if it doesn't already exist
     create(req, res) {
         const tags = req.body.tags;
         const result = [];

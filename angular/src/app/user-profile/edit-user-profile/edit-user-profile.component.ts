@@ -13,7 +13,8 @@ const log = console.log;
 export class EditUserProfileComponent {
 
     editUserForm: FormGroup;
-
+    addedTags: string[] = [];
+    removedTags: string[] = [];
     constructor(
         private fb: FormBuilder,
         private editUserProfileService: EditUserProfileService,

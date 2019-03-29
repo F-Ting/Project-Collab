@@ -12,6 +12,18 @@ export class TagsService {
     return this.httpClient.get('api/tags/project/' + projectId);
   }
 
+  getForUser(username) {
+    return this.httpClient.get('api/tags/user/' + username);
+  }
+  
+  addToUser(username,data) {
+    return this.httpClient.post('api/tags/user/' + username, data);
+  }
+
+  removeFromUser(username,data) {
+    return this.httpClient.post('api/tags/user/' + username + "/remove" ,data);
+  }
+
   addToProject(projectId, data) {
     return this.httpClient.post('api/tags/project/' + projectId, data);
   }

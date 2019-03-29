@@ -43,6 +43,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TagsComponent } from './tags/tags.component';
 import { EditUserProfileComponent } from './user-profile/edit-user-profile/edit-user-profile.component';
+import { TagsAutocompleteComponent } from './tags-autocomplete/tags-autocomplete.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { EditUserProfileComponent } from './user-profile/edit-user-profile/edit-
     UserProfileComponent,
     TagsComponent,
     EditUserProfileComponent,
+    TagsAutocompleteComponent,
   ],
   imports: [
     BrowserAnimationsModule,

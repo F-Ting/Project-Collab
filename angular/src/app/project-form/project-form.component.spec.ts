@@ -9,9 +9,13 @@ import {
   MatCardModule,
   MatFormFieldModule,
   MatInputModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatChipsModule,
+  MatIconModule,
+  MatAutocompleteModule,
 } from '@angular/material';
 import { Project } from '../models/project';
+import { TagsAutocompleteComponent } from '../tags-autocomplete/tags-autocomplete.component';
 
 
 describe('ProjectFormComponent', () => {
@@ -21,7 +25,7 @@ describe('ProjectFormComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ProjectFormComponent],
+      declarations: [ProjectFormComponent, TagsAutocompleteComponent],
       imports: [
         BrowserModule,
         FormsModule,
@@ -32,7 +36,10 @@ describe('ProjectFormComponent', () => {
         RouterTestingModule,
         NoopAnimationsModule,
         HttpClientTestingModule,
-        MatSnackBarModule
+        MatSnackBarModule,
+        MatAutocompleteModule,
+        MatChipsModule,
+        MatIconModule,
       ]
     })
     .compileComponents();

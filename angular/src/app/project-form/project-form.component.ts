@@ -70,7 +70,7 @@ export class ProjectFormComponent implements OnInit {
     private projectFormService: ProjectFormService,
     public router: Router,
     private snackBar: MatSnackBar,
-    private tagService: TagsService
+    private tagService: TagsService,
     private location: Location
   ) {
   }

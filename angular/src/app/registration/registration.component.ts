@@ -53,14 +53,20 @@ export class RegistrationComponent implements OnInit {
       "github": ""};
 
     if (this.firstGroup.value.password != this.firstGroup.value.passwordConfirm) {
-      this.snackBar.open("The passwords did not match.", "Dismiss");
+      this.snackBar.open("The passwords did not match.", "Dismiss", {
+        duration: 2500
+      });
     } else {
       this.registrationService.registration(this.data, "student").subscribe((response)=>{
-        this.snackBar.open("Your registration has succeeded. Welcome to Project Collab!", "Dismiss");
+        this.snackBar.open("Your registration has succeeded. Welcome to Project Collab!", "Dismiss", {
+            duration: 2500
+        });
         this.error = false;
       },
       error => {
-        this.snackBar.open("The username has already been taken.", "Dismiss");
+        this.snackBar.open("The username has already been taken.", "Dismiss", {
+            duration: 2500
+        });
         this.error = true;
         console.log(error);
       });

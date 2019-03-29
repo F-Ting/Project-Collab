@@ -39,7 +39,9 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/discover']);
     },
     error => {
-      this.snackBar.open("The username or password is incorrect.", "Dismiss");
+      this.snackBar.open("The username or password is incorrect.", "Dismiss", {
+          duration: 2500
+      });
       console.log(error);
       this.error = true;
     });

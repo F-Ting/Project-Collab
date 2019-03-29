@@ -34,7 +34,9 @@ export class ProjectFormComponent implements OnInit {
         this.router.navigate(['/discover']);
       },
       error => {
-        this.snackBar.open("One or more of the fields are filled in incorrectly.", "Dismiss");
+        this.snackBar.open("One or more of the fields are filled in incorrectly.", "Dismiss", {
+            duration: 2500
+        });
         console.log(error);
       });
     } else {
@@ -44,7 +46,9 @@ export class ProjectFormComponent implements OnInit {
         this.router.navigate(['/discover']);
       },
       error => {
-        this.snackBar.open("One or more of the fields are filled in incorrectly.", "Dismiss");
+        this.snackBar.open("One or more of the fields are filled in incorrectly.", "Dismiss", {
+            duration: 2500
+        });
         console.log(error);
       });
     }
@@ -56,7 +60,9 @@ export class ProjectFormComponent implements OnInit {
       this.router.navigate(['/discover']);
     },
     error => {
-      this.snackBar.open("The project was not deleted.", "Dismiss");
+      this.snackBar.open("The project was not deleted.", "Dismiss", {
+        duration: 2500
+      });
       console.log(error);
     });
   }
@@ -127,13 +133,17 @@ export class ProjectFormComponent implements OnInit {
   updateProjectTags(projectId) {
     if (this.addedTags.length > 0) {
       this.tagService.addToProject(projectId, { tags: this.addedTags }).subscribe(_ => { }, error => {
-        this.snackBar.open('Unable to add tags to project', 'Dismiss');
+        this.snackBar.open('Unable to add tags to project', 'Dismiss', {
+            duration: 2500
+        });
         console.log(error);
       });
     }
     if (this.removedTags.length > 0) {
       this.tagService.removeFromProject(projectId, { tags: this.removedTags }).subscribe(_ => { }, error => {
-        this.snackBar.open('Unable to remove tags from project', 'Dismiss');
+        this.snackBar.open('Unable to remove tags from project', 'Dismiss', {
+            duration: 2500
+        });
         console.log(error);
       });
     }

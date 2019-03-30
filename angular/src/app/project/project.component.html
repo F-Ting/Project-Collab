@@ -1,7 +1,10 @@
 <mat-card class="project-detail-mat-card" *ngIf="project">
     <mat-grid-list cols="3" rowHeight=600px>
-        <mat-grid-tile [colspan]=1 [style.border-right]="'1px dashed #ddd'">
+        <mat-grid-tile *ngIf="project.image" [colspan]=1 [style.border-right]="'1px dashed #ddd'">
             <img src="{{ project.image }}" alt="Project Image" />
+        </mat-grid-tile>
+        <mat-grid-tile *ngIf="!project.image" [colspan]=1 [style.border-right]="'1px dashed #ddd'">
+            <header class="project-title-alt">{{ project.name }}</header>
         </mat-grid-tile>
         <mat-grid-tile [colspan]=2>
             <section class="description fill-container">

@@ -14,6 +14,7 @@ const data = async (props = {}) => {
     const defaultProps = {
         name: faker.random.word(),
         description: faker.random.word(),
+        tasks_required: faker.random.word(),
         github: faker.internet.userName(),
         url: faker.internet.url(),
         project_start_date: faker.date.recent(),

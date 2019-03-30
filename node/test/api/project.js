@@ -23,6 +23,7 @@ describe('Project API', () => {
             user_id: user.id,
             name: "test_name",
             description: "test_description",
+            tasks_required: "test_tasks_required",
             github: "test_github",
             url: "test_url"
         }
@@ -32,6 +33,7 @@ describe('Project API', () => {
         expect(response).to.have.status(200);
         assert.equal(new_project.name, response.body.name);
         assert.equal(new_project.description, response.body.description);
+        assert.equal(new_project.tasks_required, response.body.tasks_required);
         assert.equal(new_project.github, response.body.github);
         assert.equal(new_project.url, response.body.url);
         assert.equal(count + 1, await models.projects.count());

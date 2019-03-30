@@ -16,16 +16,19 @@
                     <mat-card-title>Description</mat-card-title>
                     <p>{{ project.description }}</p>
 
+                    <mat-card-title>Tasks Required</mat-card-title>
+                    <p>{{ project.tasks_required }}</p>
+
                     <mat-card-title>Links</mat-card-title>
                     <mat-card-actions>
                         <mat-list class="links-container">
                             <mat-list-item *ngIf="user.email">
                                 <a href="mailto:{{ user.email }}">
-                                    <fa-icon class="project-icon" [icon]="faEnvelope"></fa-icon>
+                                    <fa-icon [icon]="faEnvelope"></fa-icon>
                                 </a>
                                 <div class="single-link-container">
                                     <mat-label class="link-description">Email</mat-label>
-                                    <a class="project-link" href="mailto:{{ user.email }}">{{ user.email }}</a>
+                                    <a href="mailto:{{ user.email }}">{{ user.email }}</a>
                                 </div>
                             </mat-list-item>
                             <mat-list-item *ngIf="project.github">
@@ -34,7 +37,7 @@
                                 </a>
                                 <div class="single-link-container">
                                     <mat-label class="link-description">Github</mat-label>
-                                    <a class="project-link" href="https://github.com/{{ project.github }}">{{ project.github }}</a>
+                                    <a href="https://github.com/{{ project.github }}">{{ project.github }}</a>
                                 </div>
                             </mat-list-item>
                             <mat-list-item *ngIf="project.url">

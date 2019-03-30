@@ -1,12 +1,13 @@
-<mat-card *ngIf="project">
-    <mat-grid-list cols="2">
-        <mat-grid-tile [style.border-right]="'1px dashed #ddd'">
+<mat-card class="project-detail-mat-card" *ngIf="project">
+    <mat-grid-list cols="3" rowHeight=600px>
+        <mat-grid-tile [colspan]=1 [style.border-right]="'1px dashed #ddd'">
             <img src="{{ project.image }}" alt="Project Image" />
         </mat-grid-tile>
-        <mat-grid-tile>
-            <section class="description">
-                <mat-card>
-                    <mat-card-title>{{ project.name }}</mat-card-title>
+        <mat-grid-tile [colspan]=2>
+            <section class="description fill-container">
+                <mat-card class="fill-container">
+                    <mat-card-title class="project-title">{{ project.name }}</mat-card-title>
+
                     <mat-card-subtitle
                         routerLink="/user/{{ project.owner.username }}"
                         >{{ project.owner.username }}</mat-card-subtitle

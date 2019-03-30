@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { RegistrationService } from './registration.service';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
-
 
 @Component({
   selector: 'app-registration',
@@ -32,7 +31,7 @@ export class RegistrationComponent implements OnInit {
       username: [null, Validators.required],
       password: [null, [Validators.required, Validators.minLength(8)]],
       passwordConfirm: [null, [Validators.required, Validators.minLength(8)]]
-    });
+    }, {validator: this.checkPasswords});
     this.secondGroup = this._formBuilder.group({
       email: [null, [Validators.required, Validators.email]]
     });
@@ -69,6 +68,21 @@ export class RegistrationComponent implements OnInit {
         });
         this.error = true;
         console.log(error);
+      });
+    }
+  }
+
+  checkPasswords(group: FormGroup) {
+    let pass = group.controls.password.value;
+    let confirmPass = group.controls.passwordConfirm.value;
+
+    return pass === confirmPass ? null : { notSame: true };
+  }
+
+  checkPasswordsButton() {
+    if (this.checkPasswords(this.firstGroup)) {
+      this.snackBar.open("The passwords do not match", "Dismiss", {
+          duration: 2500
       });
     }
   }

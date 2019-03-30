@@ -1,5 +1,5 @@
-<mat-card class="project-detail-mat-card" *ngIf="project">
-    <mat-grid-list cols="3" rowHeight=600px>
+<mat-card class="project-detail-mat-card" *ngIf="project && user && associated_users">
+    <mat-grid-list cols="3" rowHeight=800px>
         <mat-grid-tile *ngIf="project.image" [colspan]=1 [style.border-right]="'1px dashed #ddd'">
             <img src="{{ project.image }}" alt="Project Image" />
         </mat-grid-tile>
@@ -54,6 +54,19 @@
                             </mat-list-item>
                         </mat-list>
                     </mat-card-actions>
+                    <mat-card-title>Members</mat-card-title>
+                    <mat-list>
+                        <mat-list-item *ngFor="let usr of associated_users">
+                            <div class="contact-wrapper">
+                                <a routerLink="/user/{{ usr.user.username }}">
+                                    <img class="clickable" *ngIf="usr.user.photo" matListAvatar src="{{ usr.user.photo }}" alt="{{ usr.user.username }}">
+                                    <button class="clickable" mat-icon-button color="secondary" *ngIf="!usr.user.photo" matListAvatar>{{ usr.user.name.charAt(0) }}</button>
+                                </a>
+                                <p matLine>{{ usr.user.username }}</p>
+                            </div>
+                        </mat-list-item>
+                    </mat-list>
+
                     <button id='discover-project' mat-raised-button color="primary" (click)="onEdit(project)"
                       *ngIf="project.owner.username == username" type="button">Edit</button>
                     <app-tags class="profile-card-tags" [tags]="project.tags"></app-tags>

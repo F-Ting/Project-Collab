@@ -10,4 +10,8 @@ export class ProjectService {
       getProject(projectId) {
           return this.httpClient.get(`api/project/${projectId}?withTags=true`)
       }
+
+    getUsers(projectId) {
+        return this.httpClient.get(`api/user_associations/project/${projectId}`);
+      }
 }

@@ -16,6 +16,7 @@ export class ProjectComponent implements OnInit {
 
     project: any;
     user: any;
+    associated_users: any;
 
     faGithub: IconDefinition = faGithub;
     faEnvelope: IconDefinition = faEnvelope;
@@ -37,14 +38,16 @@ export class ProjectComponent implements OnInit {
         this.projectId = this.route.snapshot.paramMap.get("id");
         this.username = localStorage.getItem("username");
 
-        this.projectService.getProject(this.projectId).subscribe( (response) => {
+        this.projectService.getProject(this.projectId).subscribe((response) => {
             this.project = response;
-            console.warn(response)
+
             this.userService.getUser(this.project.owner.username).subscribe((response) => {
                 this.user = response;
             });
+
+            this.projectService.getUsers(this.project.id).subscribe((response) => {
+                this.associated_users = response;
+            });
         });
-
-
     }
 }

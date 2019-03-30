@@ -10,3 +10,24 @@
 .mat-card-subtitle:hover {
   text-decoration: underline;
 }
+
+.project-icon {
+  float: left;
+  font-size: 28px;
+  margin-right: 10px;
+  color: black;
+}
+
+.link-description {
+  font-size: 16px;
+}
+
+.links-container {
+  padding-top: -4px;
+  margin-top: -8px;
+}
+
+.single-link-container {
+  font-size: 14px;
+  display: grid;
+}

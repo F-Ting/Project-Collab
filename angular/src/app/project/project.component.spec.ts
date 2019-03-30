@@ -8,11 +8,13 @@ import {
     MatListModule,
     MatSidenavModule,
     MatToolbarModule,
-    MatChipsModule
+    MatChipsModule,
+    MatFormFieldModule,
   } from '@angular/material';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { TagsComponent } from '../tags/tags.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 describe('ProjectComponent', () => {
   let component: ProjectComponent;
@@ -29,9 +31,11 @@ describe('ProjectComponent', () => {
         MatListModule,
         MatSidenavModule,
         MatToolbarModule,
+        FontAwesomeModule,
         HttpClientTestingModule,
         RouterTestingModule,
-        MatChipsModule
+        MatChipsModule,
+        MatFormFieldModule
       ],
     })
     .compileComponents();

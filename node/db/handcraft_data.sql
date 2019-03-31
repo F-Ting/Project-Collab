@@ -1,30 +1,29 @@
-INSERT INTO users (username, name, bio, password, email, type) VALUES ('SergeyBrin','Sergey Brin','CEO at Google.','password', 'SergeyBrin@example.com', 'admin');
-INSERT INTO users (username, name, bio, password,
-email, type) VALUES ('matthew-jay-wong','Matthew Wong','3rd Year CS Specialist.','password', 'matthew
-_jay_wong@example.com', 'student');
-INSERT INTO users (username, name, bio, password,
-email, type) VALUES ('3370sohail','Sohail Hameed','3rd Year CS Specialist.','password',
-'3370sohail@example.com', 'student');
-INSERT INTO users (username, name, bio, password,
-email, type) VALUES ('TensorFlow','TensorFlow','Open source software library.','password',
-'TensorFlow@example.com', 'company');
-INSERT INTO users (username, name, bio, password,
-email, type) VALUES ('Clarifai','Clarifai','Image processing library.','password',
-'Clarifai@example.com', 'company');
+INSERT INTO users (username, name, bio, password, email, type) VALUES ('Docker','Docker','Docker is the leader in the containerization market, combining an enterprise-grade container platform with world-class services.', 'password', 'docker@example.com','company');
+INSERT INTO users (username, name, bio, password, email, type) VALUES ('matthew-jay-wong','Matthew Wong','3rd Year CS Specialist.','password', 'matthew_jay_wong@example.com', 'student');
+INSERT INTO users (username, name, bio, password, email, type) VALUES ('3370sohail','Sohail Hameed','3rd Year CS Specialist.','password', '3370sohail@example.com', 'student');
+INSERT INTO users (username, name, bio, password, email, type) VALUES ('TensorFlow','TensorFlow','Open source software library.','password', 'TensorFlow@example.com', 'company');
+INSERT INTO users (username, name, bio, password, email, type) VALUES ('Clarifai','Clarifai','Image processing library.','password', 'Clarifai@example.com', 'company');
+INSERT INTO users (username, name, bio, password, email, type) VALUES ('Maven','Maven','Apache Maven is a software project management and comprehension tool.','password', 'maven@example.com','company');
+INSERT INTO users (username, name, bio, password, email, type) VALUES ('Firebase','Firebase','Google''s mobile platform that helps you quickly develop high-quality apps and grow your business.','password', 'firebase@example.com', 'company');
+INSERT INTO users (username, name, bio, password, email, type) VALUES ('Flutter','Flutter','Flutter is Google’s mobile app SDK for crafting high-quality native interfaces on iOS and Android in record time.','password', 'flutter@example.com', 'company');
 
-
-INSERT INTO projects (name, description, tasks_required, github, url, project_start_date, image, status) VALUES ('Google', 'Google LLC is an American multinational technology company that specializes in Internet-related services and products, which include online advertising technologies, search engine, cloud computing, software, and hardware.  Please contact Sergey Brin at SergeyBrin@google.ca to get involved!', 'Angular Frontend Developers', 'https://github.com/google', 'https://google.com', '1998-11-25T05:00:00.000Z', 'https://i.imgur.com/Hjpgzeq.jpg', 'approved');
+INSERT INTO projects (name, description, tasks_required, github, url, project_start_date, image, status) VALUES ('Moby', 'Moby Project - a collaborative project for the container ecosystem to assemble container-based systems.', 'Go/Shell/Python Experts, JavaScript Develoeprs','https://github.com/moby/moby', 'https://www.docker.com/', '1998-11-25T05:00:00.000Z', 'https://i.imgur.com/IE2JvMn.png', 'approved');
 INSERT INTO projects (name, description, tasks_required, github, url, project_start_date, image, status) VALUES ('Rate My Courses', 'Finding the right class for YOU.', 'NodeJS Backend developers, Mongoose Experts', 'https://github.com/matthew-jay-wong/rate-my-courses', 'https://matthew-jay-wong.github.io', '1998-11-25T05:00:00.000Z', 'https://i.imgur.com/Hw4VJcB.png', 'approved');
 INSERT INTO projects (name, description, tasks_required, github, url, project_start_date, image, status) VALUES ('ShowTime', 'Community Driven TV Guide.', 'React Developers', 'https://github.com/george-ma/ShowTime', 'https://3370sohail.github.io', '1998-11-25T05:00:00.000Z', 'https://i.imgur.com/F2neU7C.png', 'approved');
 INSERT INTO projects (name, description, tasks_required, github, url, project_start_date, image, status) VALUES ('TensorFlow', 'TensorFlow is an open source software library for numerical computation using data flow graphs. The graph nodes represent mathematical operations, while the graph edges represent the multidimensional data arrays (tensors) that flow between them. This flexible architecture enables you to deploy computation to one or more CPUs or GPUs in a desktop, server, or mobile device without rewriting code. TensorFlow also includes TensorBoard, a data visualization toolkit.', 'Developers interested in machine learning, Python developers, C++ Developers',  'https://github.com/tensorflow/tensorflow', 'https://www.tensorflow.org/', '1998-11-25T05:00:00.000Z', 'https://i.imgur.com/Jsd4Ukc.jpg', 'approved');
 INSERT INTO projects (name, description, tasks_required, github, url, project_start_date, image, status) VALUES ('Clarifai API', 'The Clarifai API offers image and video recognition as a service. Whether you have one image or billions, you are only steps away from using artificial intelligence to recognize your visual content.', 'Python developers, Javascript Developers', 'https://github.com/Clarifai', 'https://clarifai.com/', '1998-11-25T05:00:00.000Z', 'https://i.imgur.com/torxQvw.png', 'approved');
-
+INSERT INTO projects (name, description, tasks_required, github, url, project_start_date, image, status) VALUES ('Maven', 'Based on the concept of a project object model (POM), Maven can manage a project''s build, reporting and documentation from a central piece of information.', 'Java Developers only.', 'https://github.com/apache/maven', 'https://maven.apache.org/', '1998-11-25T05:00:00.000Z', 'https://i.imgur.com/7sgxzj4.png', 'approved');
+INSERT INTO projects (name, description, tasks_required, github, url, project_start_date, image, status) VALUES ('Firebase', 'Firebase is a mobile app development platform that provides data analysis and database web services for developers. Firebase provides developers with an API that enables the integration of online statistical analysis and database communication into their applications.', 'Java Experts, JavaScript/TypeScript developers.', 'https://github.com/firebase', 'https://firebase.google.com/', '1998-11-25T05:00:00.000Z', 'https://i.imgur.com/yBLUbv2.png', 'approved');
+INSERT INTO projects (name, description, tasks_required, github, url, project_start_date, image, status) VALUES ('Flutter', 'Flutter makes it easy and fast to build beautiful mobile apps.', 'iOS and Android developers, JavaScript Experts.', 'https://github.com/flutter/flutter', 'https://flutter.dev/', '1998-11-25T05:00:00.000Z', 'https://i.imgur.com/bogoU6u.png', 'approved');
 
 INSERT INTO user_associations (user_id, project_id, is_admin, status) VALUES (1,1,True,'approved');
 INSERT INTO user_associations (user_id, project_id, is_admin, status) VALUES (2,2,True,'approved');
 INSERT INTO user_associations (user_id, project_id, is_admin, status) VALUES (3,3,True,'approved');
 INSERT INTO user_associations (user_id, project_id, is_admin, status) VALUES (4,4,True,'approved');
 INSERT INTO user_associations (user_id, project_id, is_admin, status) VALUES (5,5,True,'approved');
+INSERT INTO user_associations (user_id, project_id, is_admin, status) VALUES (6,6,True,'approved');
+INSERT INTO user_associations (user_id, project_id, is_admin, status) VALUES (7,7,True,'approved');
+INSERT INTO user_associations (user_id, project_id, is_admin, status) VALUES (8,8,True,'approved');
 
 INSERT INTO tags (tag) VALUES ('Javascript'); 
 INSERT INTO tags (tag) VALUES ('Java'); 

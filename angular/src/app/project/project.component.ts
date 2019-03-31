@@ -13,7 +13,7 @@ import { UserProfileService } from '../user-profile/user-profile.service';
 export class ProjectComponent implements OnInit {
     projectId: string;
     username: string;
-
+    github: string;
     project: any;
     user: any;
     associated_users: any;
@@ -40,6 +40,9 @@ export class ProjectComponent implements OnInit {
 
         this.projectService.getProject(this.projectId).subscribe((response) => {
             this.project = response;
+            if (this.project.github) {
+              this.github = this.project.github.replace("https://github.com/", "");
+            }
 
             this.userService.getUser(this.project.owner.username).subscribe((response) => {
                 this.user = response;

@@ -15,6 +15,7 @@ const mapProjects = function(projects) {
         id: project.id,
         name: project.name,
         description: project.description,
+        tasks_required: project.tasks_required,
         github: project.github,
         url: project.url,
         project_start_date: project.project_start_date,

@@ -17,6 +17,7 @@ module.exports = {
       .create({
         name: req.body.name,
         description: req.body.description,
+        tasks_required: req.body.tasks_required,
         github: req.body.github,
         url: req.body.url,
         image: imageURL,
@@ -120,6 +121,7 @@ module.exports = {
           .update({
             name: req.body.name,
             description: req.body.description,
+            tasks_required: req.body.tasks_required,
             github: req.body.github,
             url: req.body.url,
             status: req.body.status,
@@ -217,6 +219,7 @@ const mapProjects = function(project) {
         id: project.id,
         name: project.name,
         description: project.description,
+        tasks_required: project.tasks_required,
         github: project.github,
         url: project.url,
         project_start_date: project.project_start_date,

@@ -95,6 +95,7 @@ export class ProjectFormComponent implements OnInit {
           user_id: localStorage.getItem("user_id"),
           name: [this.project && this.project["name"] || null, Validators.required],
           description: [this.project && this.project.description || null, Validators.required],
+          tasks_required: [this.project && this.project.tasks_required || null, Validators.required],
           url: [this.project && this.project.url || null, Validators.required],
           github: [this.project && this.project.github || null, Validators.required],
           tags: [tags.map(tag => tag.tag).splice(0)]
@@ -105,6 +106,7 @@ export class ProjectFormComponent implements OnInit {
         user_id: localStorage.getItem("user_id"),
         name: [this.project && this.project["name"] || null, Validators.required],
         description: [this.project && this.project.description || null, Validators.required],
+        tasks_required: [this.project && this.project.tasks_required || null, Validators.required],
         url: [this.project && this.project.url || null, Validators.required],
         github: [this.project && this.project.github || null, Validators.required],
         tags: []

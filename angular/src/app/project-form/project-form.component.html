@@ -1,4 +1,4 @@
-<div class="main-div">
+<div *ngIf='projectForm' class="main-div">
   <form class="project-form" [formGroup]="projectForm" novalidate (ngSubmit)="onSubmit()">
     <mat-card class="shipping-card">
       <mat-card-header>
@@ -23,6 +23,13 @@
         <div class="row">
           <div class="col">
             <mat-form-field appearance="fill" class="project-full-width">
+              <textarea rows="8" cols="80" id='project-form-tasks_required' matInput placeholder="Tasks Required" formControlName="tasks_required" required></textarea>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <mat-form-field appearance="fill" class="project-full-width">
               <input id='project-form-url' matInput placeholder="URL" formControlName="url">
             </mat-form-field>
           </div>
@@ -34,9 +41,23 @@
             </mat-form-field>
           </div>
         </div>
+        <div class="row">
+          <div class="col">
+            <app-tags-autocomplete [group]="projectForm" (tagsChanged)="tagsChangedHandler($event)" class="project-full-width"></app-tags-autocomplete>
+          </div>
+        </div>
+        <div class="row">
+          Upload an Image (Optional):
+          <div class="col">
+            <span style="color:red;" *ngIf="message">{{message}}</span>
+            <input #file type="file" accept='image/*' (change)="preview(file.files)" />
+            <img [src]="imgURL" height="200" *ngIf="imgURL">
+          </div>
+        </div>
       </mat-card-content>
       <mat-card-actions>
         <button id='project-form-delete' mat-raised-button color="primary" (click)="onDelete()" *ngIf="project" type="delete">Delete</button>
+        <button id='project=form-back' mat-raised-button color="primary" (click)="onBack()">Back</button>
         <button id='project-form-submit' mat-raised-button color="primary" type="submit">Submit</button>
       </mat-card-actions>
     </mat-card>

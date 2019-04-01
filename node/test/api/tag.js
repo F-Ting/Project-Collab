@@ -127,7 +127,7 @@ describe('Tag API', () => {
         await models.tag_to_user.create({ user_id: user.id, tag_id: tagObj2.id });
 
         //make API call
-        const response = await chai.request(app).get('/api/tags/user/' + user.id);
+        const response = await chai.request(app).get('/api/tags/user/' + user.username);
         expect(response.body).to.have.lengthOf(2);
         assert(response.body[0], { id: tagObj1.id, tag: tagObj1.tag });
         assert(response.body[1], { id: tagObj2.id, tag: tagObj2.tag });
@@ -141,10 +141,8 @@ describe('Tag API', () => {
         }
 
         //make API call
-        const response = await chai.request(app).post('/api/tags/user/' + user.id).send(data);
-        expect(response.body).to.have.lengthOf(2);
-        assert(response.body[0].tag, data.tags[0]);
-        assert(response.body[1].tag, data.tags[1]);
+        const response = await chai.request(app).post('/api/tags/user/' + user.username).send(data);
+        expect(response).to.have.status(200);
     });
 
     it('should delete the tags from a user', async () => {

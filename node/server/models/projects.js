@@ -6,6 +6,7 @@ module.exports = (sequelize, DataTypes) => {
       unique: true,
     },
     description: DataTypes.STRING,
+    tasks_required: DataTypes.STRING,
     github: DataTypes.STRING,
     url: DataTypes.STRING,
     project_start_date: DataTypes.DATE,

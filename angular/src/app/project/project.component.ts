@@ -1,6 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { Router, ActivatedRoute, ParamMap } from "@angular/router";
 import { ProjectService } from "./project.service";
+import { faGithub, IconDefinition } from '@fortawesome/free-brands-svg-icons';
+import { faEnvelope, faLink } from '@fortawesome/free-solid-svg-icons';
+import { UserProfileService } from '../user-profile/user-profile.service';
 
 @Component({
     selector: "app-project",
@@ -10,13 +13,20 @@ import { ProjectService } from "./project.service";
 export class ProjectComponent implements OnInit {
     projectId: string;
     username: string;
-
+    github: string;
     project: any;
+    user: any;
+    associated_users: any;
+
+    faGithub: IconDefinition = faGithub;
+    faEnvelope: IconDefinition = faEnvelope;
+    faLink: IconDefinition = faLink;
 
     constructor(
         public route: ActivatedRoute,
         public router: Router,
-        private projectService: ProjectService
+        private projectService: ProjectService,
+        private userService: UserProfileService
     ) {}
 
     onEdit(project) {
@@ -28,8 +38,19 @@ export class ProjectComponent implements OnInit {
         this.projectId = this.route.snapshot.paramMap.get("id");
         this.username = localStorage.getItem("username");
 
-        this.projectService.getProject(this.projectId).subscribe( (response) => {
+        this.projectService.getProject(this.projectId).subscribe((response) => {
             this.project = response;
+            if (this.project.github) {
+              this.github = this.project.github.replace("https://github.com/", "");
+            }
+
+            this.userService.getUser(this.project.owner.username).subscribe((response) => {
+                this.user = response;
+            });
+
+            this.projectService.getUsers(this.project.id).subscribe((response) => {
+                this.associated_users = response;
+            });
         });
     }
 }

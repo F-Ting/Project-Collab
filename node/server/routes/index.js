@@ -100,7 +100,7 @@ module.exports = (app) => {
   // get all users associations for a project (equal to getting all users for a project)
   app.get('/api/user_associations/project/:project', userAssociationsController.listUsers);
   //get all users associations for a User (equal to getting all projects for a User)
-  app.get('/api/user_associations/user', authenticate, userAssociationsController.listProjects);
+  app.get('/api/user_associations/user/:username', userAssociationsController.listProjects);
   // get your status on a project
   app.get('/api/user_associations/user/project/:project', authenticate, userAssociationsController.yourProjectStatus);
   // get all users associations a user is not aprt (equal to getting all projects a user is not apart of)
@@ -131,7 +131,7 @@ module.exports = (app) => {
 
   // * tag_to_user routes *
   // get all tags associated with a user
-  app.get('/api/tags/user/:user_id', tagToUser.list);
+  app.get('/api/tags/user/:username', tagToUser.list);
   // simple project rec
   app.get('/api/tags/rec/user/:user_id', Rec.rec_project_list);
   // simple simlair users
@@ -141,8 +141,8 @@ module.exports = (app) => {
   //
   app.get('/api/recommend/:user_id', Rec.recommend_to_user )
   // create a tag and associate it with a user
-  app.post('/api/tags/user/:user_id', tagToUser.create);
+  app.post('/api/tags/user/:username', tagToUser.create);
   // delete a tag from a user
-  app.post('/api/tags/user/:user_id/remove', tagToUser.delete);
+  app.post('/api/tags/user/:username/remove', tagToUser.delete);
 
 };

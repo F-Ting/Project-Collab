@@ -7,7 +7,7 @@ module.exports = {
         return res.status(400).send('No files were uploaded.');
       }
       // The name of the input field (i.e. "audioFile") is used to retrieve the uploaded file
-      let resumeFile = req.files.resume;
+      let resumeFile = req.files.image;
       let username = req.body.username;
 
       //Alternate solution to file uploads

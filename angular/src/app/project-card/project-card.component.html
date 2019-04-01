@@ -13,12 +13,12 @@
   <mat-card-footer class="profile-card-footer">
     <app-tags class="profile-card-tags" [tags]="project.tags"></app-tags>
     <span class="profile-card-github">
-      <a href="{{ project.github }}" style="text-decoration: none">Project Link</a>
+      <a class="no-decoration" href="{{ project.github }}">Project Link</a>
     </span>
     <button class="profile-card-user" id='discover-project' mat-raised-button color="primary" (click)="onEdit(project)"
       *ngIf="project.owner.username == username" type="button">Edit</button>
     <span class="profile-card-user" *ngIf="project.owner.username != username">
-      {{ project.owner.username }}
+      <a class="no-decoration" routerLink="/user/{{project.owner.username}}">{{ project.owner.username }}</a>
     </span>
   </mat-card-footer>
 

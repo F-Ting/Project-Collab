@@ -24,7 +24,7 @@ export class EditUserProfileComponent {
             id: [this.data.id],
             name: [this.data.name],
             email: [this.data.email],
-            linkedin: [this.data.linked_in],
+            linked_in: [this.data.linked_in],
             github: [this.data.github],
             bio: [this.data.bio]
         });

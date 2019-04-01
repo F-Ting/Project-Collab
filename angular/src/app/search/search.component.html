@@ -27,9 +27,9 @@
       Search by #Tag or @UserName or ProjectName
     </mat-panel-description>
   </mat-expansion-panel-header>
-  <mat-list>
+  <mat-grid-list cols="1">
     <!-- Use when tags get implimented -->
-    <mat-list-item>
+    <mat-list-item class="no-wrap">
       Recomended Tags: &nbsp;
       <mat-chip-list #chipList>
         <mat-chip *ngFor="let tag of recomendedTags" [value]="tag" [selectable]="selectable" [removable]="removable"
@@ -39,6 +39,7 @@
         </mat-chip>
       </mat-chip-list>
     </mat-list-item>
+    <mat-divider [inset]="true"></mat-divider>
     <form [formGroup]="formGroup">
       <mat-list-item>
         <mat-form-field style="padding-top: 20px; width: 100%; text-align: right">
@@ -53,7 +54,7 @@
         </mat-autocomplete>
     </mat-list-item>
     </form>
-  </mat-list>
+  </mat-grid-list>
   <mat-action-row>
     <button mat-button (click)="search()">Search</button>
   </mat-action-row>

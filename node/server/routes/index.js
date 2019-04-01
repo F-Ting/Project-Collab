@@ -134,6 +134,6 @@ module.exports = (app) => {
   // create a tag and associate it with a user
   app.post('/api/tags/user/:username', tagToUser.create);
   // delete a tag from a user
-  app.post('/api/tags/user/:user_id/remove', tagToUser.delete);
+  app.post('/api/tags/user/:username/remove', tagToUser.delete);
 
 };

@@ -16,7 +16,8 @@ module.exports = {
                     include: [{
                         model: users,
                         where: { username: req.params.username },
-                    }]
+                    }],
+                    required:true
                 }],
                 attributes: { exclude: ['createdAt', 'updatedAt'] },
             })

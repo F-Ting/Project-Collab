@@ -34,13 +34,13 @@
                                     <a href="mailto:{{ user.email }}">{{ user.email }}</a>
                                 </div>
                             </mat-list-item>
-                            <mat-list-item *ngIf="project.github">
-                                <a href="https://github.com/{{ project.github }}">
+                            <mat-list-item *ngIf="github">
+                                <a href="https://github.com/{{ github }}">
                                     <fa-icon class="project-icon" [icon]="faGithub"></fa-icon>
                                 </a>
                                 <div class="single-link-container">
                                     <mat-label class="link-description">Github</mat-label>
-                                    <a href="https://github.com/{{ project.github }}">{{ project.github }}</a>
+                                    <a href="https://github.com/{{ github }}">{{ github }}</a>
                                 </div>
                             </mat-list-item>
                             <mat-list-item *ngIf="project.url">

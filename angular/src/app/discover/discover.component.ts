@@ -10,6 +10,7 @@ const log = console.log;
   styleUrls: ["./discover.component.css"]
 })
 export class DiscoverComponent implements OnInit {
+  breakpoint: number;
   error: boolean = false;
   projects: Array<any> = [];
   user_id = localStorage.getItem("user_id");
@@ -19,6 +20,11 @@ export class DiscoverComponent implements OnInit {
 
   ngOnInit() {
     this.getProjects();
+    this.breakpoint = Math.ceil(window.innerWidth / 600);
+  }
+
+  onResize(event) {
+    this.breakpoint = Math.ceil(window.innerWidth / 600);
   }
 
   getProjects() {

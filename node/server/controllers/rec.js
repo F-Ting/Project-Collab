@@ -39,7 +39,7 @@ function get_tags_count_project_list(porjects, res){
     }).catch((error) => res.status(400).send(error));
 }
 
-async function feature_matrix(cur_user_id) {
+async function feature_matrix(cur_user_id, res) {
     let feature_matrix_users = [];
     let feature_matrix_projects = [];
     let tags_count = []
@@ -83,7 +83,7 @@ async function feature_matrix(cur_user_id) {
           }
     } catch (err) {
       // Rollback transaction if any errors were encountered
-      console.log(err)
+      res.status(400).send(err);
     }
 
     console.log("HERERE",num_tags,num_users)
@@ -121,12 +121,14 @@ async function feature_matrix(cur_user_id) {
     for(let i =0; i<3;i++){
         console.log(sim_structs[i]);
     }
+    return_list = []
     for(let i =0; i<3;i++){
+        return_list.push(sim_projects[i])
         console.log(sim_projects[i]);
     }
     //console.log(sim_structs);
     //console.log(feature_matrix_projects);
-
+    res.status(200).send(return_list);
 
 }
 
@@ -283,7 +285,6 @@ module.exports = {
           raw: true
         })
         .then((associations) => {
-            let c = feature_matrix(req.params.user_id -1);
             let result = [];
             for ( let i in associations){
                 result.push(associations[i].project_id)
@@ -293,5 +294,14 @@ module.exports = {
         .catch((error) => res.status(400).send(error));
     },
 
+    recommend_to_user(req, res) {
+        try{
+            feature_matrix(req.params.user_id -1, res);
+        } catch (err){
+            res.status(400).send(err);
+        }
+
+
+    },
 
 };

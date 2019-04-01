@@ -69,7 +69,7 @@ async function feature_matrix(cur_user_id, res) {
         let associations = await Associations
           .findAll({
             where: {
-              user_id: cur_user_id,
+              user_id: cur_user_id+1,
             },
             order: [
               ['createdAt', 'DESC'],
@@ -113,7 +113,7 @@ async function feature_matrix(cur_user_id, res) {
     let sim_projects =[];
 
     for(let j =0; j<num_projects; j++){
-        if(my_projects.includes(j) == false){
+        if(!(my_projects.includes(j+1))){
             sim_projects.push({porject_id: j+1,distance:Distance(feature_matrix_users[cur_user_id], feature_matrix_projects[j]), pcor:Correlation.rank(feature_matrix_users[cur_user_id], feature_matrix_projects[j])});
         }
     }
@@ -126,9 +126,11 @@ async function feature_matrix(cur_user_id, res) {
         return_list.push(sim_projects[i])
         console.log(sim_projects[i]);
     }
+    console.log(my_projects);
     //console.log(sim_structs);
     //console.log(feature_matrix_projects);
     res.status(200).send(return_list);
+
 
 }
 

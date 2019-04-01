@@ -46,6 +46,7 @@ async function feature_matrix(cur_user_id) {
     let num_users =0;
     let num_tags =0;
     let num_projects =0;
+    let my_projects = [];
     try {
         await Users.count(
 
@@ -65,6 +66,21 @@ async function feature_matrix(cur_user_id) {
             num_projects = c;
         }).catch((error) => console.log(error));
 
+        let associations = await Associations
+          .findAll({
+            where: {
+              user_id: cur_user_id,
+            },
+            order: [
+              ['createdAt', 'DESC'],
+            ],
+            attributes: {exclude: ['createdAt', 'updatedAt', 'user_id'] },
+            raw: true
+          })
+
+          for ( let i in associations){
+              my_projects.push(associations[i].project_id)
+          }
     } catch (err) {
       // Rollback transaction if any errors were encountered
       console.log(err)
@@ -84,20 +100,32 @@ async function feature_matrix(cur_user_id) {
         let c = await porject_feature_vector(j+1,temp);
         feature_matrix_projects.push(c)
     }
-    console.log(feature_matrix_users);
+    //console.log(feature_matrix_users);
     //Similarity( feature_matrix_users[1], feature_matrix_users[j])
     sim_structs = [];
     for(let j =0; j<num_users; j++){
         if(j != cur_user_id){
-            sim_structs.push({user_id: j,distance:Distance(feature_matrix_users[cur_user_id], feature_matrix_users[j]), pcor:Correlation.rank(feature_matrix_users[cur_user_id], feature_matrix_users[j])});
+            sim_structs.push({user_id: j+1,distance:Distance(feature_matrix_users[cur_user_id], feature_matrix_users[j]), pcor:Correlation.rank(feature_matrix_users[cur_user_id], feature_matrix_users[j])});
         }
     }
     sim_structs.sort((a, b) => a.distance - b.distance);
-    for(let i =0; i<3;i++){
+    //project sim
+    let sim_projects =[];
 
+    for(let j =0; j<num_projects; j++){
+        if(my_projects.includes(j) == false){
+            sim_projects.push({porject_id: j+1,distance:Distance(feature_matrix_users[cur_user_id], feature_matrix_projects[j]), pcor:Correlation.rank(feature_matrix_users[cur_user_id], feature_matrix_projects[j])});
+        }
     }
-    console.log(sim_structs);
-    console.log(feature_matrix_projects);
+    sim_projects.sort((a, b) =>  b.pcor - a.pcor);
+    for(let i =0; i<3;i++){
+        console.log(sim_structs[i]);
+    }
+    for(let i =0; i<3;i++){
+        console.log(sim_projects[i]);
+    }
+    //console.log(sim_structs);
+    //console.log(feature_matrix_projects);
 
 
 }

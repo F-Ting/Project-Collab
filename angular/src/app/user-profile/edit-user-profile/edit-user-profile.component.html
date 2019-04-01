@@ -36,6 +36,11 @@
                 </mat-form-field>
             </div>
         </div>
+        <div class="row">
+            <div class="col">
+                    <app-tags-autocomplete [group]="editUserForm" (tagsChanged)="tagsChangedHandler($event)" class="project-full-width"></app-tags-autocomplete>
+                </div>
+            </div>
     </div>
     <div mat-dialog-actions>
         <button mat-raised-button type="submit" (click)="onSubmit()">

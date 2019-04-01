@@ -10,20 +10,25 @@ module.exports = {
     list(req, res) {
         return Tags
             .findAll({
-                where: { "$tag_to_user.user_id$": req.params.user_id },
                 include: [{
                     model: TagTouser,
                     as: 'tag_to_user',
-                    attributes: [],
+                    include: [{
+                        model: users,
+                        where: { username: req.params.username },
+                    }],
+                    required:true
                 }],
                 attributes: { exclude: ['createdAt', 'updatedAt'] },
             })
             .then(tag => {
-                res.status(200).send(tag)
+                let resObj = tag.map(el => el.tag)
+                res.status(200).send(resObj)
             })
             .catch((error) => res.status(400).send(error));
     },
 
+    // get list of users that contain any of the follow tags
     getUserList(req,res){
         let tagList = req.query.tags.split(',')
         return users
@@ -56,62 +61,63 @@ module.exports = {
             .catch((error) => res.status(400).send(error));
     },
 
-    // Associate a tag with a projet, creating the tag if it doesn't already exist
-    create(req, res) {
-        const tags = req.body.tags;
-        const result = [];
-        return Promise.all(
-            // filter unique strings in the request to avoid duplicate db queries
-            tags
-                .filter((e, i) => tags.indexOf(e) === i)
-                .map(tag => {
-                    return Tags
-                        .findOrCreate({
-                            where: { tag },
-                            defaults: { tag },
-                        })
-                        .then(([tag, created]) => {
-                            return TagTouser
-                                .findOrCreate({
-                                    where: {
-                                        tag_id: tag.id,
-                                        user_id: req.params.user_id
-                                    },
-                                    defaults: {
-                                        tag_id: tag.id,
-                                        user_id: req.params.user_id
-                                    }
-                                })
-                                .then(() => result.push(tag))
-                        })
-                        .catch((error) => error(error));
-                }))
-            .then(() => {
-                res.status(200).send(result)
-                return Promise.resolve(result);
-            })
-            .catch(error =>
-                res.status(400).send(error)
-            )
+    // Associate a tag with a user, creating the tag if it doesn't already exist
+    async create(req, res) {
+        let tagList = req.body.tags;
+        try {
+            let user = await users.findOne({where: {username : req.params.username}})
+            let user_id = user.id
+            let uniqueTagList = tagList
+            .filter((e, i) => tagList.indexOf(e) === i)
+            //create tags
+            for(let tag in uniqueTagList){
+                let tagInfo = await Tags
+                    .findOrCreate({
+                        where: { tag },
+                        defaults: { tag },
+                    })
+                
+                await TagTouser
+                .findOrCreate({
+                    where: {
+                        tag_id: tagInfo[0].id,
+                        user_id: user_id
+                    },
+                    defaults: {
+                        tag_id: tagInfo[0].id,
+                        user_id: user_id
+                    }
+                })
+            }
+
+            res.status(200).send()
+        } catch(error) {
+            console.log(error)
+            res.status(400).send(error)
+        }
     },
 
-    // Delete a tag from a user
-    delete(req, res) {
-        return Tags
+    // Delete a tag from a user 
+    async delete(req, res) {
+        try {
+            //get user
+            let user = await users.findOne({where: {username : req.params.username}})
+            let user_id = user.id
+            let tagList = await Tags
             .findAll({
                 where: { tag: { [Op.in]: req.body.tags } }
             })
-            .then(tags => {
-                return TagTouser
-                    .destroy({
-                        where: {
-                            user_id: req.params.user_id,
-                            tag_id: { [Op.in]: tags.map(tag => tag.id) }
-                        }
-                    })
-                    .then(() => res.status(200).send({ message: "tag deleted from user" }))
-                    .catch((error) => error(error));
-            })
-            .catch((error) => res.status(400).send(error));
+            await TagTouser
+                .destroy({
+                    where: {
+                        user_id: user_id,
+                        tag_id: { [Op.in]: tagList.map(tag => tag.id) }
+                    }
+                })
+                .then(() => res.status(200).send({ message: "tag deleted from user" }))
+
+        }catch(error){
+            res.status(400).send()
+        }
     }
 };

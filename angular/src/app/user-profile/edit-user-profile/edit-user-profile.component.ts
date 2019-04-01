@@ -13,6 +13,10 @@ const log = console.log;
 export class EditUserProfileComponent {
 
     editUserForm: FormGroup;
+    addedTags: string[] = [];
+    removedTags: string[] = [];
+    username : string;
+    originalTags: string[] = [];
 
     constructor(
         private fb: FormBuilder,
@@ -26,8 +30,11 @@ export class EditUserProfileComponent {
             email: [this.data.email],
             linked_in: [this.data.linked_in],
             github: [this.data.github],
-            bio: [this.data.bio]
+            bio: [this.data.bio],
+            tags: [this.data.tags]
         });
+        this.originalTags = this.data.tags; //Used to evaluate addition and removal of tags
+        this.username = this.data.username;
     }
 
     onSubmit() {
@@ -37,5 +44,22 @@ export class EditUserProfileComponent {
             },
             err => log(err)
         );
+
+        this.editUserProfileService.saveTags(this.username, this.addedTags).subscribe(
+            result => {
+            },
+            err => log(err)
+        );
+
+        this.editUserProfileService.removeTags(this.username, this.removedTags).subscribe(
+            result => {
+            },
+            err => log(err)
+        );
     }
+
+    tagsChangedHandler(tags) {
+        this.addedTags = tags.filter(tag => this.originalTags.indexOf(tag) === -1);
+        this.removedTags = this.originalTags.filter(tag => tags.indexOf(tag) === -1);
+      }
 }

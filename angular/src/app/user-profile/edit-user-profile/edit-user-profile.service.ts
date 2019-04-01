@@ -14,4 +14,15 @@ export class EditUserProfileService {
       'api/user/update', user
     );
   }
+
+  public saveTags(username,tags): Observable<any> {
+    return this.httpClient.post(
+      'api/tags/user/'+ username, {tags: tags}
+    );
+  }
+  public removeTags(username,tags): Observable<any> {
+    return this.httpClient.post(
+      'api/tags/user/'+ username + "/remove", {tags: tags}
+    );
+  }
 }

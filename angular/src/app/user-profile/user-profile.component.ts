@@ -70,7 +70,7 @@ export class UserProfileComponent implements OnInit {
     editProfile() {
         const dialogRef = this.dialog.open(EditUserProfileComponent, {
             width: '500px',
-            data: this.user
+            data: {...this.user, tags: this.tags, username: this.user.username}
         });
         dialogRef.afterClosed().subscribe(_ => this.ngOnInit());
     }

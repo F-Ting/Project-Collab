@@ -92,6 +92,7 @@ module.exports = {
 
             res.status(200).send()
         } catch(error) {
+            console.log(error)
             res.status(400).send(error)
         }
     },
@@ -116,7 +117,6 @@ module.exports = {
                 .then(() => res.status(200).send({ message: "tag deleted from user" }))
 
         }catch(error){
-            console.log(error)
             res.status(400).send()
         }
     }

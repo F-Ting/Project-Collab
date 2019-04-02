@@ -26,7 +26,7 @@
       </button>
       <a routerLink="/">Project Collab</a>
       <span class="spacer"></span>
-      <div *ngIf="!isHandset$ | async">
+      <div *ngIf="!(isHandset$ | async)">
         <span *ngFor="let link of navLinks; index as i">
           <a *ngIf="navLinks[i].name == 'Logout'" routerLink="#" (click)="$event.preventDefault();properLogout()">Logout</a>
           <a *ngIf="navLinks[i].name == 'Profile'" routerLink="{{link.url + currentUsername}}">{{link.name}}</a>

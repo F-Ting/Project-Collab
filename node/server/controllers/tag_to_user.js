@@ -12,7 +12,7 @@ module.exports = {
         return TagToUser
             .findAll({
                 include: [{
-                    model: TagTouser,
+                    model: TagToUser,
                     as: 'tag_to_user',
                     include: [{
                         model: users,
@@ -79,8 +79,8 @@ module.exports = {
                         where: { tag },
                         defaults: { tag },
                     })
-                
-                await TagTouser
+
+                await TagToUser
                 .findOrCreate({
                     where: {
                         tag_id: tagInfo[0].id,
@@ -100,7 +100,7 @@ module.exports = {
         }
     },
 
-    // Delete a tag from a user 
+    // Delete a tag from a user
     async delete(req, res) {
         try {
             //get user
@@ -110,7 +110,7 @@ module.exports = {
             .findAll({
                 where: { tag: { [Op.in]: req.body.tags } }
             })
-            await TagTouser
+            await TagToUser
                 .destroy({
                     where: {
                         user_id: user_id,

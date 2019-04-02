@@ -9,10 +9,10 @@ const Op = Sequelize.Op;
 module.exports = {
     // List all tags for a user
     list(req, res) {
-        return TagToUser
+        return Tags
             .findAll({
                 include: [{
-                    model: TagToUser,
+                    model: TagTouser,
                     as: 'tag_to_user',
                     include: [{
                         model: users,
@@ -20,8 +20,7 @@ module.exports = {
                     }],
                     required:true
                 }],
-                attributes: { exclude: ['createdAt', 'updatedAt', 'user_id', 'id'] },
-                raw: true
+                attributes: { exclude: ['createdAt', 'updatedAt'] },
             })
             .then(tag => {
                 let resObj = tag.map(el => el.tag)

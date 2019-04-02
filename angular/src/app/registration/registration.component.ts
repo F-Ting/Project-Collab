@@ -21,12 +21,14 @@ export class RegistrationComponent implements OnInit {
   secondGroup: FormGroup;
   thirdGroup: FormGroup;
   data;
+  verticalFlag = false;
 
   constructor(private _formBuilder: FormBuilder,
     private registrationService: RegistrationService, private router: Router,
     private snackBar: MatSnackBar) {}
 
   ngOnInit() {
+    this.verticalFlag = (window.innerWidth < 600);
     this.firstGroup = this._formBuilder.group({
       username: [null, Validators.required],
       password: [null, [Validators.required, Validators.minLength(8)]],
@@ -39,6 +41,10 @@ export class RegistrationComponent implements OnInit {
       firstName: [null, Validators.required],
       lastName: [null, Validators.required]
     });
+  }
+
+  onResize(event) {
+    this.verticalFlag = (window.innerWidth < 600);
   }
 
   onSubmit() {

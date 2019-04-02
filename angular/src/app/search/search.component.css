@@ -1,0 +1,8 @@
+.no-wrap {
+  overflow: hidden;
+  text-overflow: clip;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  white-space: nowrap;
+
+}

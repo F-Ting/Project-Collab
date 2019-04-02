@@ -1,9 +1,9 @@
 <mat-card class="project-detail-mat-card" *ngIf="project && user && associated_users">
-    <mat-grid-list cols="3" rowHeight=800px>
-        <mat-grid-tile *ngIf="project.image" [colspan]=1 [style.border-right]="'1px dashed #ddd'">
+    <mat-grid-list [cols]="breakpoint" rowHeight=800px (window:resize)="onResize($event)">
+        <mat-grid-tile *ngIf="project.image" [colspan]=2 [style.border-right]="'1px dashed #ddd'">
             <img src="{{ project.image }}" alt="Project Image" />
         </mat-grid-tile>
-        <mat-grid-tile *ngIf="!project.image" [colspan]=1 [style.border-right]="'1px dashed #ddd'">
+        <mat-grid-tile *ngIf="!project.image" [colspan]=2 [style.border-right]="'1px dashed #ddd'">
             <header class="project-title-alt">{{ project.name }}</header>
         </mat-grid-tile>
         <mat-grid-tile [colspan]=2>

@@ -17,6 +17,7 @@ export class ProjectComponent implements OnInit {
     project: any;
     user: any;
     associated_users: any;
+    breakpoint: number;
 
     faGithub: IconDefinition = faGithub;
     faEnvelope: IconDefinition = faEnvelope;
@@ -34,11 +35,15 @@ export class ProjectComponent implements OnInit {
       this.router.navigate(['/create']);
     }
 
-    ngOnInit() {
-        this.projectId = this.route.snapshot.paramMap.get("id");
-        this.username = localStorage.getItem("username");
+    onResize(event) {
+      this.breakpoint = (window.innerWidth >= 600) ? 4: 2;
+    }
 
-        this.projectService.getProject(this.projectId).subscribe((response) => {
+    ngOnInit() {
+      this.projectId = this.route.snapshot.paramMap.get("id");
+      this.username = localStorage.getItem("username");
+      this.breakpoint = (window.innerWidth >= 600) ? 4: 2;
+      this.projectService.getProject(this.projectId).subscribe((response) => {
             this.project = response;
             if (this.project.github) {
               this.github = this.project.github.replace("https://github.com/", "");

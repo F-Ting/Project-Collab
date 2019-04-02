@@ -1,7 +1,7 @@
 <app-search (searchEventEmitter)="onSearch($event)"></app-search>
 <div class="row">
     <div class="grid-container">
-        <mat-grid-list cols="3" rowHeight="380">
+        <mat-grid-list [cols]="breakpoint" rowHeight="380" (window:resize)="onResize($event)">
             <mat-grid-tile
                 *ngFor="let project of projects"
                 [colspan]="1"

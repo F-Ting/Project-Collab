@@ -43,7 +43,6 @@ export class ProjectComponent implements OnInit {
       this.projectId = this.route.snapshot.paramMap.get("id");
       this.username = localStorage.getItem("username");
       this.breakpoint = (window.innerWidth >= 600) ? 4: 2;
-      // this.breakpoint = ;
       this.projectService.getProject(this.projectId).subscribe((response) => {
             this.project = response;
             if (this.project.github) {

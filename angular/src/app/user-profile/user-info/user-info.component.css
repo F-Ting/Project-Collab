@@ -1,20 +1,5 @@
-.row {
-    display: flex;
-    justify-content: center;
-    flex-direction: row;
-}
-
 .profile {
     width: 350px;
-}
-
-.projects {
-    width: 750px;
-}
-
-.project-title {
-  padding-left: 15px;
-  padding-right: 15px;
 }
 
 .dashboard-card {

@@ -6,7 +6,11 @@
       [opened]="!(isHandset$ | async)">
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-        <a mat-list-item *ngFor="let link of navLinks" routerLink="{{link.url}}">{{link.name}}</a>
+      <span *ngFor="let link of navLinks; index as i">
+        <a mat-list-item *ngIf="navLinks[i].name == 'Logout'" routerLink="#" (click)="$event.preventDefault();properLogout()">Logout</a>
+        <a mat-list-item *ngIf="navLinks[i].name == 'Profile'" routerLink="{{link.url + currentUsername}}">{{link.name}}</a>
+        <a mat-list-item *ngIf="navLinks[i].name != 'Logout' && navLinks[i].name != 'Profile'" routerLink="{{link.url}}">{{link.name}}</a>
+      </span>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content class="side-buttons">

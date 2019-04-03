@@ -54,9 +54,9 @@ function get_user_list_by_tags(tags, res){
     }).catch((error) => res.status(400).send(error));
 }
 
-function get_tags_count_project_list(porjects, res){
+function get_tags_count_project_list(projects, res){
     TagToProject.sequelize.query('SELECT tag_id, count(project_id) as tag_count FROM tag_to_projects WHERE project_id IN(:status) GROUP BY tag_id ORDER BY tag_count DESC',
-      { replacements: { status: porjects }, type: TagToProject.sequelize.QueryTypes.SELECT }
+      { replacements: { status: projects }, type: TagToProject.sequelize.QueryTypes.SELECT }
     ).then(final => {
         res.status(200).send(final);
     }).catch((error) => res.status(400).send(error));
@@ -77,7 +77,7 @@ async function feature_matrix(username, res) {
                     where: {username: username},
                     raw: true
                 })
-        cur_user_id = user.id;
+        cur_user_id = user.id - 1;
         await Users.count(
 
         ).then(c => {
@@ -126,7 +126,7 @@ async function feature_matrix(username, res) {
     }
     for(let j =0; j<num_projects; j++){
         let temp = [...tags_count];
-        let c = await porject_feature_vector(j+1,temp);
+        let c = await project_feature_vector(j+1,temp);
         feature_matrix_projects.push(c)
     }
     sim_structs = [];
@@ -141,14 +141,14 @@ async function feature_matrix(username, res) {
 
     for(let j =0; j<num_projects; j++){
         if(!(my_projects.includes(j+1))){
-            sim_projects.push({porject_id: j+1,distance:Distance(feature_matrix_users[cur_user_id], feature_matrix_projects[j]), pcor:0});
+            sim_projects.push({project_id: j+1,distance:Distance(feature_matrix_users[cur_user_id], feature_matrix_projects[j]), pcor:0});
         }
     }
     sim_projects.sort((a, b) =>  b.pcor - a.pcor);
 
     return_list = []
     for(let i =0; i<3;i++){
-        let full_projectdetails = await get_full_project_deatils(sim_projects[i].porject_id);
+        let full_projectdetails = await get_full_project_deatils(sim_projects[i].project_id);
         return_list.push(full_projectdetails)
     }
 
@@ -228,7 +228,7 @@ async function users_feature_vector(user_id, tags_count){
      return tags_count;
 }
 
-async function porject_feature_vector(project_id, tags_count){
+async function project_feature_vector(project_id, tags_count){
     let users = [];
     try {
         let associations = await Associations

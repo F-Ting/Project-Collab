@@ -41,7 +41,6 @@ describe('TagsComponent', () => {
 
     fixture.whenStable().then(() => {
       const chip = fixture.debugElement.query(By.css('.mat-chip'));
-      console.log(chip.nativeElement)
       expect(chip.nativeElement.innerText).toEqual(dummyTags[0]);
     });
   });

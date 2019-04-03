@@ -16,7 +16,6 @@ function get_project_list_by_tags(tags, res){
     TagToProject.sequelize.query('SELECT project_id, count(tag_id) as tag_count FROM tag_to_projects WHERE tag_id IN(:status) GROUP BY project_id ORDER BY tag_count DESC',
       { replacements: { status: tags }, type: TagToProject.sequelize.QueryTypes.SELECT }
     ).then(final => {
-        console.log(final)
         res.status(200).send(final);
     }).catch((error) => res.status(400).send(error));
 }
@@ -25,7 +24,6 @@ function get_user_list_by_tags(tags, res){
     TagToUser.sequelize.query('SELECT user_id, count(tag_id) as tag_count FROM tag_to_users WHERE tag_id IN(:status) GROUP BY user_id ORDER BY tag_count DESC' ,
       { replacements: { status: tags }, type: TagToUser.sequelize.QueryTypes.SELECT }
     ).then(final => {
-        console.log(final)
         res.status(200).send(final);
     }).catch((error) => res.status(400).send(error));
 }
@@ -34,7 +32,6 @@ function get_tags_count_project_list(porjects, res){
     TagToProject.sequelize.query('SELECT tag_id, count(project_id) as tag_count FROM tag_to_projects WHERE project_id IN(:status) GROUP BY tag_id ORDER BY tag_count DESC',
       { replacements: { status: porjects }, type: TagToProject.sequelize.QueryTypes.SELECT }
     ).then(final => {
-        console.log(final)
         res.status(200).send(final);
     }).catch((error) => res.status(400).send(error));
 }
@@ -86,7 +83,6 @@ async function feature_matrix(cur_user_id, res) {
       res.status(400).send(err);
     }
 
-    console.log("HERERE",num_tags,num_users)
     for(let i =0; i<num_tags;i++){
         tags_count.push(0);
     }
@@ -100,8 +96,6 @@ async function feature_matrix(cur_user_id, res) {
         let c = await porject_feature_vector(j+1,temp);
         feature_matrix_projects.push(c)
     }
-    //console.log(feature_matrix_users);
-    //Similarity( feature_matrix_users[1], feature_matrix_users[j])
     sim_structs = [];
     for(let j =0; j<num_users; j++){
         if(j != cur_user_id){
@@ -118,17 +112,12 @@ async function feature_matrix(cur_user_id, res) {
         }
     }
     sim_projects.sort((a, b) =>  b.pcor - a.pcor);
-    for(let i =0; i<3;i++){
-        console.log(sim_structs[i]);
-    }
+
     return_list = []
     for(let i =0; i<3;i++){
         return_list.push(sim_projects[i])
-        console.log(sim_projects[i]);
     }
-    console.log(my_projects);
-    //console.log(sim_structs);
-    //console.log(feature_matrix_projects);
+
     res.status(200).send(return_list);
 
 

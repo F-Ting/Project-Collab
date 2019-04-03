@@ -12,7 +12,7 @@ module.exports = {
         return Tags
             .findAll({
                 include: [{
-                    model: TagTouser,
+                    model: TagToUser,
                     as: 'tag_to_user',
                     include: [{
                         model: users,

@@ -35,7 +35,7 @@ module.exports = {
           is_admin: true,
           status: 'approved'
         })
-        .then((project) => res.status(200).send(project))
+        .then((association) => res.status(200).send(project))
         .catch((error) => res.status(400).send(error));
       })
       .catch(error => res.status(400).send(error));

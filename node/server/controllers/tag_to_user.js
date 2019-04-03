@@ -1,4 +1,5 @@
-const TagTouser = require('../models').tag_to_user;
+const TagToUser = require('../models').tag_to_user;
+const TagToProject = require('../models').tag_to_project;
 const Tags = require('../models').tags;
 const users = require('../models').users;
 const Sequelize = require('sequelize');
@@ -11,7 +12,7 @@ module.exports = {
         return Tags
             .findAll({
                 include: [{
-                    model: TagTouser,
+                    model: TagToUser,
                     as: 'tag_to_user',
                     include: [{
                         model: users,
@@ -34,7 +35,7 @@ module.exports = {
         return users
             .findAll({
                 include: [{
-                    model: TagTouser,
+                    model: TagToUser,
                     as: 'tag_to_user',
                     include: [{
                         model: Tags,
@@ -61,6 +62,7 @@ module.exports = {
             .catch((error) => res.status(400).send(error));
     },
 
+
     // Associate a tag with a user, creating the tag if it doesn't already exist
     async create(req, res) {
         let tagList = req.body.tags;
@@ -76,8 +78,8 @@ module.exports = {
                         where: { tag },
                         defaults: { tag },
                     })
-                
-                await TagTouser
+
+                await TagToUser
                 .findOrCreate({
                     where: {
                         tag_id: tagInfo[0].id,
@@ -97,7 +99,7 @@ module.exports = {
         }
     },
 
-    // Delete a tag from a user 
+    // Delete a tag from a user
     async delete(req, res) {
         try {
             //get user
@@ -107,7 +109,7 @@ module.exports = {
             .findAll({
                 where: { tag: { [Op.in]: req.body.tags } }
             })
-            await TagTouser
+            await TagToUser
                 .destroy({
                     where: {
                         user_id: user_id,

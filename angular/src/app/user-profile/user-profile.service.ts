@@ -23,5 +23,10 @@ export class UserProfileService {
             `api/user_associations/user/${username}`
         );
     }
-}
 
+    getRecProjects(username): Observable<any> {
+        return this.httpClient.get(
+            `api/recommend/${username}`
+        );
+    }
+}

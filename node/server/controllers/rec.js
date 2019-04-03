@@ -96,10 +96,12 @@ async function feature_matrix(cur_user_id, res) {
         let c = await porject_feature_vector(j+1,temp);
         feature_matrix_projects.push(c)
     }
+    console.log(feature_matrix_projects)
+    console.log(feature_matrix_users)
     sim_structs = [];
     for(let j =0; j<num_users; j++){
         if(j != cur_user_id){
-            sim_structs.push({user_id: j+1,distance:Distance(feature_matrix_users[cur_user_id], feature_matrix_users[j]), pcor:Correlation.rank(feature_matrix_users[cur_user_id], feature_matrix_users[j])});
+            sim_structs.push({user_id: j+1,distance:Distance(feature_matrix_users[cur_user_id],feature_matrix_users[j]), pcor:0});
         }
     }
     sim_structs.sort((a, b) => a.distance - b.distance);
@@ -108,7 +110,7 @@ async function feature_matrix(cur_user_id, res) {
 
     for(let j =0; j<num_projects; j++){
         if(!(my_projects.includes(j+1))){
-            sim_projects.push({porject_id: j+1,distance:Distance(feature_matrix_users[cur_user_id], feature_matrix_projects[j]), pcor:Correlation.rank(feature_matrix_users[cur_user_id], feature_matrix_projects[j])});
+            sim_projects.push({porject_id: j+1,distance:Distance(feature_matrix_users[cur_user_id], feature_matrix_projects[j]), pcor:0});
         }
     }
     sim_projects.sort((a, b) =>  b.pcor - a.pcor);

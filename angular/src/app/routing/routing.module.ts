@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Routes, RouterModule } from '@angular/router';
+import { Router, NavigationEnd, Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from '../login/login.component';
 import { LogoutComponent } from '../logout/logout.component';
 import { RegistrationComponent } from '../registration/registration.component';
@@ -30,4 +30,13 @@ const routes: Routes = [
   ],
   declarations: []
 })
-export class RoutingModule { }
+export class RoutingModule {
+  constructor(private router: Router) {
+    this.router.events.subscribe(event => {
+     if (event instanceof NavigationEnd) {
+       (<any>window).ga('set', 'page', event.urlAfterRedirects);
+       (<any>window).ga('send', 'pageview');
+     }
+   });
+ }
+ }

@@ -6,7 +6,7 @@ const path = require('path');
 const session = require('express-session')
 // Set up the express app
 const app = express();
-import "./server/initialize"
+
 //post to listen to
 app.set('port', 8000);
 
@@ -33,10 +33,24 @@ app.use(session({
 app.use('/resource', express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'build')));
 
-// Require our routes into the application.
-require('./server/routes')(app);
+app.use((req, res, next)=>{
+	res.header("Access-Control-Allow-Origin", "https://www.project-collab.ca");
+    res.header("Access-Control-Allow-Headers","Origin,X-Requested-With,Content-Type,Accept");
+    res.header('Access-Control-Allow-Credentials',' true');
+    next();
+  });
 
-app.get(/.*/, (req, res) => {
-  return res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
-});
+app.get('/api', (req, res) => res.status(200).send({
+	message: 'Welcome to the Project Collab API!',
+}));
+
+// Require our routes into the application.
+let apiRoutes = require('./server/routes');
+
+app.all("/api/*", apiRoutes);
+
+app.get("/*", (req, res) => {
+    return res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
+  });
+
 module.exports = app;

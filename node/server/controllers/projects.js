@@ -1,11 +1,15 @@
-const Projects = require('../models').projects;
-const Users = require('../models').users;
-const TagToProject = require('../models').tag_to_project;
-const Tags = require('../models').tags;
-const Associations = require('../models').user_associations;
-const axios = require('axios');
-const path = require('path');
-const fs = require("fs");
+const Projects = require('../models').projects,
+  Users = require('../models').users,
+  TagToProject = require('../models').tag_to_project,
+  Tags = require('../models').tags,
+  Associations = require('../models').user_associations,
+  axios = require('axios'),
+  path = require('path'),
+  fs = require("fs"),
+  aws = require('aws-sdk'),
+  multer = require('multer'),
+  multerS3 = require('multer-s3');
+
 module.exports = {
   // Create a new Project
   create(req, res) {
@@ -258,3 +262,23 @@ function saveImage(req){
   });
   return imgURL = `http://localhost:8000/resource/${userID}/${req.body.name}ProjectImg.png`
 }
+
+aws.config.update({
+  secretAccessKey: process.env.CLOUDCUBE_SECRET_ACCESS_KEY,
+  accessKeyId: process.env.CLOUDCUBE_ACCESS_KEY_ID,
+  region: "eu-west-1"
+});
+
+const s3 = new aws.S3();
+
+const upload = multer({
+  dest: "yutqk2v0mx6h/public/",
+  storage: multerS3({
+    s3: s3,
+    bucket: "cloud-cube-eu",
+    key: function(req, file, cb) {
+      console.log(file);
+      cb(null, file.originalname); //use Date.now() for unique file keys
+    }
+  })
+});

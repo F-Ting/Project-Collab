@@ -6,7 +6,7 @@ const path = require('path');
 const session = require('express-session')
 // Set up the express app
 const app = express();
-
+import "./server/initialize"
 //post to listen to
 app.set('port', 8000);
 
@@ -15,7 +15,7 @@ app.use(logger('dev'));
 app.use(fileUpload());
 
 // Parse incoming requests data (https://github.com/expressjs/body-parser)
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '8mb'}));
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // Add express sesssion middleware

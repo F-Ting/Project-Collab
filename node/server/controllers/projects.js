@@ -43,16 +43,8 @@ module.exports = {
 
   // list all projects
   list(req, res) {
-    return axios.get("http://localhost:8001" + req.originalUrl)
-    .then(response => {
-      res.status(200).send(response.data);
-    })
-    .catch(error => {
-      console.log(error)
-      res.status(400).send(error);
-    });
+    getProjects(req,res,req.query.withTags)
   },
-
   // list all projects that are approved or that are unapproved
   listApprovedOrUnapproved(req, res) {
     return Projects
@@ -66,17 +58,52 @@ module.exports = {
       .catch((error) => res.status(400).send(error));
   },
 
-  // list all projects
-  listSearch(req, res) {
-    return axios
-      .post("http://localhost:8001/api/projects/search", req.body)
-      .then(response => {
-        res.status(200).send(response.data);
-      })
-      .catch(error => {
-        res.status(400).send(error);
-      });
-  },
+ // list all projects by searching project names
+ listSearch(req, res) {
+  let hasTagFilter = req.body.searchByTags.length > 0 
+  let hasProjectFilter = req.body.searchByProjects.length > 0 
+  let projectFilter = hasProjectFilter ? {
+    name: {
+      [Op.in]: req.body.searchByProjects
+    }
+  } : {}
+  let tagFilter = hasTagFilter ? {
+    tag : {
+      [Op.in]: req.body.searchByTags
+    }
+  }: {}
+  return Projects.findAll({
+    order: [["createdAt", "DESC"]],
+    include: [
+      {
+        model: Associations,
+        as: "user_associations",
+        include: [
+          {
+            model: Users
+          }
+        ]
+      },
+      {
+        model: TagToProject,
+        as: 'tag_to_project',
+        required: hasTagFilter ? true : false,
+        include:[
+          {
+            model: Tags,
+            where: tagFilter
+          },
+      ]
+      }
+    ],
+    where: projectFilter
+  })
+    .then(projects => {
+      let resObj = mapProjects(projects);
+      res.status(200).send(resObj);
+    })
+    .catch((error) => res.status(400).send(error));
+},
 
   // get a single project
   getProject(req, res) {
@@ -157,9 +184,9 @@ module.exports = {
 
 };
 
-function getProjectWithTags(req,res){
+function getProjects(req,res, withTags){
   Projects
-  .findById(req.params.project,{
+  .findAll({
     order: [
       ['createdAt', 'DESC'],
     ],
@@ -181,38 +208,16 @@ function getProjectWithTags(req,res){
       }]
     }]
 })
-  .then(project => {
+  .then(projects => {
     // turn into own method
-    let resObj = mapProjects(project);
-    res.status(200).send(resObj);
-  })
-  .catch(error => res.status(400).send(error));
-}
-function getProjectWithoutTags(req,res){
-  Projects
-  .findById( req.params.project, {
-    order: [
-      ['createdAt', 'DESC'],
-    ],
-    include: [{
-      model: Associations,
-      as: 'user_associations',
-      where: {
-        is_admin: true
-      },
-      include:[{
-        model: Users,
-      }]
-    }]
-})
-  .then(project => {
-    let resObj = mapProjects(project);
+    let resObj = mapProjects(projects,withTags);
     res.status(200).send(resObj);
   })
   .catch(error => res.status(400).send(error));
 }
 
-const mapProjects = function(project) {
+const mapProjects = function(projects, withTags) {
+  return projects.map(project => {
     return Object.assign(
       {},
       {
@@ -231,10 +236,12 @@ const mapProjects = function(project) {
           name: project.user_associations[0].user.name,
           username: project.user_associations[0].user.username
         },
-        tags: project.tag_to_project ? project.tag_to_project.map(el => el.tag.tag) : []
+        tags: (project.tag_to_project && withTags) ? project.tag_to_project.map(el => el.tag.tag) : []
       }
     );
+  });
 };
+
 
 function ensureDirectoryExistence(filePath) {
   let dirname = path.dirname(filePath);

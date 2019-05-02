@@ -12,6 +12,32 @@ const Distance = require('euclidean-distance')
 
 const Op = Sequelize.Op;
 
+const mapProjects = function(projects) {
+  return projects.map(project => {
+    return Object.assign(
+      {},
+      {
+        id: project.id,
+        name: project.name,
+        description: project.description,
+        tasks_required: project.tasks_required,
+        github: project.github,
+        url: project.url,
+        project_start_date: project.project_start_date,
+        image: project.image,
+        status: project.status,
+        createdAt: project.createdAt,
+        updatedAt: project.updatedAt,
+        owner: {
+          name: project.user_associations[0].user.name,
+          username: project.user_associations[0].user.username
+        },
+        tags: []
+      }
+    );
+  });
+};
+
 function get_project_list_by_tags(tags, res){
     TagToProject.sequelize.query('SELECT project_id, count(tag_id) as tag_count FROM tag_to_projects WHERE tag_id IN(:status) GROUP BY project_id ORDER BY tag_count DESC',
       { replacements: { status: tags }, type: TagToProject.sequelize.QueryTypes.SELECT }
@@ -28,15 +54,15 @@ function get_user_list_by_tags(tags, res){
     }).catch((error) => res.status(400).send(error));
 }
 
-function get_tags_count_project_list(porjects, res){
+function get_tags_count_project_list(projects, res){
     TagToProject.sequelize.query('SELECT tag_id, count(project_id) as tag_count FROM tag_to_projects WHERE project_id IN(:status) GROUP BY tag_id ORDER BY tag_count DESC',
-      { replacements: { status: porjects }, type: TagToProject.sequelize.QueryTypes.SELECT }
+      { replacements: { status: projects }, type: TagToProject.sequelize.QueryTypes.SELECT }
     ).then(final => {
         res.status(200).send(final);
     }).catch((error) => res.status(400).send(error));
 }
 
-async function feature_matrix(cur_user_id, res) {
+async function feature_matrix(username, res) {
     let feature_matrix_users = [];
     let feature_matrix_projects = [];
     let tags_count = []
@@ -44,7 +70,14 @@ async function feature_matrix(cur_user_id, res) {
     let num_tags =0;
     let num_projects =0;
     let my_projects = [];
+    let user;
+    let cur_user_id = 0;
     try {
+        user = await Users.findOne({
+                    where: {username: username},
+                    raw: true
+                })
+        cur_user_id = user.id - 1;
         await Users.count(
 
         ).then(c => {
@@ -93,13 +126,13 @@ async function feature_matrix(cur_user_id, res) {
     }
     for(let j =0; j<num_projects; j++){
         let temp = [...tags_count];
-        let c = await porject_feature_vector(j+1,temp);
+        let c = await project_feature_vector(j+1,temp);
         feature_matrix_projects.push(c)
     }
     sim_structs = [];
     for(let j =0; j<num_users; j++){
         if(j != cur_user_id){
-            sim_structs.push({user_id: j+1,distance:Distance(feature_matrix_users[cur_user_id], feature_matrix_users[j]), pcor:Correlation.rank(feature_matrix_users[cur_user_id], feature_matrix_users[j])});
+            sim_structs.push({user_id: j+1,distance:Distance(feature_matrix_users[cur_user_id],feature_matrix_users[j]), pcor:0});
         }
     }
     sim_structs.sort((a, b) => a.distance - b.distance);
@@ -108,19 +141,49 @@ async function feature_matrix(cur_user_id, res) {
 
     for(let j =0; j<num_projects; j++){
         if(!(my_projects.includes(j+1))){
-            sim_projects.push({porject_id: j+1,distance:Distance(feature_matrix_users[cur_user_id], feature_matrix_projects[j]), pcor:Correlation.rank(feature_matrix_users[cur_user_id], feature_matrix_projects[j])});
+            sim_projects.push({project_id: j+1,distance:Distance(feature_matrix_users[cur_user_id], feature_matrix_projects[j]), pcor:0});
         }
     }
     sim_projects.sort((a, b) =>  b.pcor - a.pcor);
 
     return_list = []
     for(let i =0; i<3;i++){
-        return_list.push(sim_projects[i])
+        let full_projectdetails = await get_full_project_deatils(sim_projects[i].project_id);
+        return_list.push(full_projectdetails)
     }
 
     res.status(200).send(return_list);
 
 
+}
+
+async function get_full_project_deatils(project_id) {
+    let result;
+    try {
+        let res = await Projects.findOne({
+                    where: {id: project_id},
+                    include: [{
+                      model: Associations,
+                      as: 'user_associations',
+                      where: {
+                        is_admin: true
+                      },
+                      include:[{
+                        model: Users,
+                      }]
+                    }]
+                });
+        result = mapProjects([res]);
+    } catch (err) {
+        console.log(err)
+    }
+
+
+
+    // turn into own method
+
+
+    return result[0];
 }
 
 async function users_feature_vector(user_id, tags_count){
@@ -165,7 +228,7 @@ async function users_feature_vector(user_id, tags_count){
      return tags_count;
 }
 
-async function porject_feature_vector(project_id, tags_count){
+async function project_feature_vector(project_id, tags_count){
     let users = [];
     try {
         let associations = await Associations
@@ -287,7 +350,7 @@ module.exports = {
 
     recommend_to_user(req, res) {
         try{
-            feature_matrix(req.params.user_id -1, res);
+            feature_matrix(req.params.username, res);
         } catch (err){
             res.status(400).send(err);
         }

@@ -17,7 +17,7 @@ export class TagsAutocompleteComponent implements OnInit {
   removable = true;
   addOnBlur = true;
 
-  private separatorKeysCodes: number[] = [ENTER, COMMA];
+  public separatorKeysCodes: number[] = [ENTER, COMMA];
 
   @Input() group: FormGroup;
   @Input() tags: string[] = [];

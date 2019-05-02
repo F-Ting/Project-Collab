@@ -139,7 +139,7 @@ module.exports = (app) => {
   //
   app.get('/api/tags/counts/user/:user_id', Rec.count_of_tags_pre_proejct);
   //
-  app.get('/api/recommend/:user_id', Rec.recommend_to_user )
+  app.get('/api/recommend/:username', Rec.recommend_to_user )
   // create a tag and associate it with a user
   app.post('/api/tags/user/:username', tagToUser.create);
   // delete a tag from a user

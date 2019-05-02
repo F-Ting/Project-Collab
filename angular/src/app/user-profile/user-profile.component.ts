@@ -50,7 +50,13 @@ export class UserProfileComponent implements OnInit {
             );
     }
 
-    getRecommendedProjects(arg0: string): any {
+    getRecommendedProjects(username: string): any {
         // Call API for recommended projects
+        this.userProfileService
+            .getRecProjects(username)
+            .subscribe(
+                projects =>(this.recommendedProjects = projects),
+                error => log(error)
+            )
     }
 }

@@ -7,6 +7,10 @@ const session = require('express-session')
 // Set up the express app
 const app = express();
 
+// max image size
+app.use(bodyParser.json({ limit: '10mb' }));
+app.use(bodyParser.urlencoded({ extended: true, limit: '10mb' }));
+
 //post to listen to
 app.set('port', 8000);
 

@@ -293,7 +293,7 @@ function saveImage(req) {
         console.log(err); // writes out file without error, but it's not a valid image
         return null;
     });
-    return (imgURL = `http://localhost:8000/resource/${userID}/${
+    return (imgURL = `${process.env.API_URL}/resource/${userID}/${
         req.body.name
     }ProjectImg.png`);
 }

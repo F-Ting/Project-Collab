@@ -279,14 +279,24 @@ function ensureDirectoryExistence(filePath) {
     fs.mkdirSync(dirname);
 }
 
-function saveImage(req) {
-    let base64Data = req.body.image.replace(/^data:image\/png;base64,/, "");
-    let binaryData = new Buffer(base64Data, "base64").toString("binary");
-    let userID = req.session.user;
-    let imgPath = path.join(
-        __dirname,
-        `/../../public/${userID}/${req.body.name}ProjectImg.png`
-    );
+function saveImage(req){
+    let base64Data = req.body.image.replace(/^data:image\/jpeg;base64,/,"");
+    if (base64Data == req.body.image){
+        let base64Data = req.body.image.replace(/^data:image\/png;base64,/,"");
+        let binaryData = new Buffer(base64Data, 'base64').toString('binary');
+        let userID = req.session.user
+        let imgPath = path.join(__dirname, `/../../public/${userID}/${req.body.name}ProjectImg.png`);
+        ensureDirectoryExistence(imgPath);
+        //create image
+        fs.writeFile(imgPath, binaryData, "binary", function(err) {
+            console.log(err); // writes out file without error, but it's not a valid image
+            return null;
+        });
+        return imgURL = `${process.env.API_URL}/resource/${userID}/${req.body.name}ProjectImg.png`
+    }
+    let binaryData = new Buffer(base64Data, 'base64').toString('binary');
+    let userID = req.session.user
+    let imgPath = path.join(__dirname, `/../../public/${userID}/${req.body.name}ProjectImg.jpeg`);
     ensureDirectoryExistence(imgPath);
     //create image
     fs.writeFile(imgPath, binaryData, "binary", function(err) {

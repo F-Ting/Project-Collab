@@ -11,6 +11,10 @@ const app = express();
 // thus all environment configs loaded in the file specified below are skipped.
 require('dotenv').config({ path: './config/development.env' })
 
+// max image size
+app.use(bodyParser.json({ limit: '10mb' }));
+app.use(bodyParser.urlencoded({ extended: true, limit: '10mb' }));
+
 //post to listen to
 app.set('port', 8000);
 

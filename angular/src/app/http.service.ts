@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpClientModule } from '@angular/common/http';
-
+import { environment } from '../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
@@ -9,8 +9,6 @@ import { HttpClient, HttpHeaders, HttpClientModule } from '@angular/common/http'
    saved in the browsers sessionStorage under the key 'token', to any supported
    http requests (GET, POST) */
 export class HttpService {
-
-  API_URL = 'http://localhost:8000';
 
   constructor(private http: HttpClient) { }
 
@@ -27,14 +25,14 @@ export class HttpService {
   get(url) {
 	  let header = new HttpHeaders();
 	  header = this.addAuthToken(header);
-	  return this.http.get(`${this.API_URL}/${url}`, {headers: header, withCredentials: true });
+	  return this.http.get(`${environment.API_URL}/${url}`, {headers: header, withCredentials: true });
   }
 
   // performs a post request after calling the addAuthToken function
   post(url, data) {
 	  let header = new HttpHeaders();
 	  header = this.addAuthToken(header);
-	  return this.http.post(`${this.API_URL}/${url}`, data, {headers: header, withCredentials: true });
+	  return this.http.post(`${environment.API_URL}/${url}`, data, {headers: header, withCredentials: true });
   }
 
 }

@@ -6,6 +6,10 @@ const path = require('path');
 const session = require('express-session')
 // Set up the express app
 const app = express();
+// NOTE: these are only local environemnt configs, in production environment,
+// most if not all environment variables are set in the production environment,
+// thus all environment configs loaded in the file specified below are skipped.
+require('dotenv').config({ path: './config/development.env' })
 
 // max image size
 app.use(bodyParser.json({ limit: '10mb' }));
@@ -17,6 +21,7 @@ app.set('port', 8000);
 // Log requests to the console.
 app.use(logger('dev'));
 app.use(fileUpload());
+
 
 // Parse incoming requests data (https://github.com/expressjs/body-parser)
 app.use(bodyParser.json());

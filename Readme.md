@@ -1,5 +1,8 @@
 ## Project Overview
-Project Description can be found at https://docs.google.com/document/d/1U6OhjnrtKAbctL48Yah2XUSOw6cMEyru6UtWubOEdL8/edit#
+Currently, UofT students are resorting to individual projects, finding projects from personal connections or online resources. However, since students have a variety of technical experience, it is often difficult to find peers who have similar skills to work with or find a willing mentor to learn from. Project-collab provides these students with the platform to connect with each other, along with resources to get students started working with new technology or projects they are interested in.
+On a recent community survey conducted, we asked the community of computer science students, how the CSSU/CS department/CS community could support them in aspects of career and side projects. The results were quite reassuring: 12/49 responses wanted support for project related work, through a platform to share and discover personal projects. The community seems to have validated the project for us, bringing up the need for the platform we have envisioned.
+The raw data is viewable in an excel file with the following link:https://docs.google.com/spreadsheets/d/1ka9U_uB1w1ItPvCYsGl3NL-Egw5o3WS78GTWiSnlbFQ/edit?usp=sharing
+
 
 ## Technologies (Tech Stack)
 - Technologies

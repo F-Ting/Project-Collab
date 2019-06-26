@@ -3,16 +3,17 @@ const Users = require("../models").users;
 const TagToProject = require("../models").tag_to_project;
 const Tags = require("../models").tags;
 const Associations = require("../models").user_associations;
-const axios = require("axios");
 const path = require("path");
 const fs = require("fs");
+const AWS = require("aws-sdk")
 module.exports = {
     // Create a new Project
-    create(req, res) {
+    async create(req, res) {
         let imageURL = null;
         if (req.body.image) {
-            imageURL = saveImage(req);
+            imageURL = await uploadToS3(req.body.name,req.body.image);
         }
+
         return Projects.create({
             name: req.body.name,
             description: req.body.description,
@@ -190,10 +191,10 @@ module.exports = {
     },
 
     //update a project
-    update(req, res) {
+    async update(req, res) {
         let imageURL = null;
         if (req.body.image) {
-            imageURL = saveImage(req);
+            imageURL = await uploadToS3(req.body.name,req.body.image);
         }
         return Projects.findById(req.params.project, {
             attributes: { exclude: ["createdAt", "updatedAt"] }
@@ -279,31 +280,27 @@ function ensureDirectoryExistence(filePath) {
     fs.mkdirSync(dirname);
 }
 
-function saveImage(req){
-    let base64Data = req.body.image.replace(/^data:image\/jpeg;base64,/,"");
-    if (base64Data == req.body.image){
-        let base64Data = req.body.image.replace(/^data:image\/png;base64,/,"");
-        let binaryData = new Buffer(base64Data, 'base64').toString('binary');
-        let userID = req.session.user
-        let imgPath = path.join(__dirname, `/../../public/${userID}/${req.body.name}ProjectImg.png`);
-        ensureDirectoryExistence(imgPath);
-        //create image
-        fs.writeFile(imgPath, binaryData, "binary", function(err) {
-            console.log(err); // writes out file without error, but it's not a valid image
-            return null;
-        });
-        return imgURL = `${process.env.API_URL}/resource/${userID}/${req.body.name}ProjectImg.png`
-    }
-    let binaryData = new Buffer(base64Data, 'base64').toString('binary');
-    let userID = req.session.user
-    let imgPath = path.join(__dirname, `/../../public/${userID}/${req.body.name}ProjectImg.jpeg`);
-    ensureDirectoryExistence(imgPath);
-    //create image
-    fs.writeFile(imgPath, binaryData, "binary", function(err) {
-        console.log(err); // writes out file without error, but it's not a valid image
-        return null;
+
+async function uploadToS3(file_name,file_data) {
+    let s3bucket = new AWS.S3({
+      accessKeyId: process.env.IAM_KEY,
+      secretAccessKey: process.env.IAM_SECRET,
+      Bucket: process.env.BUCKET_NAME
     });
-    return (imgURL = `${process.env.API_URL}/resource/${userID}/${
-        req.body.name
-    }ProjectImg.png`);
-}
+    let buf = new Buffer(file_data.replace(/^data:image\/\w+;base64,/, ""),'base64')
+    let params = {
+        Bucket: process.env.BUCKET_NAME,
+        Key: file_name,
+        Body: buf
+    };
+    try {
+        await s3bucket.upload(params);
+    }catch(error){
+        if (error) {
+            console.log('error in callback');
+            console.log(err);
+        }
+    }
+    let url = `https://${process.env.BUCKET_NAME}.s3.amazonaws.com/${file_name}`
+    return url;
+  }

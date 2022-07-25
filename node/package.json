@@ -28,7 +28,7 @@
     "@babel/polyfill": "^7.2.5",
     "auto-parse": "1.5.1",
     "aws-sdk": "^2.481.0",
-    "axios": "^0.18.0",
+    "axios": "^0.21.2",
     "body-parser": "^1.18.3",
     "child-process-promise": "2.2.1",
     "compute-cosine-similarity": "^1.0.0",

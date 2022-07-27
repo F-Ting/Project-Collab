@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { LoginService } from './login.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({

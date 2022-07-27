@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserProfileService } from './user-profile.service';
 import { ActivatedRoute } from "@angular/router";
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { map } from 'rxjs/operators';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';

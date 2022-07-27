@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Optional } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProjectFormService } from './project-form.service';
 import { FormBuilder, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { TagsService } from '../tags/tags.service';
 import { Location } from '@angular/common';
 

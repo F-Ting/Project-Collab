@@ -3,17 +3,18 @@
 ## Clone the Repo
 Clone the repo using `git clone https://github.com/F-Ting/Project-Collab.git`
 
-## Front-end Setup
+## Individual Service setup
+### Front-end Setup
 1. Navigate into the `angular` folder via command line and run `npm install` 
 2. After node packages are installed, run `npm run start`. You should see your browser popup showing `localhost:8000` as the url
 
-## Back-end Setup
+### Back-end Setup
 1. Navigate into the `node` folder via command line and run `npm install` 
 2. After node packages are installed. Then proceed to run `npm run start`.
 Note: you can have both the front-end and backend running via `npm run dev`. But make sure the front-end start-up script is NOT running.
 
 
-## DB setup
+### DB setup
 Database and sample data setup
 1. install [PostgresSQL](https://www.postgresql.org/) 
 2. run `psql -U postgres < node/db/setup.sql` from the project root folder. (ensure `psql` is added into your path variables)
@@ -21,6 +22,12 @@ Database and sample data setup
 4. Next `cd .\node` and run `sequelize db:migrate`, this will setup the database tables
 5. Next `cd .\db` and run `psql -U project-collab-admin -d project-collab-db -f sample_data.sql`. Use the password `collab-project`, this will populate your database with some sample data, you should be able to use postman and test out some of the  existing API routes
 
+## Docker Setup
+Ensure Docker is installed and run the following command to setup the image
+`docker-compose up -d`
+
+To take down the container and the volumes with it.
+`docker-compose down -v`
 
 # Contributing Guide
 

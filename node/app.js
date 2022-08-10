@@ -1,7 +1,6 @@
 const express = require('express');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
-const fileUpload = require('express-fileupload');
 const path = require('path');
 const session = require('express-session')
 // Set up the express app
@@ -15,12 +14,8 @@ require('dotenv').config({ path: './config/development.env' })
 app.use(bodyParser.json({ limit: '10mb' }));
 app.use(bodyParser.urlencoded({ extended: true, limit: '10mb' }));
 
-//post to listen to
-app.set('port', 8000);
-
 // Log requests to the console.
 app.use(logger('dev'));
-app.use(fileUpload());
 
 
 // Parse incoming requests data (https://github.com/expressjs/body-parser)
